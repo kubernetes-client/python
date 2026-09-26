@@ -20,6 +20,8 @@ registered event-handler callbacks.
 """
 
 import logging
+import math
+import random
 import threading
 import time
 
@@ -58,7 +60,11 @@ class SharedInformer:
         or all-namespace list functions.
     resync_period:
         How often (seconds) to perform a full re-list from the API server.
-        Defaults to 0 which disables periodic resyncs.
+        Defaults to 0 which disables periodic resyncs. The interval starts
+        after a successful list completes; reconnects do not reset it.
+        Failed lists and watches use separate exponential retry delays
+        (0.5 to 60 seconds, with jitter). Network calls can extend the
+        interval beyond the configured period.
     label_selector:
         Optional label selector string forwarded to the API server.
     field_selector:
@@ -90,7 +96,9 @@ class SharedInformer:
         self._watch = None
         self._thread = None
         self._stop_event = threading.Event()
-        self._resource_version = None  # most recent RV seen; None forces a full re-list
+        # Last applied RV; None forces a full re-list.
+        self._resource_version = None
+        self._last_list_time = None
 
     # ---------------------------------------------------------------- #
     # Public API                                                        #
@@ -236,107 +244,149 @@ class SharedInformer:
         self._resource_version = rv or "0"
 
     def _run_loop(self):
-        """Background loop: list then watch, reconnect on errors.
+        """Own LIST/WATCH retries and resume only from applied events.
 
-        A full re-list is only performed when ``self._resource_version`` is
-        ``None`` (first start or after a 410 Gone response).  On all other
-        reconnects the most recent ``resourceVersion`` is reused so that no
-        events are missed and the API server does not need to send a full
-        object snapshot.
+        LIST deadlines are measured from successful LIST completion. A failed
+        periodic LIST leaves its previous RV usable while its retry backs off;
+        initial and expired-RV LISTs must succeed before another WATCH starts.
         """
+        next_resync = float("inf")
+        if self._resync_period > 0:
+            last_list = self._last_list_time
+            if last_list is None:
+                last_list = time.monotonic()
+            next_resync = last_list + self._resync_period
+        list_retry_at = watch_retry_at = 0.0
+        list_backoff = watch_backoff = 1.0
         while not self._stop_event.is_set():
-            # Full re-list only when we have no resource version to resume from.
-            if self._resource_version is None:
+            now = time.monotonic()
+            list_required = self._resource_version is None
+            list_due = max(next_resync, list_retry_at)
+            if list_required:
+                list_due = list_retry_at
+            if now >= list_due:
                 try:
                     self._initial_list()
                 except Exception as exc:
-                    logger.exception("Error during initial list; retrying")
+                    logger.exception("Error during list; retrying")
                     self._fire(ERROR, exc)
-                    self._stop_event.wait(timeout=5)
-                    continue
+                    list_retry_at = time.monotonic() + random.uniform(
+                        list_backoff / 2, list_backoff)
+                    list_backoff = min(60.0, list_backoff * 2)
+                else:
+                    list_backoff = 1.0
+                    list_retry_at = 0.0
+                    self._last_list_time = time.monotonic()
+                    next_resync = (
+                        self._last_list_time + self._resync_period
+                        if self._resync_period > 0 else float("inf")
+                    )
+                continue
 
-            # Watch loop
-            last_resync = time.monotonic()
-            self._watch = Watch()
+            if list_required:
+                self._stop_event.wait(timeout=max(0, list_due - now))
+                continue
+            if now < watch_retry_at:
+                self._stop_event.wait(
+                    timeout=max(0, min(watch_retry_at, list_due) - now))
+                continue
+
+            # One HTTP request per stream: retries and expired RV recovery
+            # belong here, so Watch's internal EOF retries cannot bypass
+            # delays.
+            self._watch = Watch(retry=False)
             kw = self._build_kwargs()
             kw["resource_version"] = self._resource_version
-            # When a resync period is configured, set a matching server-side
-            # watch timeout so that the stream exits after resync_period seconds
-            # even if no events arrive.  Without this, a quiet period longer
-            # than resync_period would never trigger a resync because the check
-            # below only runs when the generator yields an event.
             if self._resync_period > 0:
-                kw["timeout_seconds"] = max(1, int(self._resync_period))
+                kw["timeout_seconds"] = max(1, math.ceil(list_due - now))
+            watch_started = time.monotonic()
+            watch_failed = False
+            resync_requested = False
+            stream = None
             try:
-                for event in self._watch.stream(self._list_func, **kw):
+                stream = self._watch.stream(self._list_func, **kw)
+                for event in stream:
                     if self._stop_event.is_set():
                         break
+                    # A busy stream must also yield to a due periodic LIST.
+                    if time.monotonic() >= list_due:
+                        resync_requested = True
+                        break
+                    if event is None:
+                        continue
                     evt_type = event.get("type")
                     obj = event.get("object")
-                    # Sync the most recent resource version from the Watch
-                    # instance (updated by unmarshal_event before yielding).
-                    # Do this before firing handlers so consumers that wake on
-                    # an event immediately see the advanced resource version.
-                    if self._watch is not None and self._watch.resource_version:
-                        self._resource_version = self._watch.resource_version
-                    if evt_type == ADDED:
+                    if evt_type in (ADDED, MODIFIED):
                         self._cache._put(obj)
-                        self._fire(ADDED, obj)
-                    elif evt_type == MODIFIED:
-                        self._cache._put(obj)
-                        self._fire(MODIFIED, obj)
                     elif evt_type == DELETED:
                         self._cache._remove(obj)
-                        self._fire(DELETED, obj)
                     elif evt_type == BOOKMARK:
-                        # BOOKMARK events carry an updated resource version but
-                        # no object state change; the Watch instance already
-                        # records the new resource_version internally.
-                        self._fire(BOOKMARK, event.get("raw_object", obj))
-                    elif evt_type == ERROR:
-                        self._fire(ERROR, obj)
+                        obj = event.get("raw_object", obj)
+
+                    if evt_type in (ADDED, MODIFIED, DELETED, BOOKMARK):
+                        # Acknowledge only events applied to the cache (or a
+                        # BOOKMARK), before notifying handlers. Watch advances
+                        # its own RV during parsing, before cache mutation can
+                        # fail or a stop request can interrupt processing.
+                        if isinstance(obj, dict):
+                            metadata = obj.get("metadata") or {}
+                            resource_version = metadata.get("resourceVersion")
+                        else:
+                            metadata = getattr(obj, "metadata", None)
+                            resource_version = getattr(
+                                metadata, "resource_version", None)
+                        if resource_version:
+                            self._resource_version = resource_version
+
+                    self._fire(evt_type, obj)
             except ApiException as exc:
+                watch_failed = True
                 if exc.status == 410:
-                    # The stored resource version is too old; force a full re-list.
                     logger.warning(
                         "Watch expired (410 Gone); will re-list from scratch"
                     )
                     self._resource_version = None
                 else:
                     logger.warning(
-                        "Watch stream ended with ApiException (status=%s); reconnecting",
-                        exc.status,
-                    )
+                        "Watch failed (status=%s); reconnecting", exc.status)
                 self._fire(ERROR, exc)
             except Exception as exc:
-                logger.exception("Unexpected error in watch loop; reconnecting")
+                watch_failed = True
+                logger.exception(
+                    "Unexpected error in watch loop; reconnecting")
                 self._fire(ERROR, exc)
             finally:
-                # Capture the most recent resource version seen by the Watch
-                # (updated on every ADDED/MODIFIED/DELETED/BOOKMARK event) so
-                # that the next watch connection can resume without re-listing.
-                # Do not overwrite a None that was set by a 410 handler above.
-                if (
-                    self._resource_version is not None
-                    and self._watch is not None
-                    and self._watch.resource_version
-                ):
-                    self._resource_version = self._watch.resource_version
-                self._watch = None
-
-            # Periodic resync: after the watch stream exits (whether due to the
-            # server-side timeout_seconds, a stop request, or an error) check if
-            # a resync is due.  This path is what actually fires the resync when
-            # the cluster is quiet and no events arrive for resync_period seconds.
-            if (
-                not self._stop_event.is_set()
-                and self._resource_version is not None  # 410 already schedules a re-list
-                and self._resync_period > 0
-                and (time.monotonic() - last_resync) >= self._resync_period
-            ):
-                logger.debug("Informer resync triggered")
+                watch_finished = time.monotonic()
+                # Explicitly finalize generators when stop/resync breaks the
+                # loop, so their HTTP response is released before the next
+                # LIST.
                 try:
-                    self._initial_list()
+                    if hasattr(stream, "close"):
+                        stream.close()
                 except Exception as exc:
-                    logger.exception("Error during resync list; continuing")
+                    watch_failed = True
+                    logger.exception(
+                        "Error closing watch stream; reconnecting")
                     self._fire(ERROR, exc)
+                finally:
+                    self._watch = None
+
+            duration = watch_finished - watch_started
+            # An event or BOOKMARK alone does not prove a healthy connection.
+            # Only a clean server timeout or long-lived EOF resets history;
+            # a slow failure is still a failure.
+            healthy = not watch_failed and (
+                duration >= min(60, kw.get("timeout_seconds", 60))
+            )
+            # A planned relist is neither a failed connection nor evidence
+            # of recovery. Preserve prior failures without adding a delay.
+            if resync_requested and not watch_failed:
+                watch_retry_at = watch_finished
+                continue
+            if healthy:
+                watch_backoff = 1.0
+                watch_retry_at = watch_finished
+            else:
+                watch_retry_at = watch_finished + random.uniform(
+                    watch_backoff / 2, watch_backoff)
+                watch_backoff = min(60.0, watch_backoff * 2)

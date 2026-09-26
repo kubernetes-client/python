@@ -15,9 +15,9 @@
 import json
 import os
 import time
+import unittest
 from types import SimpleNamespace
 from typing import Any, Optional
-import unittest
 from unittest.mock import Mock, call
 
 from kubernetes import client, config
@@ -126,8 +126,8 @@ class WatchTests(unittest.TestCase):
         count = 0
 
         # Consume all test events from the mock service, stopping when no more data is available.
-        # Note that "timeout_seconds" below is not a timeout; rather, it disables retries and is
-        # the only way to do so. Without that, the stream will re-read the test data forever.
+        # "timeout_seconds" also disables retries. Without it or
+        # retry=False, the stream will re-read the test data forever.
         for e in w.stream(fake_api.get_namespaces, timeout_seconds=1):
             # Here added a statement for exception for empty lines.
             if e is None:
@@ -163,8 +163,8 @@ class WatchTests(unittest.TestCase):
         count = 0
 
         # Consume all test events from the mock service, stopping when no more data is available.
-        # Note that "timeout_seconds" below is not a timeout; rather, it disables retries and is
-        # the only way to do so. Without that, the stream will re-read the test data forever.
+        # "timeout_seconds" also disables retries. Without it or
+        # retry=False, the stream will re-read the test data forever.
         for event in w.stream(fake_api.get_configmaps, timeout_seconds=1):
             count += 1
             self.assertEqual("MODIFIED", event['type'])
@@ -209,8 +209,8 @@ class WatchTests(unittest.TestCase):
         count = 0
 
         # Consume all test events from the mock service, stopping when no more data is available.
-        # Note that "timeout_seconds" below is not a timeout; rather, it disables retries and is
-        # the only way to do so. Without that, the stream will re-read the test data forever.
+        # "timeout_seconds" also disables retries. Without it or
+        # retry=False, the stream will re-read the test data forever.
         for event in w.stream(fake_api.get_configmaps, timeout_seconds=1):
             count += 1
             self.assertEqual("MODIFIED", event['type'])
@@ -482,6 +482,251 @@ class WatchTests(unittest.TestCase):
             amt=None, decode_content=False)
         fake_resp.close.assert_called_once()
         fake_resp.release_conn.assert_called_once()
+
+    def test_watch_retry_disabled_stops_at_eof_without_forwarding_option(self):
+        response = Mock()
+        response.stream.return_value = [
+            '{"type":"ADDED","object":{"metadata":'
+            '{"name":"test","resourceVersion":"2"}}}\n'
+        ]
+        requests = []
+
+        def list_namespaces(*, resource_version, watch, _preload_content):
+            """:rtype: V1NamespaceList"""
+            requests.append((resource_version, watch, _preload_content))
+            if len(requests) > 1:
+                self.fail("Watch retried after EOF with retry=False")
+            return response
+
+        watch = Watch(retry=False)
+        events = list(watch.stream(list_namespaces, resource_version="1"))
+
+        self.assertEqual([("1", True, False)], requests)
+        self.assertEqual(["ADDED"], [event["type"] for event in events])
+        self.assertEqual("2", watch.resource_version)
+        response.close.assert_called_once()
+        response.release_conn.assert_called_once()
+
+    def test_watch_retry_disabled_raises_first_expired_event(self):
+        response = Mock()
+        response.stream.return_value = [
+            '{"type":"ERROR","object":{"code":410,"reason":"Gone",'
+            '"message":"expired"}}\n'
+        ]
+        list_namespaces = Mock(side_effect=[
+            response, AssertionError("Watch retried with retry=False")
+        ])
+
+        with self.assertRaises(ApiException) as caught:
+            list(Watch(retry=False).stream(
+                list_namespaces, resource_version="1"))
+
+        self.assertEqual(410, caught.exception.status)
+        list_namespaces.assert_called_once_with(
+            resource_version="1", watch=True, _preload_content=False)
+        response.close.assert_called_once()
+        response.release_conn.assert_called_once()
+
+    def test_watch_invalid_events_do_not_reset_expired_retry(self):
+        expired = (
+            '{"type":"ERROR","object":{"code":410,"reason":"Gone",'
+            '"message":"expired"}}\n'
+        )
+        for ignored_line in (
+                '\n', 'not-json\n',
+                '{"type":"UNKNOWN","object":{"metadata":'
+                '{"resourceVersion":"1"}}}\n'):
+            with self.subTest(line=ignored_line):
+                responses = [Mock(), Mock()]
+                for response in responses:
+                    response.stream.return_value = [ignored_line, expired]
+                list_namespaces = Mock(side_effect=responses + [
+                    AssertionError("Invalid input reset the 410 retry limit")
+                ])
+                list_namespaces.__doc__ = ':rtype: V1NamespaceList'
+
+                with self.assertRaises(ApiException) as caught:
+                    list(Watch().stream(
+                        list_namespaces, resource_version="1"))
+
+                self.assertEqual(410, caught.exception.status)
+                self.assertEqual(2, list_namespaces.call_count)
+                for response in responses:
+                    response.close.assert_called_once()
+                    response.release_conn.assert_called_once()
+
+    def test_watch_valid_events_reset_expired_retry(self):
+        expired = (
+            '{"type":"ERROR","object":{"code":410,"reason":"Gone",'
+            '"message":"expired"}}\n'
+        )
+        for event_type in ('ADDED', 'MODIFIED', 'DELETED', 'BOOKMARK'):
+            for resource_version in ('1', '2'):
+                with self.subTest(event_type=event_type, rv=resource_version):
+                    responses = [Mock(), Mock(), Mock()]
+                    responses[0].stream.return_value = [expired]
+                    responses[1].stream.return_value = [
+                        json.dumps({
+                            "type": event_type,
+                            "object": {"metadata": {
+                                "name": "test",
+                                "resourceVersion": resource_version}}
+                        }) + '\n',
+                        expired
+                    ]
+                    responses[2].stream.return_value = [expired]
+                    list_namespaces = Mock(side_effect=responses + [
+                        AssertionError("Watch retried consecutive 410 errors")
+                    ])
+                    list_namespaces.__doc__ = ':rtype: V1NamespaceList'
+                    received = []
+
+                    with self.assertRaises(ApiException) as caught:
+                        for event in Watch().stream(
+                                list_namespaces, resource_version="1"):
+                            received.append(event["type"])
+
+                    self.assertEqual(410, caught.exception.status)
+                    self.assertEqual([event_type], received)
+                    self.assertEqual([
+                        call(resource_version="1", watch=True,
+                             _preload_content=False),
+                        call(resource_version="1", watch=True,
+                             _preload_content=False),
+                        call(resource_version=resource_version, watch=True,
+                             _preload_content=False)
+                    ], list_namespaces.call_args_list)
+                    for response in responses:
+                        response.close.assert_called_once()
+                        response.release_conn.assert_called_once()
+
+    def test_unmarshal_preserves_checkpoint_for_unsupported_or_invalid_rv(
+            self):
+        invalid_metadata = [
+            None, {}, {"resourceVersion": None}, {"resourceVersion": ""},
+            {"resourceVersion": 0}, {"resourceVersion": 42},
+        ]
+        for return_type in ("V1Namespace", "object"):
+            for event_type in ("ADDED", "MODIFIED", "DELETED", "BOOKMARK"):
+                for metadata in invalid_metadata:
+                    with self.subTest(
+                            return_type=return_type, event_type=event_type,
+                            metadata=metadata):
+                        watch = Watch(return_type)
+                        watch.resource_version = "1"
+                        data = json.dumps({
+                            "type": event_type,
+                            "object": {"metadata": metadata},
+                        })
+                        if (return_type == "V1Namespace"
+                                and event_type != "BOOKMARK"
+                                and metadata in ({"resourceVersion": 0},
+                                                 {"resourceVersion": 42})):
+                            # Keep the model decoder's strict validation.
+                            with self.assertRaises(ValueError):
+                                watch.unmarshal_event(data, return_type)
+                            self.assertEqual(watch.resource_version, "1")
+                            continue
+                        event = watch.unmarshal_event(data, return_type)
+                        self.assertEqual(watch.resource_version, "1")
+                        self.assertEqual(event["type"], event_type)
+            with self.subTest(return_type=return_type, event_type="UNKNOWN"):
+                watch = Watch(return_type)
+                watch.resource_version = "1"
+                event = watch.unmarshal_event(json.dumps({
+                    "type": "UNKNOWN",
+                    "object": {"metadata": {"resourceVersion": "2"}},
+                }), return_type)
+                self.assertEqual(watch.resource_version, "1")
+                if return_type == "V1Namespace":
+                    self.assertIsInstance(event["object"], client.V1Namespace)
+                else:
+                    self.assertIsInstance(event["object"], dict)
+
+    def test_unmarshal_valid_checkpoints_and_raw_return_type_contract(self):
+        for return_type in ("V1Namespace", "object", None):
+            for event_type in ("ADDED", "MODIFIED", "DELETED", "BOOKMARK"):
+                with self.subTest(return_type=return_type,
+                                  event_type=event_type):
+                    watch = Watch(return_type)
+                    watch.resource_version = "1"
+                    obj = {"metadata": {"resourceVersion": "2"}}
+                    event = watch.unmarshal_event(json.dumps({
+                        "type": event_type, "object": obj,
+                    }), return_type)
+                    self.assertEqual(watch.resource_version,
+                                     "2" if return_type else "1")
+                    self.assertEqual(event["raw_object"], obj)
+                    if (return_type == "V1Namespace"
+                            and event_type != "BOOKMARK"):
+                        self.assertIsInstance(
+                            event["object"], client.V1Namespace)
+                    else:
+                        self.assertEqual(event["object"], obj)
+
+    def test_reconnect_preserves_checkpoint_after_invalid_event_rv(self):
+        cases = [
+            ("UNKNOWN", {"resourceVersion": "2"}),
+            ("ADDED", {}),
+            ("BOOKMARK", {"resourceVersion": None}),
+        ]
+        for return_type in ("V1Namespace", "object"):
+            for event_type, metadata in cases:
+                with self.subTest(return_type=return_type,
+                                  event_type=event_type):
+                    responses = [Mock(), Mock()]
+                    responses[0].stream.return_value = [json.dumps({
+                        "type": event_type,
+                        "object": {"metadata": metadata},
+                    }) + "\n"]
+                    responses[1].stream.return_value = [json.dumps({
+                        "type": "ADDED",
+                        "object": {"metadata": {"resourceVersion": "3"}},
+                    }) + "\n"]
+                    source = Mock(side_effect=responses + [
+                        AssertionError("unexpected third request")])
+                    watch = Watch(return_type)
+                    events = []
+                    for event in watch.stream(source, resource_version="1"):
+                        events.append(event)
+                        if len(events) == 2:
+                            watch.stop()
+
+                    self.assertEqual([event_type, "ADDED"],
+                                     [event["type"] for event in events])
+                    self.assertEqual(watch.resource_version, "3")
+                    self.assertEqual(source.call_args_list, [
+                        call(resource_version="1", watch=True,
+                             _preload_content=False)] * 2)
+                    for response in responses:
+                        response.close.assert_called_once()
+                        response.release_conn.assert_called_once()
+
+    def test_invalid_rv_does_not_reset_consecutive_expired_retry(self):
+        expired = {"type": "ERROR", "object": {
+            "code": 410, "reason": "Gone", "message": "expired"}}
+        cases = (("ADDED", {}), ("BOOKMARK", {"resourceVersion": ""}))
+        for return_type in ("V1Namespace", "object"):
+            for event_type, metadata in cases:
+                with self.subTest(return_type=return_type,
+                                  event_type=event_type):
+                    responses = [Mock(), Mock()]
+                    for response in responses:
+                        response.stream.return_value = [
+                            json.dumps({"type": event_type, "object": {
+                                "metadata": metadata}}) + "\n",
+                            json.dumps(expired) + "\n",
+                        ]
+                    source = Mock(side_effect=responses + [
+                        AssertionError("Invalid RV reset 410 retry")])
+                    watch = Watch(return_type)
+                    with self.assertRaises(ApiException) as caught:
+                        list(watch.stream(source, resource_version="1"))
+                    self.assertEqual(caught.exception.status, 410)
+                    self.assertEqual(watch.resource_version, "1")
+                    self.assertEqual(source.call_args_list, [
+                        call(resource_version="1", watch=True,
+                             _preload_content=False)] * 2)
 
     def test_watch_retries_on_error_event(self):
         fake_resp = Mock()

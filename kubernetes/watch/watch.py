@@ -52,6 +52,20 @@ def _find_return_type(func):
     return ""
 
 
+def _event_resource_version(event):
+    """Return a valid checkpoint from a supported event's raw metadata."""
+    if not isinstance(event, dict) or event.get('type') not in (
+            'ADDED', 'MODIFIED', 'DELETED', 'BOOKMARK'):
+        return None
+    obj = event.get('raw_object', event.get('object'))
+    metadata = obj.get('metadata') if isinstance(obj, dict) else None
+    if isinstance(metadata, dict):
+        resource_version = metadata.get('resourceVersion')
+        if isinstance(resource_version, str) and resource_version:
+            return resource_version
+    return None
+
+
 def iter_resp_lines(resp):
     buffer = bytearray()
     for segment in resp.stream(amt=None, decode_content=False):
@@ -86,7 +100,14 @@ def iter_resp_lines(resp):
 
 class Watch:
 
-    def __init__(self, return_type=None):
+    def __init__(self, return_type=None, retry=True):
+        """Create a watch, optionally disabling automatic reconnection.
+
+        With ``retry=False``, each ``stream()`` makes at most one API call:
+        EOF ends the iterator and an ERROR event raises ``ApiException``.
+        This does not configure HTTP transport retries or request timeouts.
+        """
+        self._retry = retry
         self._raw_return_type = return_type
         self._stop = False
         self._api_client = client.ApiClient()
@@ -143,27 +164,19 @@ class Watch:
             if not return_type:
                 return js
 
-            if js['type'] == 'BOOKMARK':
-                # Extract and store resource_version from BOOKMARK event for
-                # efficiency. No deserialization as event can be incomplete.
-                if isinstance(js['object'], dict) and 'metadata' in js['object']:
-                    metadata = js['object']['metadata']
-                    if isinstance(metadata, dict) and 'resourceVersion' in metadata:
-                        self.resource_version = metadata['resourceVersion']
-            elif js['type'] != 'ERROR':
+            # BOOKMARK objects can be incomplete; preserve their raw form.
+            if js['type'] not in ('ERROR', 'BOOKMARK'):
                 js['object'] = self._api_client.deserialize(
                     json.dumps(js['raw_object']),
                     return_type,
                     'application/json',
                 )
-                if hasattr(js['object'], 'metadata'):
-                    self.resource_version = js['object'].metadata.resource_version
-                # For custom objects that we don't have model defined, json
-                # deserialization results in dictionary
-                elif (isinstance(js['object'], dict) and 'metadata' in js['object']
-                      and 'resourceVersion' in js['object']['metadata']):
-                    self.resource_version = js['object']['metadata'][
-                        'resourceVersion']
+
+            # Keep the previous checkpoint when raw metadata is missing or
+            # invalid, even if a model decoder would coerce its value.
+            resource_version = _event_resource_version(js)
+            if resource_version is not None:
+                self.resource_version = resource_version
             return js
         except json.JSONDecodeError:
             return None
@@ -177,7 +190,8 @@ class Watch:
         ``code`` 410. In that case you have to recover yourself, probably
         by listing the API resource to obtain the latest state and then
         watching from that state on by setting ``resource_version`` to
-        one returned from listing.
+        one returned from listing. Events without a valid resource version
+        preserve the last checkpoint and do not reset the 410 retry limit.
 
         :param func: The API function pointer. Any parameter to the function
                      can be passed after this parameter.
@@ -212,7 +226,7 @@ class Watch:
 
         # Do not attempt retries if user specifies a timeout.
         # We want to ensure we are returning within that timeout.
-        disable_retries = ('timeout_seconds' in kwargs)
+        disable_retries = not self._retry or 'timeout_seconds' in kwargs
         retry_after_410 = False
         deserialize = kwargs.pop('deserialize', True)
         while True:
@@ -246,19 +260,24 @@ class Watch:
                                 raise client.rest.ApiException(
                                     status=obj['code'], reason=reason)
                         else:
-                            retry_after_410 = False
+                            if _event_resource_version(event) is not None:
+                                retry_after_410 = False
                             yield event
                     else:
-                        if line:  
+                        if line:
                             yield line  # Normal non-empty line
-                        else:  
-                            yield ''  # Only yield one empty line  
+                        else:
+                            yield ''  # Only yield one empty line
                     if self._stop:
                         break
             finally:
-                resp.close()
-                resp.release_conn()
-                self._resp = None
+                try:
+                    resp.close()
+                finally:
+                    try:
+                        resp.release_conn()
+                    finally:
+                        self._resp = None
                 if self.resource_version is not None:
                     kwargs['resource_version'] = self.resource_version
                 else:
