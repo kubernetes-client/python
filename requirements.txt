@@ -6,6 +6,7 @@ PyYAML>=6.0.3  # MIT
 websocket-client>=0.32.0,!=0.40.0,!=0.41.*,!=0.42.* # LGPLv2+
 requests # Apache-2.0
 requests-oauthlib # ISC
+oauthlib>=4.0.0 # ISC -- CVE-2026-49264, CVE-2026-49265; remove once requests-oauthlib bumps its own lower bound
 typing-extensions>=4.16.0  # PSF
 urllib3>=2.8.0,<3.0.0 # MIT
 durationpy>=0.11 # MIT
