@@ -13,3 +13,8 @@
 # limitations under the License.
 
 from .stream import stream, portforward
+
+__all__ = [
+    "stream",
+    "portforward",
+]
