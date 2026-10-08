@@ -2,6 +2,58 @@
 
 Kubernetes API Version: v1.37.1
 
+# Breaking Change from upgrading OpenAPI Generator to v7.24.0
+
+Both clients now use the modern Python generator instead of
+`python-legacy`. The asynchronous client uses the generator's `asyncio`
+library and `aiohttp` transport. Existing endpoint names, model names,
+and wire aliases are preserved, but applications may need the following
+updates:
+
+- Synchronous runtime dependencies now require `urllib3>=2.6.3,<3`,
+  `pydantic>=2.11`, `lazy-imports>=1,<2`,
+  `typing-extensions>=4.7.1`, and `python-dateutil>=2.8.2`.
+- Asynchronous runtime dependencies now require
+  `aiohttp>=3.13.5,<4.0.0`, `aiohttp-retry>=2.8.3`, `pydantic>=2.11`,
+  `lazy-imports>=1,<2`, `typing-extensions>=4.7.1`, and
+  `python-dateutil>=2.8.2`. `certifi` and `six` are no longer direct
+  asynchronous dependencies. Python 3.10 remains the minimum supported
+  version for both clients.
+- Models and API-call arguments now use Pydantic validation. Invalid,
+  unknown, or previously coerced values can raise
+  `pydantic.ValidationError` before a request is sent; models are
+  keyword-only, reject unknown fields during construction, and validate
+  assignments. The model `local_vars_configuration` argument and
+  Configuration's `discard_unknown_keys` and
+  `disabled_client_side_validations` arguments are removed.
+  `client_side_validation=False` no longer disables generated
+  validation.
+- Low-level synchronous transport interfaces changed. Direct callers of
+  `ApiClient.request`, `ApiClient.call_api`, `ApiClient.deserialize`, or
+  the `RESTClientObject` HTTP-verb helpers must migrate to the modern
+  request/response interface. `ApiException.body` is now decoded text
+  instead of bytes.
+- Low-level asynchronous transport interfaces also changed. Direct
+  callers of `ApiClient.call_api`, `ApiClient.param_serialize`,
+  `ApiClient.response_deserialize`, or `RESTClientObject.request` must
+  migrate to the modern `aiohttp` request/response interface. HTTP
+  sessions are created lazily; close an owned client with
+  `await client.close()` or an async context manager. Interactive
+  websocket streams use the generated `_without_preload_content`
+  operations.
+- Individual resource-deletion methods that previously returned
+  `V1Status`, including `CoreV1Api.delete_namespace` and
+  `BatchV1Api.delete_namespaced_job`, now return decoded dictionaries in
+  both clients. A successful deletion can return either the deleted
+  resource or a Status; access response fields with dictionary keys
+  instead of model attributes.
+
+See [kubernetes-client/python#2631][python-pr] and
+[kubernetes-client/gen#305][gen-pr].
+
+[python-pr]: https://github.com/kubernetes-client/python/pull/2631
+[gen-pr]: https://github.com/kubernetes-client/gen/pull/305
+
 
 # v37.0.0b1
 
@@ -184,59 +236,6 @@ Kubernetes API Version: v1.37.0
 - Removed the generally available feature gate `AnyVolumeDataSource`, which was locked and enabled since 1.33. ([kubernetes/kubernetes#135336](https://github.com/kubernetes/kubernetes/pull/135336), [@carlory](https://github.com/carlory)) [SIG API Machinery, Apps, Storage and Testing]
 - Removed the unused `PodStatusResult` type from the Kubernetes API. This type had no REST endpoint and has been unused since 2015. ([kubernetes/kubernetes#136271](https://github.com/kubernetes/kubernetes/pull/136271), [@adityasharmawork](https://github.com/adityasharmawork)) [SIG API Machinery, Apps, Node and Testing]
 - The change is for developers building against cri-api. Enum keys of Signal are now prefixed with `SIGNAL_` in api.proto definition to avoid conflicts with C++ macroses. The wire format is unchanged. ([kubernetes/kubernetes#139251](https://github.com/kubernetes/kubernetes/pull/139251), [@SergeyKanzhelev](https://github.com/SergeyKanzhelev)) [SIG Apps, Node and Testing]
-
-
-# Breaking Change from upgrading OpenAPI Generator to v7.24.0
-
-Both clients now use the modern Python generator instead of
-`python-legacy`. The asynchronous client uses the generator's `asyncio`
-library and `aiohttp` transport. Existing endpoint names, model names,
-and wire aliases are preserved, but applications may need the following
-updates:
-
-- Synchronous runtime dependencies now require `urllib3>=2.6.3,<3`,
-  `pydantic>=2.11`, `lazy-imports>=1,<2`,
-  `typing-extensions>=4.7.1`, and `python-dateutil>=2.8.2`.
-- Asynchronous runtime dependencies now require
-  `aiohttp>=3.13.5,<4.0.0`, `aiohttp-retry>=2.8.3`, `pydantic>=2.11`,
-  `lazy-imports>=1,<2`, `typing-extensions>=4.7.1`, and
-  `python-dateutil>=2.8.2`. `certifi` and `six` are no longer direct
-  asynchronous dependencies. Python 3.10 remains the minimum supported
-  version for both clients.
-- Models and API-call arguments now use Pydantic validation. Invalid,
-  unknown, or previously coerced values can raise
-  `pydantic.ValidationError` before a request is sent; models are
-  keyword-only, reject unknown fields during construction, and validate
-  assignments. The model `local_vars_configuration` argument and
-  Configuration's `discard_unknown_keys` and
-  `disabled_client_side_validations` arguments are removed.
-  `client_side_validation=False` no longer disables generated
-  validation.
-- Low-level synchronous transport interfaces changed. Direct callers of
-  `ApiClient.request`, `ApiClient.call_api`, `ApiClient.deserialize`, or
-  the `RESTClientObject` HTTP-verb helpers must migrate to the modern
-  request/response interface. `ApiException.body` is now decoded text
-  instead of bytes.
-- Low-level asynchronous transport interfaces also changed. Direct
-  callers of `ApiClient.call_api`, `ApiClient.param_serialize`,
-  `ApiClient.response_deserialize`, or `RESTClientObject.request` must
-  migrate to the modern `aiohttp` request/response interface. HTTP
-  sessions are created lazily; close an owned client with
-  `await client.close()` or an async context manager. Interactive
-  websocket streams use the generated `_without_preload_content`
-  operations.
-- Individual resource-deletion methods that previously returned
-  `V1Status`, including `CoreV1Api.delete_namespace` and
-  `BatchV1Api.delete_namespaced_job`, now return decoded dictionaries in
-  both clients. A successful deletion can return either the deleted
-  resource or a Status; access response fields with dictionary keys
-  instead of model attributes.
-
-See [kubernetes-client/python#2631][python-pr] and
-[kubernetes-client/gen#305][gen-pr].
-
-[python-pr]: https://github.com/kubernetes-client/python/pull/2631
-[gen-pr]: https://github.com/kubernetes-client/gen/pull/305
 
 # v36.0.3
 
