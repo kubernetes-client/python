@@ -13,3 +13,7 @@
 # limitations under the License.
 
 from .watch import Watch
+
+__all__ = [
+    "Watch",
+]
