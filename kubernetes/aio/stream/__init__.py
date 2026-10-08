@@ -13,3 +13,7 @@
 # limitations under the License.
 
 from .ws_client import WsApiClient
+
+__all__ = [
+    "WsApiClient",
+]
