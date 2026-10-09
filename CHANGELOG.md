@@ -1,3 +1,11 @@
+# v37.0.1
+
+Kubernetes API Version: v1.37.1
+
+- Fixed type checkers such as pyright reporting documented functions and classes in `kubernetes.config`, `kubernetes.stream`, `kubernetes.utils`, `kubernetes.watch` and their `kubernetes.aio` counterparts, for example `config.load_kube_config` and `utils.create_from_yaml`, as not exported since v37.0.0. Wildcard imports such as `from kubernetes.config import *` no longer import unrelated names like `exists` and `expanduser`.
+
+- Fixed importing API submodules such as `core_v1_api` from the deprecated `kubernetes.client.apis` package, which raised `ImportError` since v37.0.0.
+
 # v37.0.0
 
 Kubernetes API Version: v1.37.1
