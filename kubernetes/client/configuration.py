@@ -306,6 +306,7 @@ conf = client.Configuration(
         """
 
         self.verify_ssl = verify_ssl
+        self.disable_strict_ssl_verification = False
         """SSL/TLS verification
            Set this to false to skip verifying SSL certificate when calling API
            from https server.
