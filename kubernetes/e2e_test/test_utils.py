@@ -690,6 +690,9 @@ class TestUtilsUnitTests(unittest.TestCase):
         )
         self.assertRaises(ValueError, lambda: quantity.parse_quantity("1000foo"))
         self.assertRaises(ValueError, lambda: quantity.parse_quantity("foo"))
+        self.assertRaises(
+            ValueError, lambda: quantity.parse_quantity("2.e388635141Ki")
+        )
 
         # == no suffix ==
         self.assertEqual(quantity.parse_quantity("1000"), Decimal(1000))
