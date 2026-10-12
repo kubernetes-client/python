@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from decimal import Decimal, InvalidOperation
+from decimal import Decimal, DecimalException, InvalidOperation
 
 _EXPONENTS = {
     "n": -3,
@@ -82,7 +82,10 @@ def parse_quantity(quantity):
         raise ValueError("{} has unknown suffix".format(quantity))
 
     exponent = Decimal(_EXPONENTS[suffix[0]])
-    return number * (base ** exponent)
+    try:
+        return number * (base ** exponent)
+    except DecimalException as exc:
+        raise ValueError("Invalid quantity: {}".format(quantity)) from exc
 
 
 def format_quantity(quantity_value, suffix, quantize=None) -> str:
