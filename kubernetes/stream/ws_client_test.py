@@ -111,6 +111,8 @@ class WSClientTest(unittest.TestCase):
                 ( 'http://proxy.example.com:8080/', 'user:pass', '*',                             'proxy.example.com', 8080, ('user','pass'), ['*']),
                 ( 'http://proxy.example.com:8080/', 'user:pass', '.example.com',                  'proxy.example.com', 8080, ('user','pass'), ['.example.com']),
                 ( 'http://proxy.example.com:8080/', 'user:pass', 'localhost,.local,.example.com',  'proxy.example.com', 8080, ('user','pass'), ['localhost','.local','.example.com']),
+                ( 'http://proxy.example.com:8080/', 'user:pa:ss:word', None,                       'proxy.example.com', 8080, ('user','pa:ss:word'), None),
+                ( 'http://proxy.example.com:8080/', 'useronly', None,                              'proxy.example.com', 8080, None, None),
                 ]:
             #  input setup
             cfg = Configuration(proxy='', no_proxy='')
