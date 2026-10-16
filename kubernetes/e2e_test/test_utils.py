@@ -688,6 +688,11 @@ class TestUtilsUnitTests(unittest.TestCase):
         self.assertRaises(
             ValueError, lambda: quantity.parse_quantity("1000ki")
         )
+        # "m", "n" and "u" are base 1000 only; there is no mi, ni or ui
+        for invalid in ("1mi", "1ni", "1ui"):
+            self.assertRaises(
+                ValueError, lambda: quantity.parse_quantity(invalid)
+            )
         self.assertRaises(ValueError, lambda: quantity.parse_quantity("1000foo"))
         self.assertRaises(ValueError, lambda: quantity.parse_quantity("foo"))
         self.assertRaises(
@@ -732,6 +737,10 @@ class TestUtilsUnitTests(unittest.TestCase):
         self.assertRaises(
             ValueError, lambda: quantity.format_quantity(Decimal(1_000), "ki")
         )
+        for invalid in ("mi", "ni", "ui"):
+            self.assertRaises(
+                ValueError, lambda: quantity.format_quantity(Decimal(1_000), invalid)
+            )
         self.assertRaises(
             ValueError, lambda: quantity.format_quantity(Decimal(1_000), "foo")
         )
