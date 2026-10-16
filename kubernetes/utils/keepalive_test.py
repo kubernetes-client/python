@@ -25,6 +25,14 @@ from kubernetes.utils import keepalive
 from kubernetes.utils.keepalive import tcp_keepalive_socket_options
 
 
+# Linux spells the idle time TCP_KEEPIDLE, macOS spells it TCP_KEEPALIVE, and
+# some platforms have neither (keepalive.py skips the option there).
+IDLE_OPTION = getattr(socket, 'TCP_KEEPIDLE',
+                      getattr(socket, 'TCP_KEEPALIVE', None))
+needs_idle_option = unittest.skipIf(
+    IDLE_OPTION is None, 'platform has no TCP keepalive idle option')
+
+
 def fake_socket_module(**names):
     """A stand-in for the socket module exposing only the given names."""
 
@@ -39,12 +47,13 @@ def fake_socket_module(**names):
 
 class TestTcpKeepaliveSocketOptions(unittest.TestCase):
 
+    @needs_idle_option
     def test_defaults_match_client_go(self):
         options = tcp_keepalive_socket_options()
 
         self.assertIn((socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1), options)
         self.assertIn(
-            (socket.IPPROTO_TCP, socket.TCP_KEEPIDLE, 30), options)
+            (socket.IPPROTO_TCP, IDLE_OPTION, 30), options)
         self.assertIn(
             (socket.IPPROTO_TCP, socket.TCP_KEEPINTVL, 15), options)
         self.assertIn((socket.IPPROTO_TCP, socket.TCP_KEEPCNT, 9), options)
@@ -56,10 +65,11 @@ class TestTcpKeepaliveSocketOptions(unittest.TestCase):
         for default in defaults:
             self.assertIn(default, options)
 
+    @needs_idle_option
     def test_custom_timings(self):
         options = tcp_keepalive_socket_options(idle=5, interval=2, count=3)
 
-        self.assertIn((socket.IPPROTO_TCP, socket.TCP_KEEPIDLE, 5), options)
+        self.assertIn((socket.IPPROTO_TCP, IDLE_OPTION, 5), options)
         self.assertIn((socket.IPPROTO_TCP, socket.TCP_KEEPINTVL, 2), options)
         self.assertIn((socket.IPPROTO_TCP, socket.TCP_KEEPCNT, 3), options)
 
@@ -74,15 +84,17 @@ class TestTcpKeepaliveSocketOptions(unittest.TestCase):
             for item in option:
                 self.assertIsInstance(item, int)
 
+    @needs_idle_option
     def test_options_apply_to_a_socket(self):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             for level, name, value in tcp_keepalive_socket_options():
                 sock.setsockopt(level, name, value)
 
+            # Boolean options read back as any non-zero value (8 on macOS)
+            self.assertNotEqual(
+                0, sock.getsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE))
             self.assertEqual(
-                1, sock.getsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE))
-            self.assertEqual(
-                30, sock.getsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPIDLE))
+                30, sock.getsockopt(socket.IPPROTO_TCP, IDLE_OPTION))
 
     def test_falls_back_to_tcp_keepalive_on_macos(self):
         macos = fake_socket_module(
