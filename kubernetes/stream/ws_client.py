@@ -598,10 +598,16 @@ def websocket_proxycare(connect_opt, configuration, url, headers):
     if configuration.proxy_headers:
         for key,value in configuration.proxy_headers.items():
             if key == 'proxy-authorization' and value.startswith('Basic'):
-                b64value = value.split()[1]
-                auth = urlsafe_b64decode(b64value).decode().split(':', 1)
-                if len(auth) == 2:
-                    connect_opt.update({'http_proxy_auth': (auth[0], auth[1]) })
+                parts = value.split()
+                if len(parts) < 2:
+                    raise ApiValueError(
+                        "Invalid proxy-authorization header: missing Basic credentials")
+                auth = urlsafe_b64decode(parts[1]).decode().split(':', 1)
+                if len(auth) != 2:
+                    raise ApiValueError(
+                        "Invalid proxy-authorization header: Basic credentials "
+                        "must be in the form 'user:password'")
+                connect_opt.update({'http_proxy_auth': (auth[0], auth[1]) })
     return(connect_opt)
 
 
