@@ -26,6 +26,9 @@ _EXPONENTS = {
     "E": 6,
 }
 
+# Only these prefixes exist in base 1024 (Ki, Mi, Gi, Ti, Pi, Ei).
+_BINARY_PREFIXES = "KMGTPE"
+
 
 def parse_quantity(quantity):
     """
@@ -74,8 +77,8 @@ def parse_quantity(quantity):
     else:
         raise ValueError("{} has unknown suffix".format(quantity))
 
-    # handle SI inconsistency
-    if suffix == "ki":
+    # handle SI inconsistency: "ki", "mi", "ni" and "ui" are not valid binary suffixes
+    if base == 1024 and suffix[0] not in _BINARY_PREFIXES:
         raise ValueError("{} has unknown suffix".format(quantity))
 
     if suffix[0] not in _EXPONENTS:
@@ -133,7 +136,7 @@ def format_quantity(quantity_value, suffix, quantize=None) -> str:
     else:
         raise ValueError(f"{quantity_value} has unknown suffix")
 
-    if suffix == "ki":
+    if base == 1024 and suffix[0] not in _BINARY_PREFIXES:
         raise ValueError(f"{quantity_value} has unknown suffix")
 
     if suffix[0] not in _EXPONENTS:
