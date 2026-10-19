@@ -1,5 +1,5 @@
 isort
-pluggy>=1.6.0
+pluggy>=1.7.0
 py>=1.4.31
 pytest
 pytest-cov
