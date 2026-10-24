@@ -9,6 +9,8 @@ Submodules
 
    kubernetes.utils.create_from_yaml
    kubernetes.utils.duration
+   kubernetes.utils.keepalive
+   kubernetes.utils.keepalive_test
    kubernetes.utils.metrics
    kubernetes.utils.quantity
    kubernetes.utils.retry

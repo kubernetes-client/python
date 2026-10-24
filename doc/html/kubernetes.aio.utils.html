@@ -15,7 +15,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="kubernetes.aio.utils.create_from_yaml module" href="kubernetes.aio.utils.create_from_yaml.html" />
-    <link rel="prev" title="kubernetes.aio.test.test_well_known_api module" href="kubernetes.aio.test.test_well_known_api.html" />
+    <link rel="prev" title="kubernetes.aio.test.test_generated_api module" href="kubernetes.aio.test.test_generated_api.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -65,11 +65,13 @@
 <li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.utils.retry_test.html#kubernetes.aio.utils.retry_test.AioRetryTest.test_default_retry_matches_client_go"><code class="docutils literal notranslate"><span class="pre">AioRetryTest.test_default_retry_matches_client_go()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.utils.retry_test.html#kubernetes.aio.utils.retry_test.AioRetryTest.test_on_error_retries_retriable_errors"><code class="docutils literal notranslate"><span class="pre">AioRetryTest.test_on_error_retries_retriable_errors()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.utils.retry_test.html#kubernetes.aio.utils.retry_test.AioRetryTest.test_on_retry_after_error_honors_retry_after_for_429"><code class="docutils literal notranslate"><span class="pre">AioRetryTest.test_on_retry_after_error_honors_retry_after_for_429()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.utils.retry_test.html#kubernetes.aio.utils.retry_test.AioRetryTest.test_retry_after_backoff_uses_aio_retry_attempts"><code class="docutils literal notranslate"><span class="pre">AioRetryTest.test_retry_after_backoff_uses_aio_retry_attempts()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.utils.retry_test.html#kubernetes.aio.utils.retry_test.AioRetryTest.test_retry_after_seconds_parses_delay_seconds"><code class="docutils literal notranslate"><span class="pre">AioRetryTest.test_retry_after_seconds_parses_delay_seconds()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="kubernetes.aio.utils.retry_test.html#kubernetes.aio.utils.retry_test.AioRetryTest.test_retry_on_conflict_retries"><code class="docutils literal notranslate"><span class="pre">AioRetryTest.test_retry_on_conflict_retries()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="kubernetes.aio.utils.retry_test.html#kubernetes.aio.utils.retry_test.FakeError"><code class="docutils literal notranslate"><span class="pre">FakeError</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.aio.utils.retry_test.html#kubernetes.aio.utils.retry_test.RetryOptions"><code class="docutils literal notranslate"><span class="pre">RetryOptions</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -77,6 +79,209 @@
 </section>
 <section id="module-kubernetes.aio.utils">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kubernetes.aio.utils" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.Backoff">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.utils.</span></span><span class="sig-name descname"><span class="pre">Backoff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="kubernetes.aio.client.models.v1_device_attribute.html#kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.int" title="kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.int"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jitter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.utils.Backoff" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Retry backoff parameters.</p>
+<p>This maps 1:1 to <code class="docutils literal notranslate"><span class="pre">k8s.io/apimachinery/pkg/util/wait.Backoff</span></code> for the
+fields used by client-go retry helpers. <code class="docutils literal notranslate"><span class="pre">steps</span></code> is the maximum number of
+times the operation is called, including the first call. <code class="docutils literal notranslate"><span class="pre">duration</span></code> is
+the first delay in seconds, <code class="docutils literal notranslate"><span class="pre">factor</span></code> is multiplied into the next delay
+after every failed attempt, and <code class="docutils literal notranslate"><span class="pre">jitter</span></code> adds up to that fraction of the
+current delay. <code class="docutils literal notranslate"><span class="pre">cap</span></code> limits increased delay values.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.Backoff.cap">
+<span class="sig-name descname"><span class="pre">cap</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></span><a class="headerlink" href="#kubernetes.aio.utils.Backoff.cap" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.Backoff.duration">
+<span class="sig-name descname"><span class="pre">duration</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#kubernetes.aio.utils.Backoff.duration" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.Backoff.factor">
+<span class="sig-name descname"><span class="pre">factor</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><a class="headerlink" href="#kubernetes.aio.utils.Backoff.factor" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.Backoff.jitter">
+<span class="sig-name descname"><span class="pre">jitter</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></span><a class="headerlink" href="#kubernetes.aio.utils.Backoff.jitter" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.Backoff.steps">
+<span class="sig-name descname"><span class="pre">steps</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="kubernetes.aio.client.models.v1_device_attribute.html#kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.int" title="kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.int"><span class="pre">int</span></a></span><a class="headerlink" href="#kubernetes.aio.utils.Backoff.steps" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.FailToCreateError">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.utils.</span></span><span class="sig-name descname"><span class="pre">FailToCreateError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">api_exceptions</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.utils.FailToCreateError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>An exception class for handling error if an error occurred when
+handling a yaml file.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.create_from_dict">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.utils.</span></span><span class="sig-name descname"><span class="pre">create_from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k8s_client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.utils.create_from_dict" title="Link to this definition">¶</a></dt>
+<dd><p>Perform an action from a yaml file. Pass True for verbose to
+print confirmation information.
+Input:
+yaml_file: string. Contains the path to yaml file.
+data: a dictionary holding valid kubernetes objects
+verbose: If True, print confirmation from the create action.</p>
+<blockquote>
+<div><p>Default is False.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>namespace: string. Contains the namespace to create all</dt><dd><p>resources inside. The namespace must preexist otherwise
+the resource creation will fail. If the API object in
+the yaml file already contains a namespace definition
+this parameter has no effect.</p>
+</dd>
+</dl>
+<p>Returns:
+An k8s api object or list of apis objects created from dict.
+When a single object is generated, return type is dependent
+on output_list.
+Throws a FailToCreateError exception if creation of any object
+fails with helpful messages from the server.
+Available parameters for creating &lt;kind&gt;:
+:param async_req bool
+:param bool include_uninitialized: If true, partially initialized</p>
+<blockquote>
+<div><p>resources are included in the response.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pretty</strong> (<em>str</em>) – If ‘true’, then the output is pretty printed.</p></li>
+<li><p><strong>dry_run</strong> (<em>str</em>) – When present, indicates that modifications
+should not be persisted. An invalid or unrecognized dryRun
+directive will result in an error response and no further
+processing of the request.
+Valid values are: - All: all dry run stages will be processed</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.create_from_yaml">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.utils.</span></span><span class="sig-name descname"><span class="pre">create_from_yaml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k8s_client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yaml_file</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.utils.create_from_yaml" title="Link to this definition">¶</a></dt>
+<dd><p>Perform an action from a yaml file. Pass True for verbose to
+print confirmation information.
+Input:
+yaml_file: string. Contains the path to yaml file.
+k8s_client: an ApiClient object, initialized with the client args.
+verbose: If True, print confirmation from the create action.</p>
+<blockquote>
+<div><p>Default is False.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>namespace: string. Contains the namespace to create all</dt><dd><p>resources inside. The namespace must preexist otherwise
+the resource creation will fail. If the API object in
+the yaml file already contains a namespace definition
+this parameter has no effect.</p>
+</dd>
+</dl>
+<p>Returns:
+An k8s api object or list of apis objects created from YAML.
+When a single object is generated, return type is dependent
+on output_list.
+Throws a FailToCreateError exception if creation of any object
+fails with helpful messages from the server.
+Available parameters for creating &lt;kind&gt;:
+:param async_req bool
+:param bool include_uninitialized: If true, partially initialized</p>
+<blockquote>
+<div><p>resources are included in the response.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pretty</strong> (<em>str</em>) – If ‘true’, then the output is pretty printed.</p></li>
+<li><p><strong>dry_run</strong> (<em>str</em>) – When present, indicates that modifications
+should not be persisted. An invalid or unrecognized dryRun
+directive will result in an error response and no further
+processing of the request.
+Valid values are: - All: all dry run stages will be processed</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.create_from_yaml_single_item">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.utils.</span></span><span class="sig-name descname"><span class="pre">create_from_yaml_single_item</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k8s_client</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">yml_object</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.utils.create_from_yaml_single_item" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.is_conflict">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.aio.utils.</span></span><span class="sig-name descname"><span class="pre">is_conflict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Exception</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="kubernetes.aio.client.models.v1_device_attribute.html#kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool" title="kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#kubernetes.aio.utils.is_conflict" title="Link to this definition">¶</a></dt>
+<dd><p>Return True if <code class="docutils literal notranslate"><span class="pre">error</span></code> represents an HTTP 409 Conflict response.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.is_retry_after_response">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.aio.utils.</span></span><span class="sig-name descname"><span class="pre">is_retry_after_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Exception</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="kubernetes.aio.client.models.v1_device_attribute.html#kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool" title="kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#kubernetes.aio.utils.is_retry_after_response" title="Link to this definition">¶</a></dt>
+<dd><p>Return True if <code class="docutils literal notranslate"><span class="pre">error</span></code> should be retried after Retry-After.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.is_too_many_requests">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.aio.utils.</span></span><span class="sig-name descname"><span class="pre">is_too_many_requests</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Exception</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="kubernetes.aio.client.models.v1_device_attribute.html#kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool" title="kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#kubernetes.aio.utils.is_too_many_requests" title="Link to this definition">¶</a></dt>
+<dd><p>Return True if <code class="docutils literal notranslate"><span class="pre">error</span></code> represents HTTP 429 Too Many Requests.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.on_error">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.utils.</span></span><span class="sig-name descname"><span class="pre">on_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">backoff:</span> <span class="pre">~kubernetes.aio.utils._retry_base.Backoff,</span> <span class="pre">retriable:</span> <span class="pre">~typing.Callable[[Exception],</span> <span class="pre">bool],</span> <span class="pre">fn:</span> <span class="pre">~typing.Callable[[],</span> <span class="pre">~typing.Awaitable[~kubernetes.aio.utils.retry.T]],</span> <span class="pre">sleep_func:</span> <span class="pre">~typing.Callable[[float],</span> <span class="pre">~typing.Awaitable[None]]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">sleep&gt;,</span> <span class="pre">random_func:</span> <span class="pre">~typing.Callable[[],</span> <span class="pre">float]</span> <span class="pre">=</span> <span class="pre">&lt;built-in</span> <span class="pre">method</span> <span class="pre">random</span> <span class="pre">of</span> <span class="pre">Random</span> <span class="pre">object&gt;</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span><a class="headerlink" href="#kubernetes.aio.utils.on_error" title="Link to this definition">¶</a></dt>
+<dd><p>Async 1:1 implementation of client-go <code class="docutils literal notranslate"><span class="pre">retry.OnError</span></code>.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.on_retry_after_error">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.utils.</span></span><span class="sig-name descname"><span class="pre">on_retry_after_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">backoff:</span> <span class="pre">~kubernetes.aio.utils._retry_base.Backoff,</span> <span class="pre">retriable:</span> <span class="pre">~typing.Callable[[Exception],</span> <span class="pre">bool],</span> <span class="pre">fn:</span> <span class="pre">~typing.Callable[[],</span> <span class="pre">~typing.Awaitable[~kubernetes.aio.utils.retry.T]],</span> <span class="pre">sleep_func:</span> <span class="pre">~typing.Callable[[float],</span> <span class="pre">~typing.Awaitable[None]]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">sleep&gt;,</span> <span class="pre">random_func:</span> <span class="pre">~typing.Callable[[],</span> <span class="pre">float]</span> <span class="pre">=</span> <span class="pre">&lt;built-in</span> <span class="pre">method</span> <span class="pre">random</span> <span class="pre">of</span> <span class="pre">Random</span> <span class="pre">object&gt;</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span><a class="headerlink" href="#kubernetes.aio.utils.on_retry_after_error" title="Link to this definition">¶</a></dt>
+<dd><p>Async implementation of client-go REST Retry-After sleep semantics.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.retry_after_backoff">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.aio.utils.</span></span><span class="sig-name descname"><span class="pre">retry_after_backoff</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">backoff</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#kubernetes.aio.utils.Backoff" title="kubernetes.aio.utils._retry_base.Backoff"><span class="pre">Backoff</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#kubernetes.aio.utils.Backoff" title="kubernetes.aio.utils._retry_base.Backoff"><span class="pre">Backoff</span></a></span></span><a class="headerlink" href="#kubernetes.aio.utils.retry_after_backoff" title="Link to this definition">¶</a></dt>
+<dd><p>Return the client-go REST Retry-After backoff for <code class="docutils literal notranslate"><span class="pre">retries</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">backoff</span></code> supplies the retry delay parameters. If <code class="docutils literal notranslate"><span class="pre">retries</span></code> is not
+<code class="docutils literal notranslate"><span class="pre">None</span></code>, it is interpreted as the retry ceiling and overrides
+<code class="docutils literal notranslate"><span class="pre">backoff.steps</span></code>. <code class="docutils literal notranslate"><span class="pre">False</span></code> and <code class="docutils literal notranslate"><span class="pre">0</span></code> disable retries by returning a
+single-attempt backoff. Integer values and urllib3-style Retry objects with
+a <code class="docutils literal notranslate"><span class="pre">total</span></code> value are treated as retry ceilings. aiohttp-retry-style
+options with an <code class="docutils literal notranslate"><span class="pre">attempts</span></code> value are treated as request attempt ceilings.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.retry_after_max_retries">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.aio.utils.</span></span><span class="sig-name descname"><span class="pre">retry_after_max_retries</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">retries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="kubernetes.aio.client.models.v1_device_attribute.html#kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.int" title="kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.int"><span class="pre">int</span></a></span></span><a class="headerlink" href="#kubernetes.aio.utils.retry_after_max_retries" title="Link to this definition">¶</a></dt>
+<dd><p>Return the client-go REST Retry-After retry ceiling.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.retry_after_seconds">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.aio.utils.</span></span><span class="sig-name descname"><span class="pre">retry_after_seconds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Exception</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="headerlink" href="#kubernetes.aio.utils.retry_after_seconds" title="Link to this definition">¶</a></dt>
+<dd><p>Return the Retry-After delay in seconds, if <code class="docutils literal notranslate"><span class="pre">error</span></code> provides one.</p>
+<p>client-go accepts integer seconds. Invalid, missing, or negative values
+return <code class="docutils literal notranslate"><span class="pre">None</span></code> so callers can fall back to their normal backoff.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.utils.retry_on_conflict">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.utils.</span></span><span class="sig-name descname"><span class="pre">retry_on_conflict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">fn:</span> <span class="pre">~typing.Callable[[],</span> <span class="pre">~typing.Awaitable[~kubernetes.aio.utils.retry.T]],</span> <span class="pre">backoff:</span> <span class="pre">~kubernetes.aio.utils._retry_base.Backoff</span> <span class="pre">=</span> <span class="pre">Backoff(steps=5,</span> <span class="pre">duration=0.01,</span> <span class="pre">factor=1.0,</span> <span class="pre">jitter=0.1,</span> <span class="pre">cap=0.0),</span> <span class="pre">sleep_func:</span> <span class="pre">~typing.Callable[[float],</span> <span class="pre">~typing.Awaitable[None]]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">sleep&gt;,</span> <span class="pre">random_func:</span> <span class="pre">~typing.Callable[[],</span> <span class="pre">float]</span> <span class="pre">=</span> <span class="pre">&lt;built-in</span> <span class="pre">method</span> <span class="pre">random</span> <span class="pre">of</span> <span class="pre">Random</span> <span class="pre">object&gt;</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span><a class="headerlink" href="#kubernetes.aio.utils.retry_on_conflict" title="Link to this definition">¶</a></dt>
+<dd><p>Async 1:1 implementation of client-go <code class="docutils literal notranslate"><span class="pre">retry.RetryOnConflict</span></code>.</p>
+</dd></dl>
+
 </section>
 </section>
 
@@ -123,7 +328,7 @@
   <li><a href="modules.html">kubernetes</a><ul>
   <li><a href="kubernetes.html">kubernetes package</a><ul>
   <li><a href="kubernetes.aio.html">kubernetes.aio package</a><ul>
-      <li>Previous: <a href="kubernetes.aio.test.test_well_known_api.html" title="previous chapter">kubernetes.aio.test.test_well_known_api module</a></li>
+      <li>Previous: <a href="kubernetes.aio.test.test_generated_api.html" title="previous chapter">kubernetes.aio.test.test_generated_api module</a></li>
       <li>Next: <a href="kubernetes.aio.utils.create_from_yaml.html" title="next chapter">kubernetes.aio.utils.create_from_yaml module</a></li>
   </ul></li>
   </ul></li>

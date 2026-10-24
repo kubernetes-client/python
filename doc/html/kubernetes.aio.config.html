@@ -285,6 +285,17 @@
 </section>
 <section id="module-kubernetes.aio.config">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kubernetes.aio.config" title="Link to this heading">¶</a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="kubernetes.aio.config.ConfigException">
+<span class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.</span></span><span class="sig-name descname"><span class="pre">ConfigException</span></span><a class="headerlink" href="#kubernetes.aio.config.ConfigException" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.config.list_kube_config_contexts">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.</span></span><span class="sig-name descname"><span class="pre">list_kube_config_contexts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.list_kube_config_contexts" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py function">
 <dt class="sig sig-object py" id="kubernetes.aio.config.load_config">
 <span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.</span></span><span class="sig-name descname"><span class="pre">load_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.load_config" title="Link to this definition">¶</a></dt>
@@ -300,6 +311,89 @@ and inform the user accordingly.</p>
 </dl>
 <p>can be passed to either load_kube_config or
 load_incluster_config functions.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.config.load_incluster_config">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.</span></span><span class="sig-name descname"><span class="pre">load_incluster_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client_configuration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">try_refresh_token</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.load_incluster_config" title="Link to this definition">¶</a></dt>
+<dd><p>Use the service account kubernetes gives to pods to connect to kubernetes
+cluster. It’s intended for clients that expect to be running inside a pod
+running on kubernetes. It will raise an exception if called from a process
+not running in a kubernetes environment.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.config.load_kube_config">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.</span></span><span class="sig-name descname"><span class="pre">load_kube_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client_configuration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">persist_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_file_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.load_kube_config" title="Link to this definition">¶</a></dt>
+<dd><p>Loads authentication and cluster information from kube-config file
+and stores them in kubernetes.client.configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config_file</strong> – Name of the kube-config file.</p></li>
+<li><p><strong>context</strong> – set the active context. If is set to None, current_context
+from config file will be used.</p></li>
+<li><p><strong>client_configuration</strong> – The kubernetes.client.Configuration to
+set configs to.</p></li>
+<li><p><strong>persist_config</strong> – If True, config file will be updated when changed
+(e.g GCP token refresh).</p></li>
+<li><p><strong>temp_file_path</strong> – directory where temp files are stored
+(default - system temp dir).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.config.load_kube_config_from_dict">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.</span></span><span class="sig-name descname"><span class="pre">load_kube_config_from_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client_configuration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_file_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.load_kube_config_from_dict" title="Link to this definition">¶</a></dt>
+<dd><p>Loads authentication and cluster information from config_dict
+and stores them in kubernetes.client.configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config_dict</strong> – Takes the config file as a dict.</p></li>
+<li><p><strong>context</strong> – set the active context. If is set to None, current_context
+from config file will be used.</p></li>
+<li><p><strong>client_configuration</strong> – The kubernetes.aio.client.Configuration to
+set configs to.</p></li>
+<li><p><strong>temp_file_path</strong> – directory where temp files are stored
+(default - system temp dir).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.config.new_client_from_config">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.</span></span><span class="sig-name descname"><span class="pre">new_client_from_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_file</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">persist_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_file_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.new_client_from_config" title="Link to this definition">¶</a></dt>
+<dd><p>Loads configuration the same as load_kube_config but returns an ApiClient
+to be used with any API object. This will allow the caller to concurrently
+talk with multiple clusters.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.config.new_client_from_config_dict">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.</span></span><span class="sig-name descname"><span class="pre">new_client_from_config_dict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">config_dict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">temp_file_path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.new_client_from_config_dict" title="Link to this definition">¶</a></dt>
+<dd><p>Loads configuration the same as load_kube_config_dict but returns an ApiClient
+to be used with any API object. This will allow the caller to concurrently
+talk with multiple clusters.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.aio.config.refresh_token">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.config.</span></span><span class="sig-name descname"><span class="pre">refresh_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loader</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">client_configuration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">60</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.config.refresh_token" title="Link to this definition">¶</a></dt>
+<dd><p>Refresh token if necessary, updates the token in client configurarion</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>loader</strong> – KubeConfigLoader returned by load_kube_config</p></li>
+<li><p><strong>client_configuration</strong> – The kubernetes.client.Configuration to
+set configs to.</p></li>
+<li><p><strong>interval</strong> – how often check if token is up-to-date</p></li>
+</ul>
+</dd>
+</dl>
 </dd></dl>
 
 </section>

@@ -29,7 +29,6 @@ Submodules
    kubernetes.aio.client.api.batch_v1_api
    kubernetes.aio.client.api.certificates_api
    kubernetes.aio.client.api.certificates_v1_api
-   kubernetes.aio.client.api.certificates_v1alpha1_api
    kubernetes.aio.client.api.certificates_v1beta1_api
    kubernetes.aio.client.api.coordination_api
    kubernetes.aio.client.api.coordination_v1_api
@@ -46,10 +45,11 @@ Submodules
    kubernetes.aio.client.api.flowcontrol_apiserver_v1_api
    kubernetes.aio.client.api.internal_apiserver_api
    kubernetes.aio.client.api.internal_apiserver_v1alpha1_api
+   kubernetes.aio.client.api.lifecycle_api
+   kubernetes.aio.client.api.lifecycle_v1alpha1_api
    kubernetes.aio.client.api.logs_api
    kubernetes.aio.client.api.networking_api
    kubernetes.aio.client.api.networking_v1_api
-   kubernetes.aio.client.api.networking_v1beta1_api
    kubernetes.aio.client.api.node_api
    kubernetes.aio.client.api.node_v1_api
    kubernetes.aio.client.api.openid_api
@@ -64,11 +64,12 @@ Submodules
    kubernetes.aio.client.api.resource_v1beta2_api
    kubernetes.aio.client.api.scheduling_api
    kubernetes.aio.client.api.scheduling_v1_api
-   kubernetes.aio.client.api.scheduling_v1alpha2_api
+   kubernetes.aio.client.api.scheduling_v1alpha3_api
+   kubernetes.aio.client.api.scheduling_v1beta1_api
    kubernetes.aio.client.api.storage_api
    kubernetes.aio.client.api.storage_v1_api
-   kubernetes.aio.client.api.storage_v1beta1_api
    kubernetes.aio.client.api.storagemigration_api
+   kubernetes.aio.client.api.storagemigration_v1_api
    kubernetes.aio.client.api.storagemigration_v1beta1_api
    kubernetes.aio.client.api.version_api
    kubernetes.aio.client.api.well_known_api
