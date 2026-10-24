@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>kubernetes.aio.leaderelection.leaderelection module &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kubernetes.aio.leaderelection.leaderelection_test module" href="kubernetes.aio.leaderelection.leaderelection_test.html" />
+    <link rel="prev" title="kubernetes.aio.leaderelection.electionconfig module" href="kubernetes.aio.leaderelection.electionconfig.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-kubernetes.aio.leaderelection.leaderelection">
+<span id="kubernetes-aio-leaderelection-leaderelection-module"></span><h1>kubernetes.aio.leaderelection.leaderelection module<a class="headerlink" href="#module-kubernetes.aio.leaderelection.leaderelection" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.aio.leaderelection.leaderelection.LeaderElection">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.leaderelection.leaderelection.</span></span><span class="sig-name descname"><span class="pre">LeaderElection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">election_config</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="kubernetes.aio.leaderelection.electionconfig.html#kubernetes.aio.leaderelection.electionconfig.Config" title="kubernetes.aio.leaderelection.electionconfig.Config"><span class="pre">Config</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.leaderelection.leaderelection.LeaderElection" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.leaderelection.leaderelection.LeaderElection.acquire">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">acquire</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="kubernetes.aio.client.models.v1_device_attribute.html#kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool" title="kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#kubernetes.aio.leaderelection.leaderelection.LeaderElection.acquire" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="kubernetes.aio.leaderelection.leaderelection.LeaderElection.election_config">
+<span class="sig-name descname"><span class="pre">election_config</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="kubernetes.aio.leaderelection.electionconfig.html#kubernetes.aio.leaderelection.electionconfig.Config" title="kubernetes.aio.leaderelection.electionconfig.Config"><span class="pre">Config</span></a></span><a class="headerlink" href="#kubernetes.aio.leaderelection.leaderelection.LeaderElection.election_config" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="kubernetes.aio.leaderelection.leaderelection.LeaderElection.observed_record">
+<span class="sig-name descname"><span class="pre">observed_record</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="kubernetes.aio.leaderelection.leaderelectionrecord.html#kubernetes.aio.leaderelection.leaderelectionrecord.LeaderElectionRecord" title="kubernetes.aio.leaderelection.leaderelectionrecord.LeaderElectionRecord"><span class="pre">LeaderElectionRecord</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#kubernetes.aio.leaderelection.leaderelection.LeaderElection.observed_record" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.leaderelection.leaderelection.LeaderElection.renew_loop">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">renew_loop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kubernetes.aio.leaderelection.leaderelection.LeaderElection.renew_loop" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.leaderelection.leaderelection.LeaderElection.run">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#kubernetes.aio.leaderelection.leaderelection.LeaderElection.run" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.leaderelection.leaderelection.LeaderElection.try_acquire_or_renew">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">try_acquire_or_renew</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="kubernetes.aio.client.models.v1_device_attribute.html#kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool" title="kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#kubernetes.aio.leaderelection.leaderelection.LeaderElection.try_acquire_or_renew" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.leaderelection.leaderelection.LeaderElection.update_lock">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">update_lock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">leader_election_record</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="kubernetes.aio.leaderelection.leaderelectionrecord.html#kubernetes.aio.leaderelection.leaderelectionrecord.LeaderElectionRecord" title="kubernetes.aio.leaderelection.leaderelectionrecord.LeaderElectionRecord"><span class="pre">LeaderElectionRecord</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="kubernetes.aio.client.models.v1_device_attribute.html#kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool" title="kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#kubernetes.aio.leaderelection.leaderelection.LeaderElection.update_lock" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="kubernetes.aio.leaderelection.leaderelection.logger">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.aio.leaderelection.leaderelection.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;Logger</span> <span class="pre">kubernetes.aio.leaderelection.leaderelection</span> <span class="pre">(WARNING)&gt;</span></span><a class="headerlink" href="#kubernetes.aio.leaderelection.leaderelection.logger" title="Link to this definition">¶</a></dt>
+<dd><p>This package implements leader election using an annotation in a Kubernetes
+object. The onstarted_leading coroutine is run as a task, which is cancelled if
+the leader lock is obtained and then lost.</p>
+<p>At first all candidates are considered followers. The one to create a lock or
+update an existing lock first becomes the leader and remains so until it fails
+to renew its lease.</p>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kubernetes.html">kubernetes package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">kubernetes</a><ul>
+  <li><a href="kubernetes.html">kubernetes package</a><ul>
+  <li><a href="kubernetes.aio.html">kubernetes.aio package</a><ul>
+  <li><a href="kubernetes.aio.leaderelection.html">kubernetes.aio.leaderelection package</a><ul>
+      <li>Previous: <a href="kubernetes.aio.leaderelection.electionconfig.html" title="previous chapter">kubernetes.aio.leaderelection.electionconfig module</a></li>
+      <li>Next: <a href="kubernetes.aio.leaderelection.leaderelection_test.html" title="next chapter">kubernetes.aio.leaderelection.leaderelection_test module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/kubernetes.aio.leaderelection.leaderelection.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>kubernetes.leaderelection.resourcelock.leaselock module &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kubernetes.leaderelection.resourcelock.leaselock_test module" href="kubernetes.leaderelection.resourcelock.leaselock_test.html" />
+    <link rel="prev" title="kubernetes.leaderelection.resourcelock.configmaplock module" href="kubernetes.leaderelection.resourcelock.configmaplock.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-kubernetes.leaderelection.resourcelock.leaselock">
+<span id="kubernetes-leaderelection-resourcelock-leaselock-module"></span><h1>kubernetes.leaderelection.resourcelock.leaselock module<a class="headerlink" href="#module-kubernetes.leaderelection.resourcelock.leaselock" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.leaderelection.resourcelock.leaselock.LeaseLock">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.leaderelection.resourcelock.leaselock.</span></span><span class="sig-name descname"><span class="pre">LeaseLock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">identity</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.leaderelection.resourcelock.leaselock.LeaseLock" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.leaderelection.resourcelock.leaselock.LeaseLock.create">
+<span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">election_record</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.leaderelection.resourcelock.leaselock.LeaseLock.create" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the lease object to be created</p></li>
+<li><p><strong>namespace</strong> – Namespace in which the lease object is to be created</p></li>
+<li><p><strong>election_record</strong> – The election record to store in the lease spec</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>‘True’ if object is created else ‘False’ if failed</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.leaderelection.resourcelock.leaselock.LeaseLock.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.leaderelection.resourcelock.leaselock.LeaseLock.get" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the lease object information to get</p></li>
+<li><p><strong>namespace</strong> – Namespace in which the lease object is to be searched</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>‘True, election record’ if object found else ‘False, exception response’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.leaderelection.resourcelock.leaselock.LeaseLock.get_lease_spec">
+<span class="sig-name descname"><span class="pre">get_lease_spec</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">leader_election_record</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_spec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.leaderelection.resourcelock.leaselock.LeaseLock.get_lease_spec" title="Link to this definition">¶</a></dt>
+<dd><p>Build the lease spec that holds the given election record.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.leaderelection.resourcelock.leaselock.LeaseLock.get_lock_object">
+<span class="sig-name descname"><span class="pre">get_lock_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lease</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.leaderelection.resourcelock.leaselock.LeaseLock.get_lock_object" title="Link to this definition">¶</a></dt>
+<dd><p>Build the election record held in the given lease spec.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.leaderelection.resourcelock.leaselock.LeaseLock.time_from_utc">
+<span class="sig-name descname"><span class="pre">time_from_utc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.leaderelection.resourcelock.leaselock.LeaseLock.time_from_utc" title="Link to this definition">¶</a></dt>
+<dd><p>Inverse of <a class="reference internal" href="#kubernetes.leaderelection.resourcelock.leaselock.LeaseLock.time_str_to_iso" title="kubernetes.leaderelection.resourcelock.leaselock.LeaseLock.time_str_to_iso"><code class="xref py py-meth docutils literal notranslate"><span class="pre">time_str_to_iso()</span></code></a>, back to the record format.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.leaderelection.resourcelock.leaselock.LeaseLock.time_str_to_iso">
+<span class="sig-name descname"><span class="pre">time_str_to_iso</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str_time</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.leaderelection.resourcelock.leaselock.LeaseLock.time_str_to_iso" title="Link to this definition">¶</a></dt>
+<dd><p>Convert an election record time into the instant to store.</p>
+<p><code class="docutils literal notranslate"><span class="pre">leaderelection.py</span></code> builds its times with
+<code class="docutils literal notranslate"><span class="pre">datetime.fromtimestamp()</span></code>, which is local and naive. The Lease is
+shared with other clients, so the value has to go on the wire as the
+real UTC instant rather than as local wall clock labeled as UTC.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.leaderelection.resourcelock.leaselock.LeaseLock.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updated_record</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.leaderelection.resourcelock.leaselock.LeaseLock.update" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – name of the lock to be updated</p></li>
+<li><p><strong>namespace</strong> – namespace the lock is in</p></li>
+<li><p><strong>updated_record</strong> – the updated election record</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if update is successful False if it fails</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kubernetes.html">kubernetes package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">kubernetes</a><ul>
+  <li><a href="kubernetes.html">kubernetes package</a><ul>
+  <li><a href="kubernetes.leaderelection.html">kubernetes.leaderelection package</a><ul>
+  <li><a href="kubernetes.leaderelection.resourcelock.html">kubernetes.leaderelection.resourcelock package</a><ul>
+      <li>Previous: <a href="kubernetes.leaderelection.resourcelock.configmaplock.html" title="previous chapter">kubernetes.leaderelection.resourcelock.configmaplock module</a></li>
+      <li>Next: <a href="kubernetes.leaderelection.resourcelock.leaselock_test.html" title="next chapter">kubernetes.leaderelection.resourcelock.leaselock_test module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/kubernetes.leaderelection.resourcelock.leaselock.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -38,7 +38,32 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="kubernetes.aio.stream.ws_client.WsApiClient">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.stream.ws_client.</span></span><span class="sig-name descname"><span class="pre">WsApiClient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">configuration</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_value</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cookie</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">heartbeat</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.stream.ws_client.WsApiClient" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="kubernetes.aio.client.api_client.html#kubernetes.aio.client.api_client.ApiClient" title="kubernetes.aio.client.api_client.ApiClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApiClient</span></code></a></p>
+<dd><p>Bases: <a class="reference internal" href="kubernetes.aio.client.html#kubernetes.aio.client.ApiClient" title="kubernetes.aio.client.api_client.ApiClient"><code class="xref py py-class docutils literal notranslate"><span class="pre">ApiClient</span></code></a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.stream.ws_client.WsApiClient.call_api">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">call_api</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_request_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_preload_content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.stream.ws_client.WsApiClient.call_api" title="Link to this definition">¶</a></dt>
+<dd><p>Makes the HTTP request (synchronous)
+:param method: Method to call.
+:param url: Path to method endpoint.
+:param header_params: Header parameters to be</p>
+<blockquote>
+<div><p>placed in the request header.</p>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>body</strong> – Request body.</p></li>
+<li><p><strong>dict</strong> (<em>post_params</em>) – Request post form parameters,
+for <cite>application/x-www-form-urlencoded</cite>, <cite>multipart/form-data</cite>.</p></li>
+<li><p><strong>_request_timeout</strong> – timeout setting for this request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>RESTResponse</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="kubernetes.aio.stream.ws_client.WsApiClient.parse_error_data">
 <span class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">parse_error_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">error_data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.stream.ws_client.WsApiClient.parse_error_data" title="Link to this definition">¶</a></dt>
@@ -48,26 +73,36 @@
 <dl class="py method">
 <dt class="sig sig-object py" id="kubernetes.aio.stream.ws_client.WsApiClient.request">
 <span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">method</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_params</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">body</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_preload_content</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_request_timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.stream.ws_client.WsApiClient.request" title="Link to this definition">¶</a></dt>
-<dd><p>Makes the HTTP request using RESTClient.</p>
-</dd></dl>
+<dd></dd></dl>
 
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="kubernetes.aio.stream.ws_client.WsResponse">
-<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.stream.ws_client.</span></span><span class="sig-name descname"><span class="pre">WsResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.stream.ws_client.WsResponse" title="Link to this definition">¶</a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.stream.ws_client.</span></span><span class="sig-name descname"><span class="pre">WsResponse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.stream.ws_client.WsResponse" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="kubernetes.aio.client.rest.html#kubernetes.aio.client.rest.RESTResponse" title="kubernetes.aio.client.rest.RESTResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">RESTResponse</span></code></a></p>
 <dl class="py method">
 <dt class="sig sig-object py" id="kubernetes.aio.stream.ws_client.WsResponse.getheader">
 <span class="sig-name descname"><span class="pre">getheader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.stream.ws_client.WsResponse.getheader" title="Link to this definition">¶</a></dt>
-<dd><p>Returns a given response header.</p>
+<dd><p>Returns a given response header; use <code class="docutils literal notranslate"><span class="pre">headers.get()</span></code> instead.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="kubernetes.aio.stream.ws_client.WsResponse.getheaders">
 <span class="sig-name descname"><span class="pre">getheaders</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.stream.ws_client.WsResponse.getheaders" title="Link to this definition">¶</a></dt>
-<dd><p>Returns a CIMultiDictProxy of the response headers.</p>
+<dd><p>Returns a CIMultiDictProxy of the response headers; use <code class="docutils literal notranslate"><span class="pre">headers</span></code> instead.</p>
 </dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="kubernetes.aio.stream.ws_client.WsResponse.headers">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">headers</span></span><a class="headerlink" href="#kubernetes.aio.stream.ws_client.WsResponse.headers" title="Link to this definition">¶</a></dt>
+<dd><p>Returns a CIMultiDictProxy of response headers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.stream.ws_client.WsResponse.read">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.stream.ws_client.WsResponse.read" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

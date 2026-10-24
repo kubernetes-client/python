@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>kubernetes.aio.leaderelection.resourcelock.baselock module &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kubernetes.aio.leaderelection.resourcelock.configmaplock module" href="kubernetes.aio.leaderelection.resourcelock.configmaplock.html" />
+    <link rel="prev" title="kubernetes.aio.leaderelection.resourcelock package" href="kubernetes.aio.leaderelection.resourcelock.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-kubernetes.aio.leaderelection.resourcelock.baselock">
+<span id="kubernetes-aio-leaderelection-resourcelock-baselock-module"></span><h1>kubernetes.aio.leaderelection.resourcelock.baselock module<a class="headerlink" href="#module-kubernetes.aio.leaderelection.resourcelock.baselock" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.aio.leaderelection.resourcelock.baselock.BaseLock">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.leaderelection.resourcelock.baselock.</span></span><span class="sig-name descname"><span class="pre">BaseLock</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">identity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.leaderelection.resourcelock.baselock.BaseLock" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.leaderelection.resourcelock.baselock.BaseLock.create">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">election_record</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="kubernetes.aio.leaderelection.leaderelectionrecord.html#kubernetes.aio.leaderelection.leaderelectionrecord.LeaderElectionRecord" title="kubernetes.aio.leaderelection.leaderelectionrecord.LeaderElectionRecord"><span class="pre">LeaderElectionRecord</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="kubernetes.aio.client.models.v1_device_attribute.html#kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool" title="kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#kubernetes.aio.leaderelection.resourcelock.baselock.BaseLock.create" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>electionRecord</strong> – Annotation string</p></li>
+<li><p><strong>name</strong> – Name of the configmap object to be created</p></li>
+<li><p><strong>namespace</strong> – Namespace in which the configmap object is to be created</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>‘True’ if object is created else ‘False’ if failed</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.leaderelection.resourcelock.baselock.BaseLock.get">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="kubernetes.aio.client.models.v1_device_attribute.html#kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool" title="kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool"><span class="pre">bool</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="kubernetes.aio.leaderelection.leaderelectionrecord.html#kubernetes.aio.leaderelection.leaderelectionrecord.LeaderElectionRecord" title="kubernetes.aio.leaderelection.leaderelectionrecord.LeaderElectionRecord"><span class="pre">LeaderElectionRecord</span></a><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="kubernetes.aio.client.models.v1_device_attribute.html#kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool" title="kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool"><span class="pre">bool</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Exception</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="kubernetes.aio.client.models.v1_device_attribute.html#kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool" title="kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool"><span class="pre">bool</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#kubernetes.aio.leaderelection.resourcelock.baselock.BaseLock.get" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – Name of the configmap object information to get</p></li>
+<li><p><strong>namespace</strong> – Namespace in which the configmap object is to be searched</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>‘True, election record’ if object found else ‘False, exception response’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.leaderelection.resourcelock.baselock.BaseLock.update">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">updated_record</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="kubernetes.aio.leaderelection.leaderelectionrecord.html#kubernetes.aio.leaderelection.leaderelectionrecord.LeaderElectionRecord" title="kubernetes.aio.leaderelection.leaderelectionrecord.LeaderElectionRecord"><span class="pre">LeaderElectionRecord</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="kubernetes.aio.client.models.v1_device_attribute.html#kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool" title="kubernetes.aio.client.models.v1_device_attribute.V1DeviceAttribute.bool"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#kubernetes.aio.leaderelection.resourcelock.baselock.BaseLock.update" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – name of the lock to be updated</p></li>
+<li><p><strong>namespace</strong> – namespace the lock is in</p></li>
+<li><p><strong>updated_record</strong> – the updated election record</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if update is successful False if it fails</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kubernetes.html">kubernetes package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">kubernetes</a><ul>
+  <li><a href="kubernetes.html">kubernetes package</a><ul>
+  <li><a href="kubernetes.aio.html">kubernetes.aio package</a><ul>
+  <li><a href="kubernetes.aio.leaderelection.html">kubernetes.aio.leaderelection package</a><ul>
+  <li><a href="kubernetes.aio.leaderelection.resourcelock.html">kubernetes.aio.leaderelection.resourcelock package</a><ul>
+      <li>Previous: <a href="kubernetes.aio.leaderelection.resourcelock.html" title="previous chapter">kubernetes.aio.leaderelection.resourcelock package</a></li>
+      <li>Next: <a href="kubernetes.aio.leaderelection.resourcelock.configmaplock.html" title="next chapter">kubernetes.aio.leaderelection.resourcelock.configmaplock module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/kubernetes.aio.leaderelection.resourcelock.baselock.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

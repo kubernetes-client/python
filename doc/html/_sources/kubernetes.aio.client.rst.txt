@@ -17,6 +17,7 @@ Submodules
    :maxdepth: 4
 
    kubernetes.aio.client.api_client
+   kubernetes.aio.client.api_response
    kubernetes.aio.client.configuration
    kubernetes.aio.client.exceptions
    kubernetes.aio.client.rest
