@@ -14,20 +14,18 @@
 
 """Unit tests for kubernetes.informer."""
 
+import json
 import threading
 import time
 import unittest
+from types import SimpleNamespace
 from unittest.mock import MagicMock, patch
 
+from kubernetes.client.exceptions import ApiException
 from kubernetes.informer.cache import ObjectCache, _meta_namespace_key
-from kubernetes.informer.informer import (
-    ADDED,
-    BOOKMARK,
-    DELETED,
-    ERROR,
-    MODIFIED,
-    SharedInformer,
-)
+from kubernetes.informer.informer import (ADDED, BOOKMARK, DELETED, ERROR,
+                                          MODIFIED, SharedInformer)
+from kubernetes.watch import Watch
 
 
 def _make_pod(namespace, name):
@@ -367,50 +365,6 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
         self.assertEqual(len(cached), 1)
         self.assertIs(cached[0], pod)
 
-    def test_bookmark_advances_resource_version(self):
-        """A BOOKMARK event causes the informer's _resource_version to advance.
-
-        PR #2505 added BOOKMARK-aware handling to Watch.unmarshal_event: it
-        extracts resourceVersion from the raw BOOKMARK dict and stores it on
-        self.resource_version *without* deserialising the object (because
-        BOOKMARK events may be incomplete).  The informer must read that value
-        back so that the next watch reconnect starts from the BOOKMARK's RV
-        rather than the initial-list RV.
-        """
-        bookmark_obj = {"metadata": {"resourceVersion": "100"}}
-
-        list_func = MagicMock()
-        list_resp = MagicMock()
-        list_resp.items = []
-        list_resp.metadata = MagicMock(resource_version="5")
-        list_func.return_value = list_resp
-
-        informer = SharedInformer(list_func=list_func)
-
-        with patch("kubernetes.informer.informer.Watch") as MockWatch:
-            mock_w = MagicMock()
-            # Start at the initial-list RV; fake_stream will advance it to the
-            # BOOKMARK's RV, mirroring how Watch.unmarshal_event updates
-            # self.resource_version before yielding a BOOKMARK event.
-            mock_w.resource_version = "5"
-
-            def fake_stream(func, **kw):
-                # Simulate Watch.unmarshal_event setting resource_version from
-                # the BOOKMARK metadata before the event is yielded.
-                mock_w.resource_version = "100"
-                yield {"type": "BOOKMARK", "object": bookmark_obj, "raw_object": bookmark_obj}
-                informer._stop_event.set()
-
-            mock_w.stream.side_effect = fake_stream
-            MockWatch.return_value = mock_w
-
-            informer.start()
-            informer._thread.join(timeout=3)
-
-        # The informer must have synced the RV from the BOOKMARK, not the
-        # stale initial-list RV ("5").
-        self.assertEqual(informer._resource_version, "100")
-
     def test_bookmark_handler_receives_raw_dict(self):
         """BOOKMARK handlers receive the raw dict, not a deserialized model.
 
@@ -460,8 +414,6 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
 
         informer = SharedInformer(list_func=list_func)
 
-        rv_sequence = iter(["10", "20", "30"])
-
         with patch("kubernetes.informer.informer.Watch") as MockWatch:
             mock_w = MagicMock()
 
@@ -502,14 +454,8 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
 
         with patch("kubernetes.informer.informer.Watch") as MockWatch, \
                 patch("kubernetes.informer.informer.time") as mock_time:
-            # Sequence of time.monotonic() calls inside _run_loop:
-            #   1. last_resync = time.monotonic()            → 0.0  (watch-loop start)
-            #   2. post-stream: time.monotonic()             → 61.0 (≥60 → resync fires)
-            #   3. last_resync = time.monotonic()            → 61.0 (second watch-loop start)
-            # The stop_event is set during the second stream, so the
-            # post-stream check is short-circuited and no further calls occur.
-            mock_time.monotonic.side_effect = [0.0, 61.0, 61.0]
-            mock_time.sleep = time.sleep  # keep real sleep/wait working
+            clock = [0.0]
+            mock_time.monotonic.side_effect = lambda: clock[0]
 
             mock_w = MagicMock()
             mock_w.resource_version = "5"
@@ -519,6 +465,7 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
                 if stream_calls["n"] == 1:
                     # Simulate the stream timing out (timeout_seconds expired)
                     # with no events – the resync should fire after this returns.
+                    clock[0] = 61.0
                     return iter([])
                 # Second iteration: stop the informer.
                 informer._stop_event.set()
@@ -783,41 +730,6 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
         self.assertIsNone(informer.cache.get_by_key("default/pod-delete"))
         self.assertIsNotNone(informer.cache.get_by_key("default/pod-keep"))
 
-    def test_resource_version_stored_from_watch(self):
-        """After the watch stream ends the latest RV is preserved for reconnect."""
-        pod = _make_pod("default", "rv-pod")
-        events = [{"type": "ADDED", "object": pod}]
-
-        list_func = MagicMock()
-        list_resp = MagicMock()
-        list_resp.items = []
-        list_resp.metadata = MagicMock(resource_version="10")
-        list_func.return_value = list_resp
-
-        informer = SharedInformer(list_func=list_func)
-
-        call_count = {"n": 0}
-
-        with patch("kubernetes.informer.informer.Watch") as MockWatch:
-            mock_w = MagicMock()
-            mock_w.resource_version = "99"
-
-            def fake_stream(func, **kw):
-                call_count["n"] += 1
-                yield from events
-                informer._stop_event.set()
-
-            mock_w.stream.side_effect = fake_stream
-            MockWatch.return_value = mock_w
-
-            informer.start()
-            informer._thread.join(timeout=3)
-
-        # The Watch reported RV "99"; the informer should have stored it.
-        self.assertEqual(informer._resource_version, "99")
-        # list_func should have been called once for the initial list only.
-        self.assertEqual(list_func.call_count, 1)
-
     def test_reconnect_skips_relist_when_rv_known(self):
         """On reconnect without 410 the informer must NOT call the list function again."""
         pod = _make_pod("default", "reconnect-pod")
@@ -854,41 +766,6 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
         # list_func is called only once (initial list); reconnect reuses the RV.
         self.assertEqual(list_func.call_count, 1)
         self.assertEqual(stream_calls["n"], 2)
-
-    def test_410_gone_triggers_relist(self):
-        """A 410 Gone ApiException must reset resource_version and trigger re-list."""
-        from kubernetes.client.exceptions import ApiException
-
-        list_func = MagicMock()
-        list_resp = MagicMock()
-        list_resp.items = []
-        list_resp.metadata = MagicMock(resource_version="3")
-        list_func.return_value = list_resp
-
-        informer = SharedInformer(list_func=list_func)
-
-        stream_calls = {"n": 0}
-
-        with patch("kubernetes.informer.informer.Watch") as MockWatch:
-            mock_w = MagicMock()
-            mock_w.resource_version = "3"
-
-            def fake_stream(func, **kw):
-                stream_calls["n"] += 1
-                if stream_calls["n"] == 1:
-                    raise ApiException(status=410, reason="Gone")
-                # Second stream (after re-list): stop cleanly
-                informer._stop_event.set()
-                return iter([])
-
-            mock_w.stream.side_effect = fake_stream
-            MockWatch.return_value = mock_w
-
-            informer.start()
-            informer._thread.join(timeout=3)
-
-        # list_func called twice: initial list + re-list after 410.
-        self.assertEqual(list_func.call_count, 2)
 
     # ------------------------------------------------------------------
     # Tests analogous to client-go shared_informer_test.go scenarios.
@@ -1131,6 +1008,767 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
         self.assertIsNotNone(informer.cache.get_by_key("default/stable-pod"))
 
 
+class TestSharedInformerWatchCheckpoint(unittest.TestCase):
+    """Exercise checkpoints with the real Watch parser and retry scheduler."""
+
+    def setUp(self):
+        # Timing is verified separately with a fake clock below.
+        jitter = patch(
+            "kubernetes.informer.informer.random.uniform",
+            return_value=0)
+        jitter.start()
+        self.addCleanup(jitter.stop)
+
+    def _make_checkpoint_object(self, resource_version):
+        return {
+            "metadata": {
+                "namespace": "default",
+                "name": "pod",
+                "resourceVersion": resource_version,
+            }
+        }
+
+    def _make_event(self, event_type, resource_version):
+        return {
+            "type": event_type,
+            "object": self._make_checkpoint_object(resource_version),
+        }
+
+    def _make_watch_response(self, *events):
+        response = MagicMock()
+        response.status = 200
+        response.stream.return_value = iter(
+            (
+                (json.dumps(event) if isinstance(event, dict) else event)
+                + "\n"
+            ).encode()
+            for event in events
+        )
+        return response
+
+    def _make_list_source(self, responses, initial_items=()):
+        responses = iter(responses)
+        requests = []
+
+        def list_func(**kwargs):
+            requests.append(kwargs)
+            if not kwargs.get("watch"):
+                return SimpleNamespace(
+                    items=list(initial_items),
+                    metadata=SimpleNamespace(resource_version="10"),
+                )
+            return next(responses)
+
+        return list_func, requests
+
+    def _stop_on_error(self, informer):
+        errors = []
+
+        def on_error(error):
+            errors.append(error)
+            informer.stop()
+
+        informer.add_event_handler(ERROR, on_error)
+        return errors
+
+    def test_watch_reconnect_uses_applied_event_and_bookmark(self):
+        for return_type in [None, "V1Pod"]:
+            with self.subTest(return_type=return_type):
+                list_func, requests = self._make_list_source(
+                    [
+                        self._make_watch_response(
+                            self._make_event(ADDED, "11")
+                        ),
+                        self._make_watch_response(
+                            {
+                                "type": BOOKMARK,
+                                "object": {
+                                    "metadata": {"resourceVersion": "12"}
+                                },
+                            }
+                        ),
+                        self._make_watch_response(
+                            self._make_event(MODIFIED, "13")
+                        ),
+                    ]
+                )
+                informer = SharedInformer(list_func)
+                errors = self._stop_on_error(informer)
+                checkpoints = []
+                bookmark_cache = []
+                informer.add_event_handler(
+                    ADDED,
+                    lambda obj: checkpoints.append(informer._resource_version),
+                )
+
+                def on_bookmark(obj):
+                    checkpoints.append(informer._resource_version)
+                    bookmark_cache.extend(informer.cache.list_keys())
+
+                informer.add_event_handler(BOOKMARK, on_bookmark)
+                informer.add_event_handler(
+                    MODIFIED, lambda obj: informer.stop()
+                )
+                with patch(
+                    "kubernetes.informer.informer.Watch",
+                    side_effect=lambda **kw: Watch(return_type, **kw),
+                ) as factory:
+                    informer._run_loop()
+
+                self.assertFalse(errors)
+                # Each reconnect passes through the informer scheduler.
+                self.assertEqual(factory.call_count, 3)
+                self.assertEqual(
+                    [
+                        request["resource_version"]
+                        for request in requests
+                        if request.get("watch")
+                    ],
+                    ["10", "11", "12"],
+                )
+                self.assertEqual(checkpoints, ["11", "12"])
+                self.assertEqual(bookmark_cache, ["default/pod"])
+                self.assertEqual(informer._resource_version, "13")
+
+    def test_empty_and_invalid_lines_do_not_interrupt_watch(self):
+        for return_type in [None, "V1Pod"]:
+            with self.subTest(return_type=return_type):
+                response = self._make_watch_response(
+                    "", "not json", self._make_event(ADDED, "11")
+                )
+                list_func, requests = self._make_list_source([response])
+                informer = SharedInformer(list_func)
+                errors = self._stop_on_error(informer)
+                informer.add_event_handler(ADDED, lambda obj: informer.stop())
+
+                with patch(
+                    "kubernetes.informer.informer.Watch",
+                    lambda **kw: Watch(return_type, **kw),
+                ):
+                    informer._run_loop()
+
+                self.assertFalse(errors)
+                # One LIST and one WATCH, with no reconnect.
+                self.assertEqual(len(requests), 2)
+                self.assertIsNotNone(informer.cache.get_by_key("default/pod"))
+                self.assertEqual(informer._resource_version, "11")
+                response.close.assert_called_once()
+                response.release_conn.assert_called_once()
+
+    def test_unknown_event_does_not_advance_internal_watch_checkpoint(self):
+        list_func, requests = self._make_list_source(
+            [
+                self._make_watch_response(self._make_event("UNKNOWN", "11")),
+                self._make_watch_response(self._make_event(ADDED, "12")),
+            ]
+        )
+        informer = SharedInformer(list_func)
+        errors = self._stop_on_error(informer)
+        informer.add_event_handler(ADDED, lambda obj: informer.stop())
+        with patch(
+            "kubernetes.informer.informer.Watch",
+            lambda **kw: Watch("V1Pod", **kw)
+        ):
+            informer._run_loop()
+
+        self.assertFalse(errors)
+        self.assertEqual(
+            [
+                request["resource_version"]
+                for request in requests
+                if request.get("watch")
+            ],
+            ["10", "10"],
+        )
+        self.assertEqual(informer._resource_version, "12")
+
+    def test_cache_failure_reconnects_from_last_applied_event(self):
+        for return_type in [None, "V1Pod"]:
+            for event_type in [ADDED, MODIFIED, DELETED]:
+                with self.subTest(
+                    return_type=return_type, event_type=event_type
+                ):
+                    list_func, requests = self._make_list_source(
+                        [
+                            self._make_watch_response(
+                                self._make_event(event_type, "11")
+                            ),
+                            self._make_watch_response(
+                                self._make_event(event_type, "11")
+                            ),
+                        ],
+                        initial_items=(
+                            [self._make_checkpoint_object("10")]
+                            if event_type != ADDED
+                            else []
+                        ),
+                    )
+                    failed = False
+
+                    def key_func(obj):
+                        nonlocal failed
+                        resource_version = (
+                            obj["metadata"]["resourceVersion"]
+                            if isinstance(obj, dict)
+                            else obj.metadata.resource_version
+                        )
+                        if resource_version == "11" and not failed:
+                            failed = True
+                            raise ValueError("cache key failed")
+                        return _meta_namespace_key(obj)
+
+                    informer = SharedInformer(list_func, key_func=key_func)
+                    errors = []
+                    informer.add_event_handler(ERROR, errors.append)
+                    checkpoints = []
+
+                    def on_applied(obj):
+                        resource_version = (
+                            obj["metadata"]["resourceVersion"]
+                            if isinstance(obj, dict)
+                            else obj.metadata.resource_version
+                        )
+                        if resource_version == "11":
+                            checkpoints.append(informer._resource_version)
+                            informer.stop()
+
+                    informer.add_event_handler(event_type, on_applied)
+                    # Stop on unexpected exhaustion instead of retrying
+                    # an invalid test fixture.
+                    informer.add_event_handler(
+                        ERROR,
+                        lambda error: (
+                            informer.stop()
+                            if isinstance(error, StopIteration)
+                            else None
+                        ),
+                    )
+                    with patch(
+                        "kubernetes.informer.informer.Watch",
+                        lambda **kw: Watch(return_type, **kw),
+                    ):
+                        informer._run_loop()
+
+                    self.assertEqual(len(errors), 1)
+                    self.assertIsInstance(errors[0], ValueError)
+                    self.assertEqual(
+                        [
+                            request["resource_version"]
+                            for request in requests
+                            if request.get("watch")
+                        ],
+                        ["10", "10"],
+                    )
+                    self.assertEqual(checkpoints, ["11"])
+                    self.assertEqual(
+                        informer.cache.get_by_key("default/pod") is None,
+                        event_type == DELETED,
+                    )
+
+    def test_handler_failure_preserves_applied_checkpoint_and_other_handlers(
+        self,
+    ):
+        list_func, requests = self._make_list_source(
+            [
+                self._make_watch_response(self._make_event(ADDED, "11")),
+                self._make_watch_response(self._make_event(MODIFIED, "12")),
+            ]
+        )
+        informer = SharedInformer(list_func)
+        errors = self._stop_on_error(informer)
+        checkpoints = []
+
+        def failing_handler(obj):
+            raise ValueError("handler failed after cache application")
+
+        informer.add_event_handler(ADDED, failing_handler)
+        informer.add_event_handler(
+            ADDED, lambda obj: checkpoints.append(informer._resource_version)
+        )
+        informer.add_event_handler(MODIFIED, lambda obj: informer.stop())
+        informer._run_loop()
+
+        # Handler failures retain the existing log-and-continue policy.
+        self.assertFalse(errors)
+        self.assertEqual(checkpoints, ["11"])
+        self.assertEqual(
+            [
+                request["resource_version"]
+                for request in requests
+                if request.get("watch")
+            ],
+            ["10", "11"],
+        )
+        self.assertEqual(informer._resource_version, "12")
+
+    def test_stop_after_deserialization_replays_unapplied_event_on_restart(
+        self,
+    ):
+        list_func, requests = self._make_list_source(
+            [
+                self._make_watch_response(self._make_event(ADDED, "11")),
+                self._make_watch_response(self._make_event(ADDED, "11")),
+            ]
+        )
+        informer = SharedInformer(list_func)
+        errors = self._stop_on_error(informer)
+        first_watch = Watch("V1Pod")
+        unmarshal_event = first_watch.unmarshal_event
+
+        def stop_after_unmarshal(data, return_type):
+            event = unmarshal_event(data, return_type)
+            # Simulate stop between parsing and cache application.
+            informer.stop()
+            return event
+
+        first_watch.unmarshal_event = stop_after_unmarshal
+        with patch(
+            "kubernetes.informer.informer.Watch", return_value=first_watch
+        ):
+            informer._run_loop()
+
+        # Received, but not applied.
+        self.assertEqual(first_watch.resource_version, "11")
+        self.assertEqual(informer.cache.list(), [])
+        checkpoint_after_stop = informer._resource_version
+        informer.add_event_handler(ADDED, lambda obj: informer.stop())
+        informer._stop_event.clear()
+        with patch(
+            "kubernetes.informer.informer.Watch",
+            lambda **kw: Watch("V1Pod", **kw)
+        ):
+            informer._run_loop()
+
+        self.assertFalse(errors)
+        self.assertEqual(checkpoint_after_stop, "10")
+        self.assertEqual(
+            [
+                request["resource_version"]
+                for request in requests
+                if request.get("watch")
+            ],
+            ["10", "10"],
+        )
+        self.assertIsNotNone(informer.cache.get_by_key("default/pod"))
+        self.assertEqual(informer._resource_version, "11")
+
+    def test_repeated_410_relists_without_restoring_expired_checkpoint(self):
+        expired = {
+            "type": ERROR,
+            "object": {
+                "code": 410,
+                "reason": "Gone",
+                "message": "resource version expired",
+            },
+        }
+        list_func, requests = self._make_list_source(
+            [
+                self._make_watch_response(
+                    self._make_event(ADDED, "11"), expired
+                ),
+                self._make_watch_response(expired),
+                self._make_watch_response(self._make_event(MODIFIED, "12")),
+            ]
+        )
+        informer = SharedInformer(list_func)
+        errors = []
+        informer.add_event_handler(ERROR, errors.append)
+        informer.add_event_handler(
+            ERROR,
+            lambda error: (
+                informer.stop()
+                if not isinstance(error, ApiException)
+                else None
+            ),
+        )
+        informer.add_event_handler(MODIFIED, lambda obj: informer.stop())
+        with patch(
+            "kubernetes.informer.informer.Watch",
+            lambda **kw: Watch("V1Pod", **kw)
+        ):
+            informer._run_loop()
+
+        self.assertEqual(len(errors), 2)
+        self.assertTrue(all(isinstance(error, ApiException)
+                        for error in errors))
+        self.assertTrue(all(error.status == 410 for error in errors))
+        self.assertEqual(
+            [
+                request["resource_version"]
+                for request in requests
+                if request.get("watch")
+            ],
+            ["10", "10", "10"],
+        )
+        self.assertEqual(
+            len([request for request in requests if not request.get("watch")]),
+            3,
+        )
+        self.assertEqual(informer._resource_version, "12")
+
+
+class TestSharedInformerRetryScheduling(unittest.TestCase):
+    """Exercise scheduler deadlines without sleeping or replacing Watch."""
+
+    def setUp(self):
+        self.now = 0.0
+        self.requests = []
+        self.waits = []
+        self.list_action = None
+        self.watch_action = None
+        clock = patch("kubernetes.informer.informer.time.monotonic",
+                      side_effect=lambda: self.now)
+        jitter = patch("kubernetes.informer.informer.random.uniform",
+                       side_effect=lambda lower, upper: upper)
+        clock.start()
+        self.jitter = jitter.start()
+        self.addCleanup(clock.stop)
+        self.addCleanup(jitter.stop)
+
+    def _make_informer(self, resync_period=0):
+        def source(**kwargs):
+            watching = kwargs.get("watch", False)
+            self.requests.append(("watch" if watching else "list",
+                                  self.now, kwargs))
+            if watching:
+                return self.watch_action()
+            if self.list_action:
+                return self.list_action()
+            return SimpleNamespace(
+                items=[], metadata=SimpleNamespace(resource_version="10"))
+
+        informer = SharedInformer(source, resync_period=resync_period)
+
+        def wait(timeout):
+            self.assertGreater(timeout, 0)
+            self.waits.append(timeout)
+            self.assertLess(len(self.waits), 30, "unexpected retry loop")
+            self.now += timeout
+            return False
+
+        informer._stop_event.wait = MagicMock(side_effect=wait)
+        return informer
+
+    def _response(self, duration=0, events=(), error=None):
+        def chunks():
+            self.now += duration
+            for event in events:
+                line = json.dumps(event) if isinstance(event, dict) else event
+                yield (line + "\n").encode()
+            if error:
+                raise error
+
+        response = MagicMock()
+        response.status = 200
+        response.stream.side_effect = lambda **kwargs: chunks()
+        return response
+
+    def _event(self, event_type=BOOKMARK):
+        return {"type": event_type,
+                "object": {"metadata": {"name": "pod",
+                                        "resourceVersion": "11"}}}
+
+    def test_short_streams_back_off_even_after_events_or_bookmarks(self):
+        for event_type in [None, ADDED, BOOKMARK]:
+            with self.subTest(event_type=event_type):
+                self.now = 0
+                self.requests.clear()
+                self.waits.clear()
+                informer = self._make_informer()
+                count = [0]
+
+                def watch():
+                    count[0] += 1
+                    if count[0] == 4:
+                        informer._stop_event.set()
+                    events = [self._event(event_type)] if event_type else []
+                    return self._response(events=events)
+
+                self.watch_action = watch
+                informer._run_loop()
+                self.assertEqual(self.waits, [1, 2, 4])
+                self.assertEqual(
+                    [t for op, t, _ in self.requests if op == "watch"],
+                    [0, 1, 3, 7])
+
+    def test_slow_watch_errors_keep_failure_history_and_cap_jitter(self):
+        informer = self._make_informer()
+        count = [0]
+
+        def watch():
+            count[0] += 1
+            if count[0] == 9:
+                informer._stop_event.set()
+                return self._response()
+            return self._response(
+                duration=70, error=RuntimeError("read failed"))
+
+        self.watch_action = watch
+        informer._run_loop()
+        self.assertEqual(self.waits, [1, 2, 4, 8, 16, 32, 60, 60])
+        self.assertEqual(
+            [entry.args for entry in self.jitter.call_args_list[:8]],
+            [(0.5, 1), (1, 2), (2, 4), (4, 8), (8, 16),
+             (16, 32), (30, 60), (30, 60)])
+
+    def test_long_clean_watch_resets_backoff(self):
+        informer = self._make_informer()
+        count = [0]
+
+        def watch():
+            count[0] += 1
+            if count[0] == 5:
+                informer._stop_event.set()
+            return self._response(duration=60 if count[0] == 3 else 0)
+
+        self.watch_action = watch
+        informer._run_loop()
+        self.assertEqual(self.waits, [1, 2, 1])
+        self.assertEqual([t for op, t, _ in self.requests if op == "watch"],
+                         [0, 1, 3, 63, 64])
+
+    def test_backoff_wakes_for_periodic_list_before_next_watch(self):
+        informer = self._make_informer(resync_period=5)
+        count = [0]
+
+        def watch():
+            count[0] += 1
+            if count[0] == 4:
+                informer._stop_event.set()
+            return self._response()
+
+        self.watch_action = watch
+        informer._run_loop()
+        self.assertEqual([(op, t) for op, t, _ in self.requests],
+                         [("list", 0), ("watch", 0), ("watch", 1),
+                          ("watch", 3), ("list", 5), ("watch", 7)])
+        self.assertEqual([kw["timeout_seconds"] for op, _, kw in self.requests
+                          if op == "watch"], [5, 4, 2, 3])
+
+    def test_periodic_list_failures_back_off_while_watch_keeps_delivering(
+            self):
+        informer = self._make_informer(resync_period=2)
+        list_count = [0]
+
+        def list_objects():
+            list_count[0] += 1
+            if list_count[0] == 1:
+                return SimpleNamespace(
+                    items=[], metadata=SimpleNamespace(resource_version="10"))
+            if list_count[0] == 5:
+                informer._stop_event.set()
+            raise RuntimeError("list unavailable")
+
+        self.list_action = list_objects
+        self.watch_action = lambda: self._response(
+            duration=1, events=[self._event()])
+        informer._run_loop()
+        self.assertEqual([t for op, t, _ in self.requests if op == "list"],
+                         [0, 2, 3, 5, 9])
+        self.assertEqual(informer._resource_version, "11")
+        self.assertGreater(
+            len([op for op, _, _ in self.requests if op == "watch"]), 3)
+
+    def test_initial_and_expired_list_failures_prevent_watch(self):
+        for expired in [False, True]:
+            with self.subTest(expired=expired):
+                self.now = 0
+                self.requests.clear()
+                self.waits.clear()
+                informer = self._make_informer()
+                count = [0]
+
+                def list_objects():
+                    count[0] += 1
+                    if expired and count[0] == 1:
+                        return SimpleNamespace(
+                            items=[], metadata=SimpleNamespace(
+                                resource_version="10"))
+                    if count[0] == (4 if expired else 3):
+                        informer._stop_event.set()
+                    raise RuntimeError("list unavailable")
+
+                self.list_action = list_objects
+                self.watch_action = lambda: self._response(events=[{
+                    "type": ERROR, "object": {"code": 410, "reason": "Gone",
+                                              "message": "expired"}}])
+                informer._run_loop()
+                self.assertEqual(len([op for op, _, _ in self.requests
+                                      if op == "watch"]), int(expired))
+                self.assertEqual(self.waits, [1, 2])
+                self.assertIsNone(informer._resource_version)
+
+    def test_slow_relist_does_not_make_short_watch_healthy(self):
+        informer = self._make_informer(resync_period=2)
+        list_count = [0]
+        watch_count = [0]
+
+        def list_objects():
+            list_count[0] += 1
+            if list_count[0] > 1:
+                self.now += 70
+            return SimpleNamespace(items=[], metadata=SimpleNamespace(
+                resource_version="10"))
+
+        def watch():
+            watch_count[0] += 1
+            if watch_count[0] == 4:
+                informer._stop_event.set()
+            return self._response()
+
+        self.list_action = list_objects
+        self.watch_action = watch
+        informer._run_loop()
+        # Delays keep growing across the slow LIST, and resync starts anew
+        # from each LIST completion, not its start time.
+        self.assertEqual([t for op, t, _ in self.requests if op == "watch"],
+                         [0, 1, 72, 144])
+        self.assertEqual([t for op, t, _ in self.requests if op == "list"],
+                         [0, 2, 74])
+        self.assertEqual(
+            [entry.args for entry in self.jitter.call_args_list[:3]],
+            [(0.5, 1), (1, 2), (2, 4)])
+
+    def test_fractional_period_busy_watch_does_not_accumulate_backoff(self):
+        informer = self._make_informer(resync_period=0.5)
+        count = [0]
+
+        def watch():
+            count[0] += 1
+            if count[0] == 4:
+                informer._stop_event.set()
+            return self._response(duration=0.5, events=[self._event()])
+
+        self.watch_action = watch
+        informer._run_loop()
+        self.assertEqual([t for op, t, _ in self.requests if op == "watch"],
+                         [0, 0.5, 1, 1.5])
+        self.assertEqual(self.waits, [])
+
+    def test_planned_relist_preserves_previous_watch_failure_history(self):
+        informer = self._make_informer(resync_period=0.5)
+        count = [0]
+
+        def watch():
+            count[0] += 1
+            if count[0] == 4:
+                informer._stop_event.set()
+            if count[0] == 2:
+                return self._response(duration=0.5, events=[self._event()])
+            return self._response()
+
+        self.watch_action = watch
+        informer._run_loop()
+        self.assertEqual([t for op, t, _ in self.requests if op == "watch"],
+                         [0, 1, 1.5, 3.5])
+        self.assertEqual(
+            [entry.args for entry in self.jitter.call_args_list[:2]],
+            [(0.5, 1), (1, 2)])
+
+    def test_normal_idle_timeout_relists_without_failure_delay(self):
+        informer = self._make_informer(resync_period=2)
+        count = [0]
+
+        def watch():
+            count[0] += 1
+            if count[0] == 2:
+                informer._stop_event.set()
+            return self._response(duration=2)
+
+        self.watch_action = watch
+        informer._run_loop()
+        self.assertEqual([(op, t) for op, t, _ in self.requests], [
+                         ("list", 0), ("watch", 0), ("list", 2), ("watch", 2)])
+        self.assertEqual(self.waits, [])
+
+    def test_cancel_during_backoff_prevents_another_request(self):
+        informer = self._make_informer()
+        self.watch_action = lambda: self._response()
+        informer._stop_event.wait.side_effect = (
+            lambda timeout: informer._stop_event.set())
+        informer._run_loop()
+        self.assertEqual([op for op, _, _ in self.requests], ["list", "watch"])
+
+    def test_invalid_lines_followed_by_410_relist_without_internal_retry(self):
+        informer = self._make_informer()
+        count = [0]
+
+        def watch():
+            count[0] += 1
+            if count[0] == 3:
+                informer._stop_event.set()
+                return self._response()
+            return self._response(events=["", "not json", {
+                "type": ERROR, "object": {"code": 410, "reason": "Gone",
+                                          "message": "expired"}}])
+
+        self.watch_action = watch
+        informer._run_loop()
+        self.assertEqual([op for op, _, _ in self.requests],
+                         ["list", "watch", "list", "watch", "list", "watch"])
+        self.assertEqual(self.waits, [1, 2])
+
+    def test_restart_preserves_periodic_list_deadline(self):
+        informer = self._make_informer(resync_period=5)
+        count = [0]
+
+        def watch():
+            count[0] += 1
+            if count[0] in (1, 3):
+                informer._stop_event.set()
+                return self._response()
+            return self._response(duration=4)
+
+        self.watch_action = watch
+        informer._run_loop()
+        self.now = 1
+        informer._stop_event.clear()
+        informer._run_loop()
+        self.assertEqual([(op, t) for op, t, _ in self.requests],
+                         [("list", 0), ("watch", 0), ("watch", 1),
+                          ("list", 5), ("watch", 5)])
+        self.assertEqual([kw["timeout_seconds"] for op, _, kw in self.requests
+                          if op == "watch"], [5, 4, 5])
+
+    def test_response_close_failure_at_resync_is_retried(self):
+        informer = self._make_informer(resync_period=1)
+        errors = []
+        informer.add_event_handler(ERROR, errors.append)
+        response = self._response(duration=1, events=[self._event()])
+        response.close.side_effect = RuntimeError("close failed")
+        count = [0]
+
+        def watch():
+            count[0] += 1
+            if count[0] == 1:
+                return response
+            informer._stop_event.set()
+            return self._response()
+
+        self.watch_action = watch
+        informer._run_loop()
+        self.assertEqual(len(errors), 1)
+        self.assertEqual(str(errors[0]), "close failed")
+        response.release_conn.assert_called_once()
+        self.assertEqual(count[0], 2)
+        self.assertIsNone(informer._watch)
+
+    def test_default_resync_accepts_callable_without_timeout_parameter(self):
+        informer = None
+        requests = []
+
+        def source(watch=False, resource_version=None, _preload_content=True):
+            requests.append(watch)
+            if watch:
+                informer._stop_event.set()
+                return self._response()
+            return SimpleNamespace(items=[], metadata=SimpleNamespace(
+                resource_version="10"))
+
+        informer = SharedInformer(source)
+        informer._run_loop()
+        self.assertEqual(requests, [False, True])
+
+
 if __name__ == "__main__":
     unittest.main()
-
