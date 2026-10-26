@@ -13,6 +13,7 @@ Submodules
    kubernetes.e2e_test.test_batch
    kubernetes.e2e_test.test_client
    kubernetes.e2e_test.test_informer
+   kubernetes.e2e_test.test_issue_2387_proxy_ssl_context
    kubernetes.e2e_test.test_utils
    kubernetes.e2e_test.test_watch
 

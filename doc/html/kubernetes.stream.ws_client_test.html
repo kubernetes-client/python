@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>kubernetes.stream.ws_client_test module &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kubernetes.utils package" href="kubernetes.utils.html" />
+    <link rel="prev" title="kubernetes.stream.ws_client module" href="kubernetes.stream.ws_client.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-kubernetes.stream.ws_client_test">
+<span id="kubernetes-stream-ws-client-test-module"></span><h1>kubernetes.stream.ws_client_test module<a class="headerlink" href="#module-kubernetes.stream.ws_client_test" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.DummyProxy">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.stream.ws_client_test.</span></span><span class="sig-name descname"><span class="pre">DummyProxy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'127.0.0.1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8888</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.DummyProxy" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Thread</span></code></p>
+<p>A minimal HTTP proxy that flags any CONNECT request and returns 200 OK.
+Listens on 127.0.0.1:8888 by default.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.DummyProxy.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.DummyProxy.run" title="Link to this definition">¶</a></dt>
+<dd><p>Method representing the thread’s activity.</p>
+<p>You may override this method in a subclass. The standard run() method
+invokes the callable object passed to the object’s constructor as the
+target argument, if any, with sequential and keyword arguments taken
+from the args and kwargs arguments, respectively.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientMultiFrameReadTest">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.stream.ws_client_test.</span></span><span class="sig-name descname"><span class="pre">WSClientMultiFrameReadTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientMultiFrameReadTest" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Tests that reads spanning multiple websocket frames are not
+truncated at a frame boundary (issue #2226)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientMultiFrameReadTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientMultiFrameReadTest.setUp" title="Link to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientMultiFrameReadTest.test_read_stdout_returns_all_available_frames">
+<span class="sig-name descname"><span class="pre">test_read_stdout_returns_all_available_frames</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientMultiFrameReadTest.test_read_stdout_returns_all_available_frames" title="Link to this definition">¶</a></dt>
+<dd><p>Verify a single peek/read returns output spanning several frames.</p>
+<p>The server sends long exec stdout as a sequence of websocket
+messages (32768 bytes each). Reading only one frame per update()
+truncated the output at a frame boundary for callers using the
+peek_stdout()/read_stdout() pattern.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientMultiFrameReadTest.test_update_consumes_all_immediately_available_frames">
+<span class="sig-name descname"><span class="pre">test_update_consumes_all_immediately_available_frames</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientMultiFrameReadTest.test_update_consumes_all_immediately_available_frames" title="Link to this definition">¶</a></dt>
+<dd><p>Verify update() drains every frame that is already readable</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientMultiFrameReadTest.test_update_stops_draining_on_close_frame">
+<span class="sig-name descname"><span class="pre">test_update_stops_draining_on_close_frame</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientMultiFrameReadTest.test_update_stops_draining_on_close_frame" title="Link to this definition">¶</a></dt>
+<dd><p>Verify the drain loop terminates when a close frame arrives</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientProtocolTest">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.stream.ws_client_test.</span></span><span class="sig-name descname"><span class="pre">WSClientProtocolTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientProtocolTest" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Tests for WSClient V5 protocol handling</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientProtocolTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientProtocolTest.setUp" title="Link to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientProtocolTest.test_close_channel_v4">
+<span class="sig-name descname"><span class="pre">test_close_channel_v4</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientProtocolTest.test_close_channel_v4" title="Link to this definition">¶</a></dt>
+<dd><p>Verify close_channel does nothing when v4 is negotiated</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientProtocolTest.test_close_channel_v5">
+<span class="sig-name descname"><span class="pre">test_close_channel_v5</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientProtocolTest.test_close_channel_v5" title="Link to this definition">¶</a></dt>
+<dd><p>Verify close_channel sends correct frame when v5 is negotiated</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientProtocolTest.test_create_websocket_header">
+<span class="sig-name descname"><span class="pre">test_create_websocket_header</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientProtocolTest.test_create_websocket_header" title="Link to this definition">¶</a></dt>
+<dd><p>Verify sec-websocket-protocol header requests v5 first</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientProtocolTest.test_peek_channel_closed_with_leftover_data">
+<span class="sig-name descname"><span class="pre">test_peek_channel_closed_with_leftover_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientProtocolTest.test_peek_channel_closed_with_leftover_data" title="Link to this definition">¶</a></dt>
+<dd><p>Verify peek_channel allows peeking leftover data and then short-circuits after draining</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientProtocolTest.test_read_channel_closed_with_leftover_data">
+<span class="sig-name descname"><span class="pre">test_read_channel_closed_with_leftover_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientProtocolTest.test_read_channel_closed_with_leftover_data" title="Link to this definition">¶</a></dt>
+<dd><p>Verify read_channel drains leftover data and then short-circuits on closed channel</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientProtocolTest.test_readline_channel_closed_with_leftover_data">
+<span class="sig-name descname"><span class="pre">test_readline_channel_closed_with_leftover_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientProtocolTest.test_readline_channel_closed_with_leftover_data" title="Link to this definition">¶</a></dt>
+<dd><p>Verify readline_channel flushes remaining buffer when channel is closed</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientProtocolTest.test_readline_channel_closed_with_leftover_data_binary">
+<span class="sig-name descname"><span class="pre">test_readline_channel_closed_with_leftover_data_binary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientProtocolTest.test_readline_channel_closed_with_leftover_data_binary" title="Link to this definition">¶</a></dt>
+<dd><p>Verify readline_channel flushes remaining buffer when channel is closed in binary mode</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientProtocolTest.test_readline_channel_returns_empty_bytes_on_expired_timeout">
+<span class="sig-name descname"><span class="pre">test_readline_channel_returns_empty_bytes_on_expired_timeout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientProtocolTest.test_readline_channel_returns_empty_bytes_on_expired_timeout" title="Link to this definition">¶</a></dt>
+<dd><p>Verify readline_channel returns b’’ (not None) when a finite timeout expires in binary mode</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientProtocolTest.test_readline_channel_returns_empty_string_on_expired_timeout">
+<span class="sig-name descname"><span class="pre">test_readline_channel_returns_empty_string_on_expired_timeout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientProtocolTest.test_readline_channel_returns_empty_string_on_expired_timeout" title="Link to this definition">¶</a></dt>
+<dd><p>Verify readline_channel returns ‘’ (not None) when a finite timeout expires</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientProtocolTest.test_update_ignores_close_signal_v4">
+<span class="sig-name descname"><span class="pre">test_update_ignores_close_signal_v4</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientProtocolTest.test_update_ignores_close_signal_v4" title="Link to this definition">¶</a></dt>
+<dd><p>Verify update treats 0xFF as regular data (or ignores signal interpretation) when v4</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientProtocolTest.test_update_infinite_timeout_polls_without_overflow">
+<span class="sig-name descname"><span class="pre">test_update_infinite_timeout_polls_without_overflow</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientProtocolTest.test_update_infinite_timeout_polls_without_overflow" title="Link to this definition">¶</a></dt>
+<dd><p>Verify update maps an infinite (default) timeout to a blocking poll instead of overflowing</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientProtocolTest.test_update_receives_close_v5">
+<span class="sig-name descname"><span class="pre">test_update_receives_close_v5</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientProtocolTest.test_update_receives_close_v5" title="Link to this definition">¶</a></dt>
+<dd><p>Verify update processes close signal when v5 is negotiated</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientTest">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.stream.ws_client_test.</span></span><span class="sig-name descname"><span class="pre">WSClientTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientTest" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientTest.test_websocket_client">
+<span class="sig-name descname"><span class="pre">test_websocket_client</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientTest.test_websocket_client" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientTest.test_websocket_proxycare">
+<span class="sig-name descname"><span class="pre">test_websocket_proxycare</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientTest.test_websocket_proxycare" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientUpdateTest">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.stream.ws_client_test.</span></span><span class="sig-name descname"><span class="pre">WSClientUpdateTest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientUpdateTest" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
+<p>Tests for WSClient.update() frame consumption (issue #2375)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientUpdateTest.setUp">
+<span class="sig-name descname"><span class="pre">setUp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientUpdateTest.setUp" title="Link to this definition">¶</a></dt>
+<dd><p>Hook method for setting up the test fixture before exercising it.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientUpdateTest.test_update_polls_when_no_ssl_data_pending">
+<span class="sig-name descname"><span class="pre">test_update_polls_when_no_ssl_data_pending</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientUpdateTest.test_update_polls_when_no_ssl_data_pending" title="Link to this definition">¶</a></dt>
+<dd><p>Verify update falls back to poll/select when the SSL socket has no
+buffered data</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientUpdateTest.test_update_reads_frames_pending_in_ssl_buffer">
+<span class="sig-name descname"><span class="pre">test_update_reads_frames_pending_in_ssl_buffer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientUpdateTest.test_update_reads_frames_pending_in_ssl_buffer" title="Link to this definition">¶</a></dt>
+<dd><p>Verify update reads a frame buffered inside the SSL socket even
+when the underlying socket does not report as readable.</p>
+<p>SSL sockets decrypt a whole TLS record at a time, so frames that
+share a TLS record with a previously read frame sit decrypted in
+the SSLSocket’s buffer where select()/poll() cannot see them.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.WSClientUpdateTest.test_update_receives_fragmented_message">
+<span class="sig-name descname"><span class="pre">test_update_receives_fragmented_message</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.WSClientUpdateTest.test_update_receives_fragmented_message" title="Link to this definition">¶</a></dt>
+<dd><p>Verify a message fragmented into continuation frames is delivered
+in full.</p>
+<p>websocket-client reassembles continuation (OPCODE_CONT) frames inside
+recv_data_frame() and returns the opcode of the initial frame, so
+update() must buffer the complete message.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.apply_proxy_to_conf">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.stream.ws_client_test.</span></span><span class="sig-name descname"><span class="pre">apply_proxy_to_conf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.apply_proxy_to_conf" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.clear_proxy_env">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.stream.ws_client_test.</span></span><span class="sig-name descname"><span class="pre">clear_proxy_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">monkeypatch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.clear_proxy_env" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.dictval">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.stream.ws_client_test.</span></span><span class="sig-name descname"><span class="pre">dictval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.dictval" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.dummy_kubeconfig">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.stream.ws_client_test.</span></span><span class="sig-name descname"><span class="pre">dummy_kubeconfig</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tmp_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monkeypatch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.dummy_kubeconfig" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.dummy_proxy">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.stream.ws_client_test.</span></span><span class="sig-name descname"><span class="pre">dummy_proxy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.dummy_proxy" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.test_rest_call_ignores_env">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.stream.ws_client_test.</span></span><span class="sig-name descname"><span class="pre">test_rest_call_ignores_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dummy_proxy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monkeypatch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.test_rest_call_ignores_env" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="kubernetes.stream.ws_client_test.test_websocket_call_honors_env">
+<span class="sig-prename descclassname"><span class="pre">kubernetes.stream.ws_client_test.</span></span><span class="sig-name descname"><span class="pre">test_websocket_call_honors_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dummy_proxy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monkeypatch</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.stream.ws_client_test.test_websocket_call_honors_env" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kubernetes.html">kubernetes package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">kubernetes</a><ul>
+  <li><a href="kubernetes.html">kubernetes package</a><ul>
+  <li><a href="kubernetes.stream.html">kubernetes.stream package</a><ul>
+      <li>Previous: <a href="kubernetes.stream.ws_client.html" title="previous chapter">kubernetes.stream.ws_client module</a></li>
+      <li>Next: <a href="kubernetes.utils.html" title="next chapter">kubernetes.utils package</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/kubernetes.stream.ws_client_test.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

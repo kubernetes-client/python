@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>kubernetes.watch package &#8212; kubernetes-python-client  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="kubernetes.watch.watch module" href="kubernetes.watch.watch.html" />
+    <link rel="prev" title="kubernetes.utils.retry_test module" href="kubernetes.utils.retry_test.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="kubernetes-watch-package">
+<h1>kubernetes.watch package<a class="headerlink" href="#kubernetes-watch-package" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="kubernetes.watch.watch.html">kubernetes.watch.watch module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.watch.watch.html#kubernetes.watch.watch.Watch"><code class="docutils literal notranslate"><span class="pre">Watch</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch.html#kubernetes.watch.watch.Watch.get_return_type"><code class="docutils literal notranslate"><span class="pre">Watch.get_return_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch.html#kubernetes.watch.watch.Watch.get_watch_argument_name"><code class="docutils literal notranslate"><span class="pre">Watch.get_watch_argument_name()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch.html#kubernetes.watch.watch.Watch.stop"><code class="docutils literal notranslate"><span class="pre">Watch.stop()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch.html#kubernetes.watch.watch.Watch.stream"><code class="docutils literal notranslate"><span class="pre">Watch.stream()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch.html#kubernetes.watch.watch.Watch.unmarshal_event"><code class="docutils literal notranslate"><span class="pre">Watch.unmarshal_event()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.watch.watch.html#kubernetes.watch.watch.iter_resp_lines"><code class="docutils literal notranslate"><span class="pre">iter_resp_lines()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="kubernetes.watch.watch_test.html">kubernetes.watch.watch_test module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests"><code class="docutils literal notranslate"><span class="pre">WatchTests</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.setUp"><code class="docutils literal notranslate"><span class="pre">WatchTests.setUp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.setUpClass"><code class="docutils literal notranslate"><span class="pre">WatchTests.setUpClass()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_generated_api_streams_raw_response"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_generated_api_streams_raw_response()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_pod_log_empty_lines"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_pod_log_empty_lines()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_typing_annotation_falls_back_to_documented_model"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_typing_annotation_falls_back_to_documented_model()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_unmarshal_with_bookmark"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_unmarshal_with_bookmark()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_unmarshal_with_bookmark_metadata_not_in_dict"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_unmarshal_with_bookmark_metadata_not_in_dict()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_unmarshal_with_bookmark_metadata_without_resource_version"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_unmarshal_with_bookmark_metadata_without_resource_version()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_unmarshal_with_custom_object"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_unmarshal_with_custom_object()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_unmarshal_with_float_object"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_unmarshal_with_float_object()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_unmarshal_with_no_return_type"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_unmarshal_with_no_return_type()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_watch_for_follow"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_watch_for_follow()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_watch_resource_version_set"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_watch_resource_version_set()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_watch_retries_on_error_event"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_watch_retries_on_error_event()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_watch_stream_loop"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_watch_stream_loop()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_watch_stream_twice"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_watch_stream_twice()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_watch_with_decode"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_watch_with_decode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_watch_with_deserialize_param"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_watch_with_deserialize_param()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_watch_with_error_event"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_watch_with_error_event()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_watch_with_error_event_and_timeout_param"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_watch_with_error_event_and_timeout_param()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_watch_with_exception"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_watch_with_exception()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_watch_with_interspersed_newlines"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_watch_with_interspersed_newlines()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_watch_with_invalid_utf8"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_watch_with_invalid_utf8()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="kubernetes.watch.watch_test.html#kubernetes.watch.watch_test.WatchTests.test_watch_with_multibyte_utf8"><code class="docutils literal notranslate"><span class="pre">WatchTests.test_watch_with_multibyte_utf8()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="module-kubernetes.watch">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kubernetes.watch" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.watch.Watch">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.watch.</span></span><span class="sig-name descname"><span class="pre">Watch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">return_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.watch.Watch" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.watch.Watch.get_return_type">
+<span class="sig-name descname"><span class="pre">get_return_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.watch.Watch.get_return_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.watch.Watch.get_watch_argument_name">
+<span class="sig-name descname"><span class="pre">get_watch_argument_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.watch.Watch.get_watch_argument_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.watch.Watch.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.watch.Watch.stop" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.watch.Watch.stream">
+<span class="sig-name descname"><span class="pre">stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.watch.Watch.stream" title="Link to this definition">¶</a></dt>
+<dd><p>Watch an API resource and stream the result back via a generator.</p>
+<p>Note that watching an API resource can expire. The method tries to
+resume automatically once from the last result, but if that last result
+is too old as well, an <cite>ApiException</cite> exception will be thrown with
+<code class="docutils literal notranslate"><span class="pre">code</span></code> 410. In that case you have to recover yourself, probably
+by listing the API resource to obtain the latest state and then
+watching from that state on by setting <code class="docutils literal notranslate"><span class="pre">resource_version</span></code> to
+one returned from listing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – The API function pointer. Any parameter to the function
+can be passed after this parameter.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>Event object with these keys:
+‘type’: The type of event such as “ADDED”, “DELETED”, etc.
+‘raw_object’: a dict representing the watched object.
+‘object’: A model representation of raw_object. The name of</p>
+<blockquote>
+<div><p>model will be determined based on
+the func’s doc string. If it cannot be determined,
+‘object’ value will be the same as ‘raw_object’.</p>
+</div></blockquote>
+</p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><p>v1 = kubernetes.client.CoreV1Api()
+watch = kubernetes.watch.Watch()
+for e in watch.stream(v1.list_namespace, resource_version=1127):</p>
+<blockquote>
+<div><p><a href="#id1"><span class="problematic" id="id2">type_</span></a> = e[‘type’]
+<a href="#id3"><span class="problematic" id="id4">object_</span></a> = e[‘object’]  # object is one of type return_type
+raw_object = e[‘raw_object’]  # raw_object is a dict
+…
+if should_stop:</p>
+<blockquote>
+<div><p>watch.stop()</p>
+</div></blockquote>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.watch.Watch.unmarshal_event">
+<span class="sig-name descname"><span class="pre">unmarshal_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.watch.Watch.unmarshal_event" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">kubernetes-python-client</a></h1>
+
+
+
+
+
+
+
+
+
+<search id="searchbox" style="display: none" role="search">
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Search"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="README.html">README</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">kubernetes</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="kubernetes.html">kubernetes package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">contributing</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">kubernetes</a><ul>
+  <li><a href="kubernetes.html">kubernetes package</a><ul>
+      <li>Previous: <a href="kubernetes.utils.retry_test.html" title="previous chapter">kubernetes.utils.retry_test module</a></li>
+      <li>Next: <a href="kubernetes.watch.watch.html" title="next chapter">kubernetes.watch.watch module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2017, Kubernetes.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.0.4</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/kubernetes.watch.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

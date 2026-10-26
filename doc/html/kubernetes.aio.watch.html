@@ -80,6 +80,83 @@
 </section>
 <section id="module-kubernetes.aio.watch">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-kubernetes.aio.watch" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="kubernetes.aio.watch.Watch">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">kubernetes.aio.watch.</span></span><span class="sig-name descname"><span class="pre">Watch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">return_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.watch.Watch" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.watch.Watch.close">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.watch.Watch.close" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.watch.Watch.get_return_type">
+<span class="sig-name descname"><span class="pre">get_return_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.watch.Watch.get_return_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.watch.Watch.get_watch_argument_name">
+<span class="sig-name descname"><span class="pre">get_watch_argument_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.watch.Watch.get_watch_argument_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.watch.Watch.next">
+<span class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">next</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.watch.Watch.next" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.watch.Watch.stop">
+<span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.watch.Watch.stop" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.watch.Watch.stream">
+<span class="sig-name descname"><span class="pre">stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.watch.Watch.stream" title="Link to this definition">¶</a></dt>
+<dd><p>Watch an API resource and stream the result back via a generator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>func</strong> – The API function pointer. Any parameter to the function
+can be passed after this parameter.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>Event object with these keys:
+‘type’: The type of event such as “ADDED”, “DELETED”, etc.
+‘raw_object’: a dict representing the watched object.
+‘object’: A model representation of raw_object. The name of</p>
+<blockquote>
+<div><p>model will be determined based on
+the func’s doc string. If it cannot be determined,
+‘object’ value will be the same as ‘raw_object’.</p>
+</div></blockquote>
+</p>
+</dd>
+</dl>
+<dl>
+<dt>Example:</dt><dd><p>v1 = kubernetes.aio.client.CoreV1Api()
+watch = kubernetes.aio.watch.Watch()
+async for e in watch.stream(v1.list_namespace, timeout_seconds=10):</p>
+<blockquote>
+<div><p>type = e[‘type’]
+object = e[‘object’]  # object is one of type return_type
+raw_object = e[‘raw_object’]  # raw_object is a dict
+…
+if should_stop:</p>
+<blockquote>
+<div><p>watch.stop()</p>
+</div></blockquote>
+</div></blockquote>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="kubernetes.aio.watch.Watch.unmarshal_event">
+<span class="sig-name descname"><span class="pre">unmarshal_event</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#kubernetes.aio.watch.Watch.unmarshal_event" title="Link to this definition">¶</a></dt>
+<dd><p>Return the K8s response <cite>data</cite> in JSON format.</p>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 </section>
 
