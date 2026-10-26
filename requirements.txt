@@ -1,5 +1,5 @@
 certifi>=2024.7.4 # MPL -- oldest release without a known advisory (CVE-2024-39689)
-python-dateutil>=2.8.2  # BSD
+python-dateutil>=3.0.0  # BSD
 pydantic>=2.14.1  # MIT
 setuptools>=84.2.1  # PSF/ZPL
 PyYAML>=6.0.3  # MIT

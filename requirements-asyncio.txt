@@ -1,4 +1,4 @@
-python-dateutil>=2.8.2  # BSD
+python-dateutil>=3.0.0  # BSD
 PyYAML>=6.0.3  # MIT
 urllib3>=2.8.0 # MIT
 aiohttp>=3.14.5,<4.0.0  # Apache-2.0
