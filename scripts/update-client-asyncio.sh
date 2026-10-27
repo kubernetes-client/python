@@ -34,6 +34,8 @@ popd > /dev/null
 source ${SCRIPT_ROOT}/util/common.sh
 util::common::check_sed
 
+export OPENAPI_GENERATOR_COMMIT="${OPENAPI_GENERATOR_COMMIT:-$(python "${SCRIPT_ROOT}/constants.py" OPENAPI_GENERATOR_COMMIT)}"
+
 pushd "${CLIENT_ROOT}" > /dev/null
 CLIENT_ROOT=`pwd`
 popd > /dev/null
