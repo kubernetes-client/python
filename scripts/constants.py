@@ -17,6 +17,9 @@ import sys
 # Kubernetes branch to get the OpenAPI spec from.
 KUBERNETES_BRANCH = "release-1.37"
 
+# Includes OpenAPITools/openapi-generator#24730 (shared legacy model helpers).
+OPENAPI_GENERATOR_COMMIT = "3cf4b374881ed853d522d67b326428e09defcf29"
+
 # client version for packaging and releasing.
 CLIENT_VERSION = "37.0.0+snapshot"
 

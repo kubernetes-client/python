@@ -27,9 +27,10 @@ diff --git a/kubernetes/aio/client/configuration.py b/kubernetes/aio/client/conf
 diff --git a/kubernetes/aio/client/rest.py b/kubernetes/aio/client/rest.py
 --- a/kubernetes/aio/client/rest.py
 +++ b/kubernetes/aio/client/rest.py
-@@ -21,6 +21,11 @@
+@@ -21,7 +21,12 @@
  import aiohttp
  import aiohttp_retry
+ from multidict import CIMultiDict
  
 +from kubernetes.aio.utils.retry import (
 +    is_retry_after_response,
