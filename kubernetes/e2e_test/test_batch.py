@@ -13,7 +13,7 @@
 import unittest
 import uuid
 
-from kubernetes.client import api_client
+from kubernetes.client import V1Job, V1Status, api_client
 from kubernetes.client.api import batch_v1_api
 from kubernetes.e2e_test import base
 
@@ -61,11 +61,10 @@ class TestClientBatch(unittest.TestCase):
         deleted = api.delete_namespaced_job(
             name=name, namespace='default',
             body={'propagationPolicy': 'Background'})
-        self.assertIsInstance(deleted, dict)
-        self.assertIn(deleted['kind'], ('Job', 'Status'))
-        if deleted['kind'] == 'Job':
-            self.assertEqual(name, deleted['metadata']['name'])
+        if isinstance(deleted, V1Job):
+            self.assertEqual(name, deleted.metadata.name)
         else:
-            self.assertEqual('Success', deleted['status'])
-            if 'details' in deleted:
-                self.assertEqual(name, deleted['details']['name'])
+            self.assertIsInstance(deleted, V1Status)
+            self.assertEqual('Success', deleted.status)
+            if deleted.details is not None:
+                self.assertEqual(name, deleted.details.name)

@@ -1816,7 +1816,7 @@ class FlowcontrolApiserverV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1FlowSchema | V1Status:
         """delete_flow_schema
 
         delete a FlowSchema
@@ -1875,8 +1875,8 @@ class FlowcontrolApiserverV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1FlowSchema | V1Status",
+            '202': "V1FlowSchema | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -1913,7 +1913,7 @@ class FlowcontrolApiserverV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[V1FlowSchema | V1Status]:
         """delete_flow_schema
 
         delete a FlowSchema
@@ -1972,8 +1972,8 @@ class FlowcontrolApiserverV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1FlowSchema | V1Status",
+            '202': "V1FlowSchema | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -2204,7 +2204,7 @@ class FlowcontrolApiserverV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1PriorityLevelConfiguration | V1Status:
         """delete_priority_level_configuration
 
         delete a PriorityLevelConfiguration
@@ -2263,8 +2263,8 @@ class FlowcontrolApiserverV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1PriorityLevelConfiguration | V1Status",
+            '202': "V1PriorityLevelConfiguration | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -2301,7 +2301,7 @@ class FlowcontrolApiserverV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[V1PriorityLevelConfiguration | V1Status]:
         """delete_priority_level_configuration
 
         delete a PriorityLevelConfiguration
@@ -2360,8 +2360,8 @@ class FlowcontrolApiserverV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1PriorityLevelConfiguration | V1Status",
+            '202': "V1PriorityLevelConfiguration | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(

@@ -980,7 +980,7 @@ class PolicyV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1PodDisruptionBudget | V1Status:
         """delete_namespaced_pod_disruption_budget
 
         delete a PodDisruptionBudget
@@ -1042,8 +1042,8 @@ class PolicyV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1PodDisruptionBudget | V1Status",
+            '202': "V1PodDisruptionBudget | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -1081,7 +1081,7 @@ class PolicyV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[V1PodDisruptionBudget | V1Status]:
         """delete_namespaced_pod_disruption_budget
 
         delete a PodDisruptionBudget
@@ -1143,8 +1143,8 @@ class PolicyV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1PodDisruptionBudget | V1Status",
+            '202': "V1PodDisruptionBudget | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
