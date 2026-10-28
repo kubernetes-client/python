@@ -15,7 +15,7 @@
 import uuid
 from unittest import IsolatedAsyncioTestCase
 
-from kubernetes.aio.client import api_client
+from kubernetes.aio.client import V1Job, V1Status, api_client
 from kubernetes.aio.client.api import batch_v1_api
 from kubernetes.aio.e2e_test import base
 
@@ -57,11 +57,10 @@ class TestClientBatch(IsolatedAsyncioTestCase):
         resp = await api.delete_namespaced_job(
             name=name, body={'propagationPolicy': 'Background'},
             namespace='default')
-        self.assertIsInstance(resp, dict)
-        self.assertIn(resp['kind'], ('Job', 'Status'))
-        if resp['kind'] == 'Job':
-            self.assertEqual(name, resp['metadata']['name'])
+        if isinstance(resp, V1Job):
+            self.assertEqual(name, resp.metadata.name)
         else:
-            self.assertEqual('Success', resp['status'])
-            if 'details' in resp:
-                self.assertEqual(name, resp['details']['name'])
+            self.assertIsInstance(resp, V1Status)
+            self.assertEqual('Success', resp.status)
+            if resp.details is not None:
+                self.assertEqual(name, resp.details.name)

@@ -23803,7 +23803,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1Namespace | V1Status:
         """delete_namespace
 
         delete a Namespace
@@ -23871,8 +23871,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Namespace | V1Status",
+            '202': "V1Namespace | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -23911,7 +23911,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[object, int, Any]:
+    ) -> Tuple[V1Namespace | V1Status, int, Any]:
         """delete_namespace
 
         delete a Namespace
@@ -23979,8 +23979,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Namespace | V1Status",
+            '202': "V1Namespace | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -24120,7 +24120,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1ConfigMap | V1Status:
         """delete_namespaced_config_map
 
         delete a ConfigMap
@@ -24191,8 +24191,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1ConfigMap | V1Status",
+            '202': "V1ConfigMap | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -24232,7 +24232,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[object, int, Any]:
+    ) -> Tuple[V1ConfigMap | V1Status, int, Any]:
         """delete_namespaced_config_map
 
         delete a ConfigMap
@@ -24303,8 +24303,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1ConfigMap | V1Status",
+            '202': "V1ConfigMap | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -24447,7 +24447,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1Endpoints | V1Status:
         """delete_namespaced_endpoints
 
         delete Endpoints
@@ -24518,8 +24518,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Endpoints | V1Status",
+            '202': "V1Endpoints | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -24559,7 +24559,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[object, int, Any]:
+    ) -> Tuple[V1Endpoints | V1Status, int, Any]:
         """delete_namespaced_endpoints
 
         delete Endpoints
@@ -24630,8 +24630,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Endpoints | V1Status",
+            '202': "V1Endpoints | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -24774,7 +24774,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> CoreV1Event | V1Status:
         """delete_namespaced_event
 
         delete an Event
@@ -24845,8 +24845,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "CoreV1Event | V1Status",
+            '202': "CoreV1Event | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -24886,7 +24886,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[object, int, Any]:
+    ) -> Tuple[CoreV1Event | V1Status, int, Any]:
         """delete_namespaced_event
 
         delete an Event
@@ -24957,8 +24957,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "CoreV1Event | V1Status",
+            '202': "CoreV1Event | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -25101,7 +25101,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1LimitRange | V1Status:
         """delete_namespaced_limit_range
 
         delete a LimitRange
@@ -25172,8 +25172,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1LimitRange | V1Status",
+            '202': "V1LimitRange | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -25213,7 +25213,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[object, int, Any]:
+    ) -> Tuple[V1LimitRange | V1Status, int, Any]:
         """delete_namespaced_limit_range
 
         delete a LimitRange
@@ -25284,8 +25284,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1LimitRange | V1Status",
+            '202': "V1LimitRange | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -25428,7 +25428,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1PersistentVolumeClaim:
+    ) -> V1PersistentVolumeClaim | V1Status:
         """delete_namespaced_persistent_volume_claim
 
         delete a PersistentVolumeClaim
@@ -25499,8 +25499,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1PersistentVolumeClaim",
-            '202': "V1PersistentVolumeClaim",
+            '200': "V1PersistentVolumeClaim | V1Status",
+            '202': "V1PersistentVolumeClaim | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -25540,7 +25540,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[V1PersistentVolumeClaim, int, Any]:
+    ) -> Tuple[V1PersistentVolumeClaim | V1Status, int, Any]:
         """delete_namespaced_persistent_volume_claim
 
         delete a PersistentVolumeClaim
@@ -25611,8 +25611,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1PersistentVolumeClaim",
-            '202': "V1PersistentVolumeClaim",
+            '200': "V1PersistentVolumeClaim | V1Status",
+            '202': "V1PersistentVolumeClaim | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -25755,7 +25755,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1Pod:
+    ) -> V1Pod | V1Status:
         """delete_namespaced_pod
 
         delete a Pod
@@ -25826,8 +25826,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Pod",
-            '202': "V1Pod",
+            '200': "V1Pod | V1Status",
+            '202': "V1Pod | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -25867,7 +25867,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[V1Pod, int, Any]:
+    ) -> Tuple[V1Pod | V1Status, int, Any]:
         """delete_namespaced_pod
 
         delete a Pod
@@ -25938,8 +25938,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Pod",
-            '202': "V1Pod",
+            '200': "V1Pod | V1Status",
+            '202': "V1Pod | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -26082,7 +26082,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1PodTemplate:
+    ) -> V1PodTemplate | V1Status:
         """delete_namespaced_pod_template
 
         delete a PodTemplate
@@ -26153,8 +26153,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1PodTemplate",
-            '202': "V1PodTemplate",
+            '200': "V1PodTemplate | V1Status",
+            '202': "V1PodTemplate | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -26194,7 +26194,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[V1PodTemplate, int, Any]:
+    ) -> Tuple[V1PodTemplate | V1Status, int, Any]:
         """delete_namespaced_pod_template
 
         delete a PodTemplate
@@ -26265,8 +26265,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1PodTemplate",
-            '202': "V1PodTemplate",
+            '200': "V1PodTemplate | V1Status",
+            '202': "V1PodTemplate | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -26409,7 +26409,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1ReplicationController | V1Status:
         """delete_namespaced_replication_controller
 
         delete a ReplicationController
@@ -26480,8 +26480,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1ReplicationController | V1Status",
+            '202': "V1ReplicationController | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -26521,7 +26521,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[object, int, Any]:
+    ) -> Tuple[V1ReplicationController | V1Status, int, Any]:
         """delete_namespaced_replication_controller
 
         delete a ReplicationController
@@ -26592,8 +26592,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1ReplicationController | V1Status",
+            '202': "V1ReplicationController | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -26736,7 +26736,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1ResourceQuota:
+    ) -> V1ResourceQuota | V1Status:
         """delete_namespaced_resource_quota
 
         delete a ResourceQuota
@@ -26807,8 +26807,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1ResourceQuota",
-            '202': "V1ResourceQuota",
+            '200': "V1ResourceQuota | V1Status",
+            '202': "V1ResourceQuota | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -26848,7 +26848,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[V1ResourceQuota, int, Any]:
+    ) -> Tuple[V1ResourceQuota | V1Status, int, Any]:
         """delete_namespaced_resource_quota
 
         delete a ResourceQuota
@@ -26919,8 +26919,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1ResourceQuota",
-            '202': "V1ResourceQuota",
+            '200': "V1ResourceQuota | V1Status",
+            '202': "V1ResourceQuota | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -27063,7 +27063,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1Secret | V1Status:
         """delete_namespaced_secret
 
         delete a Secret
@@ -27134,8 +27134,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Secret | V1Status",
+            '202': "V1Secret | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -27175,7 +27175,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[object, int, Any]:
+    ) -> Tuple[V1Secret | V1Status, int, Any]:
         """delete_namespaced_secret
 
         delete a Secret
@@ -27246,8 +27246,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Secret | V1Status",
+            '202': "V1Secret | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -27390,7 +27390,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1Service:
+    ) -> V1Service | V1Status:
         """delete_namespaced_service
 
         delete a Service
@@ -27461,8 +27461,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Service",
-            '202': "V1Service",
+            '200': "V1Service | V1Status",
+            '202': "V1Service | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -27502,7 +27502,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[V1Service, int, Any]:
+    ) -> Tuple[V1Service | V1Status, int, Any]:
         """delete_namespaced_service
 
         delete a Service
@@ -27573,8 +27573,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1Service",
-            '202': "V1Service",
+            '200': "V1Service | V1Status",
+            '202': "V1Service | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -27717,7 +27717,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1ServiceAccount:
+    ) -> V1ServiceAccount | V1Status:
         """delete_namespaced_service_account
 
         delete a ServiceAccount
@@ -27788,8 +27788,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1ServiceAccount",
-            '202': "V1ServiceAccount",
+            '200': "V1ServiceAccount | V1Status",
+            '202': "V1ServiceAccount | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -27829,7 +27829,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[V1ServiceAccount, int, Any]:
+    ) -> Tuple[V1ServiceAccount | V1Status, int, Any]:
         """delete_namespaced_service_account
 
         delete a ServiceAccount
@@ -27900,8 +27900,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1ServiceAccount",
-            '202': "V1ServiceAccount",
+            '200': "V1ServiceAccount | V1Status",
+            '202': "V1ServiceAccount | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -28043,7 +28043,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1Node | V1Status:
         """delete_node
 
         delete a Node
@@ -28111,8 +28111,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Node | V1Status",
+            '202': "V1Node | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -28151,7 +28151,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[object, int, Any]:
+    ) -> Tuple[V1Node | V1Status, int, Any]:
         """delete_node
 
         delete a Node
@@ -28219,8 +28219,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Node | V1Status",
+            '202': "V1Node | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -28359,7 +28359,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1PersistentVolume:
+    ) -> V1PersistentVolume | V1Status:
         """delete_persistent_volume
 
         delete a PersistentVolume
@@ -28427,8 +28427,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1PersistentVolume",
-            '202': "V1PersistentVolume",
+            '200': "V1PersistentVolume | V1Status",
+            '202': "V1PersistentVolume | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -28467,7 +28467,7 @@ class CoreV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[V1PersistentVolume, int, Any]:
+    ) -> Tuple[V1PersistentVolume | V1Status, int, Any]:
         """delete_persistent_volume
 
         delete a PersistentVolume
@@ -28535,8 +28535,8 @@ class CoreV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1PersistentVolume",
-            '202': "V1PersistentVolume",
+            '200': "V1PersistentVolume | V1Status",
+            '202': "V1PersistentVolume | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
