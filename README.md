@@ -25,6 +25,12 @@ From [PyPI](https://pypi.python.org/pypi/kubernetes/) directly:
 pip install kubernetes
 ```
 
+To use the asyncio client (`kubernetes.aio`), install the `asyncio` extra:
+
+```
+pip install kubernetes[asyncio]
+```
+
 ## Examples
 
 list all pods:
