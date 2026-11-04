@@ -392,5 +392,82 @@ class MockResourceLock:
         self.assertTrue(leaderelection.LeaderElection(config).try_acquire_or_renew())
 
 
+class RecordingLock:
+    """Holds a single record and keeps the last one written to it."""
+    def __init__(self, identity, record):
+        self.name = "lock"
+        self.namespace = "ns"
+        self.identity = identity
+        self.record = record
+        self.written = None
+
+    def get(self, name, namespace):
+        if self.record is None:
+            return False, ApiException(status=404, reason="Not Found",
+                                       body=json.dumps({'code': 404}))
+        return True, self.record
+
+    def create(self, name, namespace, election_record):
+        self.written = election_record
+        return True
+
+    def update(self, name, namespace, updated_record):
+        self.written = updated_record
+        return True
+
+
+def make_election(lock):
+    config = electionconfig.Config(
+        lock=lock, lease_duration=4, renew_deadline=3, retry_period=1,
+        onstarted_leading=lambda: None, onstopped_leading=lambda: None)
+    return leaderelection.LeaderElection(config)
+
+
+class LeaderTransitionsTest(unittest.TestCase):
+
+    def test_new_lock_starts_with_zero_transitions(self):
+        lock = RecordingLock("candidate", None)
+        election = make_election(lock)
+
+        self.assertTrue(election.try_acquire_or_renew())
+        self.assertEqual(0, lock.written.leader_transitions)
+
+    def test_renewing_leader_keeps_leader_transitions(self):
+        record = LeaderElectionRecord("candidate", "4", "then", "then", 3)
+        lock = RecordingLock("candidate", record)
+        election = make_election(lock)
+        election.observed_record = record
+
+        self.assertTrue(election.try_acquire_or_renew())
+        self.assertEqual(3, lock.written.leader_transitions)
+        self.assertEqual("then", lock.written.acquire_time)
+
+    def test_taking_over_an_expired_lock_counts_a_transition(self):
+        record = LeaderElectionRecord("other", "4", "then", "then", 3)
+        lock = RecordingLock("candidate", record)
+        election = make_election(lock)
+        election.observed_record = record
+        election.observed_time_milliseconds = 0
+
+        self.assertTrue(election.try_acquire_or_renew())
+        self.assertEqual("candidate", lock.written.holder_identity)
+        self.assertEqual(4, lock.written.leader_transitions)
+
+    def test_lock_held_by_another_candidate_is_left_alone(self):
+        record = LeaderElectionRecord("other", "4", "then", "then", 3)
+        lock = RecordingLock("candidate", record)
+
+        self.assertFalse(make_election(lock).try_acquire_or_renew())
+        self.assertIsNone(lock.written)
+
+    def test_taking_over_a_released_lock_counts_a_transition(self):
+        record = LeaderElectionRecord(None, None, None, None, 2)
+        lock = RecordingLock("candidate", record)
+
+        self.assertTrue(make_election(lock).try_acquire_or_renew())
+        self.assertEqual("candidate", lock.written.holder_identity)
+        self.assertEqual(3, lock.written.leader_transitions)
+
+
 if __name__ == '__main__':
     unittest.main()

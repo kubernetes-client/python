@@ -130,6 +130,30 @@ class LeaseLockTest(unittest.TestCase):
 
         self.assertEqual(record.__dict__, read_back.__dict__)
 
+    def test_leader_transitions_survive_a_write_and_read(self):
+        lock = make_lock()
+        record = LeaderElectionRecord('candidate', '17', '2026-08-29 01:02:03',
+                                      '2026-08-29 01:02:03', 5)
+
+        spec = lock.get_lease_spec(record)
+        self.assertEqual(5, spec.lease_transitions)
+
+        read_back = lock.get_lock_object(
+            client.V1Lease(metadata={'name': 'lock'}, spec=spec))
+        self.assertEqual(record.__dict__, read_back.__dict__)
+
+    def test_lease_without_transitions_reads_as_zero(self):
+        lock = make_lock()
+        acquired = datetime.datetime(2026, 8, 29, 1, 2, 3)
+        lease = client.V1Lease(
+            metadata={'name': 'lock'},
+            spec=client.V1LeaseSpec(holder_identity='candidate',
+                                    lease_duration_seconds=17,
+                                    acquire_time=acquired,
+                                    renew_time=acquired))
+
+        self.assertEqual(0, lock.get_lock_object(lease).leader_transitions)
+
     def test_update_replaces_the_lease_it_read(self):
         lock = make_lock()
         acquired = datetime.datetime(2026, 8, 29, 1, 2, 3, 456789)
