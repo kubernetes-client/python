@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import datetime
 import os
+from time import monotonic
 
 from kubernetes.client import Configuration
 
@@ -44,7 +44,7 @@ class InClusterConfigLoader:
         self._cert_filename = cert_filename
         self._environ = environ
         self._try_refresh_token = try_refresh_token
-        self._token_refresh_period = datetime.timedelta(minutes=1)
+        self._token_refresh_period = 60
 
     def load_and_set(self, client_configuration=None):
         try_set_default = False
@@ -93,7 +93,7 @@ class InClusterConfigLoader:
             return
 
         def _refresh_api_key(client_configuration):
-            if self.token_expires_at <= datetime.datetime.now():
+            if self.token_expires_at <= monotonic():
                 self._read_token_file()
             self._set_config(client_configuration)
 
@@ -105,8 +105,7 @@ class InClusterConfigLoader:
             if not content:
                 raise ConfigException("Token file exists but empty.")
             self.token = "bearer " + content
-            self.token_expires_at = datetime.datetime.now(
-            ) + self._token_refresh_period
+            self.token_expires_at = monotonic() + self._token_refresh_period
 
 
 def load_incluster_config(client_configuration=None, try_refresh_token=True):
