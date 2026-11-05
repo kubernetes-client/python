@@ -599,8 +599,9 @@ def websocket_proxycare(connect_opt, configuration, url, headers):
         for key,value in configuration.proxy_headers.items():
             if key == 'proxy-authorization' and value.startswith('Basic'):
                 b64value = value.split()[1]
-                auth = urlsafe_b64decode(b64value).decode().split(':')
-                connect_opt.update({'http_proxy_auth': (auth[0], auth[1]) })
+                auth = urlsafe_b64decode(b64value).decode().split(':', 1)
+                if len(auth) == 2:
+                    connect_opt.update({'http_proxy_auth': (auth[0], auth[1]) })
     return(connect_opt)
 
 

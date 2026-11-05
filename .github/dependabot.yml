@@ -5,6 +5,9 @@ updates:
     schedule:
       interval: "daily"
       time: "02:00"
+    # requirements.txt is the install_requires of a published library, so
+    # widen ranges instead of raising lower bounds on every new release.
+    versioning-strategy: "widen"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:

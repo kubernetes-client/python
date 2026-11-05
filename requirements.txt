@@ -1,11 +1,12 @@
-certifi>=2026.7.22 # MPL
-python-dateutil>=2.8.2  # BSD
-pydantic>=2.13.5  # MIT
-setuptools>=84.0.0  # PSF/ZPL
+certifi>=2024.7.4 # MPL -- oldest release without a known advisory (CVE-2024-39689)
+python-dateutil>=3.0.0  # BSD
+pydantic>=2.14.2  # MIT
+setuptools>=84.2.1  # PSF/ZPL
 PyYAML>=6.0.3  # MIT
 websocket-client>=0.32.0,!=0.40.0,!=0.41.*,!=0.42.* # LGPLv2+
 requests # Apache-2.0
 requests-oauthlib # ISC
+oauthlib>=4.0.0 # ISC -- CVE-2026-49264, CVE-2026-49265; remove once requests-oauthlib bumps its own lower bound
 typing-extensions>=4.16.0  # PSF
 urllib3>=2.8.0,<3.0.0 # MIT
 durationpy>=0.11 # MIT
