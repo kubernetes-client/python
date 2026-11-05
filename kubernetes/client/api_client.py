@@ -11,6 +11,7 @@
 
 
 
+import codecs
 import datetime
 from dateutil.parser import parse
 from enum import Enum
@@ -425,7 +426,14 @@ class ApiClient:
                 if content_type is not None:
                     match = re.search(r"charset=([a-zA-Z\-\d]+)[\s;]?", content_type)
                 encoding = match.group(1) if match else "utf-8"
-                response_text = response_data.data.decode(encoding)
+                try:
+                    response_text = response_data.data.decode(encoding)
+                except UnicodeDecodeError:
+                    # limitBytes on pod logs cuts at a byte boundary and can split a
+                    # multi-byte character. final=False drops only that incomplete
+                    # tail; any other invalid byte still raises.
+                    decoder = codecs.getincrementaldecoder(encoding)()
+                    response_text = decoder.decode(response_data.data, final=False)
                 return_data = self.deserialize(response_text, response_type, content_type)
         finally:
             if not 200 <= response_data.status <= 299:
