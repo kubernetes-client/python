@@ -19,6 +19,7 @@ from . import ws_client as ws_client_module
 from .ws_client import get_websocket_url, WSClient, V5_CHANNEL_PROTOCOL, V4_CHANNEL_PROTOCOL, CLOSE_CHANNEL, STDIN_CHANNEL, STDOUT_CHANNEL
 from .ws_client import websocket_proxycare
 from kubernetes.client.configuration import Configuration
+from kubernetes.client.rest import ApiValueError
 import os
 import select
 import socket
@@ -112,7 +113,6 @@ class WSClientTest(unittest.TestCase):
                 ( 'http://proxy.example.com:8080/', 'user:pass', '.example.com',                  'proxy.example.com', 8080, ('user','pass'), ['.example.com']),
                 ( 'http://proxy.example.com:8080/', 'user:pass', 'localhost,.local,.example.com',  'proxy.example.com', 8080, ('user','pass'), ['localhost','.local','.example.com']),
                 ( 'http://proxy.example.com:8080/', 'user:pa:ss:word', None,                       'proxy.example.com', 8080, ('user','pa:ss:word'), None),
-                ( 'http://proxy.example.com:8080/', 'useronly', None,                              'proxy.example.com', 8080, None, None),
                 ]:
             #  input setup
             cfg = Configuration(proxy='', no_proxy='')
@@ -129,6 +129,16 @@ class WSClientTest(unittest.TestCase):
             assert dictval(connect_opts, 'http_proxy_port') == expect_port
             assert dictval(connect_opts, 'http_proxy_auth') == expect_auth
             assert dictval(connect_opts, 'http_no_proxy') == expect_noproxy
+
+    def test_websocket_proxycare_invalid_basic_credentials(self):
+        for proxy_auth in [
+                urllib3.util.make_headers(proxy_basic_auth='useronly')['proxy-authorization'],
+                'Basic',
+                ]:
+            cfg = Configuration(proxy='http://proxy.example.com:8080/', no_proxy='')
+            cfg.proxy_headers = {'proxy-authorization': proxy_auth}
+            with self.assertRaises(ApiValueError):
+                websocket_proxycare({}, cfg, None, None)
 
 
 class WSClientMultiFrameReadTest(unittest.TestCase):
