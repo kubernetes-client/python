@@ -76,6 +76,103 @@ def _get_openapi_to_dict(value: Any) -> Any:
 
 RequestSerialized = Tuple[str, str, Dict[str, str], Optional[str], List[str]]
 
+_DELETE_MODELS = {
+    ('admissionregistration.k8s.io/v1', 'MutatingAdmissionPolicy'): 'V1MutatingAdmissionPolicy',
+    ('admissionregistration.k8s.io/v1', 'MutatingAdmissionPolicyBinding'): 'V1MutatingAdmissionPolicyBinding',
+    ('admissionregistration.k8s.io/v1', 'MutatingWebhookConfiguration'): 'V1MutatingWebhookConfiguration',
+    ('admissionregistration.k8s.io/v1', 'ValidatingAdmissionPolicy'): 'V1ValidatingAdmissionPolicy',
+    ('admissionregistration.k8s.io/v1', 'ValidatingAdmissionPolicyBinding'): 'V1ValidatingAdmissionPolicyBinding',
+    ('admissionregistration.k8s.io/v1', 'ValidatingWebhookConfiguration'): 'V1ValidatingWebhookConfiguration',
+    ('admissionregistration.k8s.io/v1alpha1', 'MutatingAdmissionPolicy'): 'V1alpha1MutatingAdmissionPolicy',
+    ('admissionregistration.k8s.io/v1alpha1', 'MutatingAdmissionPolicyBinding'): 'V1alpha1MutatingAdmissionPolicyBinding',
+    ('admissionregistration.k8s.io/v1beta1', 'MutatingAdmissionPolicy'): 'V1beta1MutatingAdmissionPolicy',
+    ('admissionregistration.k8s.io/v1beta1', 'MutatingAdmissionPolicyBinding'): 'V1beta1MutatingAdmissionPolicyBinding',
+    ('apiextensions.k8s.io/v1', 'CustomResourceDefinition'): 'V1CustomResourceDefinition',
+    ('apiregistration.k8s.io/v1', 'APIService'): 'V1APIService',
+    ('apps/v1', 'ControllerRevision'): 'V1ControllerRevision',
+    ('apps/v1', 'DaemonSet'): 'V1DaemonSet',
+    ('apps/v1', 'Deployment'): 'V1Deployment',
+    ('apps/v1', 'ReplicaSet'): 'V1ReplicaSet',
+    ('apps/v1', 'StatefulSet'): 'V1StatefulSet',
+    ('autoscaling/v1', 'HorizontalPodAutoscaler'): 'V1HorizontalPodAutoscaler',
+    ('autoscaling/v2', 'HorizontalPodAutoscaler'): 'V2HorizontalPodAutoscaler',
+    ('batch/v1', 'CronJob'): 'V1CronJob',
+    ('batch/v1', 'Job'): 'V1Job',
+    ('certificates.k8s.io/v1', 'CertificateSigningRequest'): 'V1CertificateSigningRequest',
+    ('certificates.k8s.io/v1', 'ClusterTrustBundle'): 'V1ClusterTrustBundle',
+    ('certificates.k8s.io/v1', 'PodCertificateRequest'): 'V1PodCertificateRequest',
+    ('certificates.k8s.io/v1beta1', 'ClusterTrustBundle'): 'V1beta1ClusterTrustBundle',
+    ('certificates.k8s.io/v1beta1', 'PodCertificateRequest'): 'V1beta1PodCertificateRequest',
+    ('coordination.k8s.io/v1', 'Lease'): 'V1Lease',
+    ('coordination.k8s.io/v1alpha2', 'LeaseCandidate'): 'V1alpha2LeaseCandidate',
+    ('coordination.k8s.io/v1beta1', 'LeaseCandidate'): 'V1beta1LeaseCandidate',
+    ('discovery.k8s.io/v1', 'EndpointSlice'): 'V1EndpointSlice',
+    ('events.k8s.io/v1', 'Event'): 'EventsV1Event',
+    ('flowcontrol.apiserver.k8s.io/v1', 'FlowSchema'): 'V1FlowSchema',
+    ('flowcontrol.apiserver.k8s.io/v1', 'PriorityLevelConfiguration'): 'V1PriorityLevelConfiguration',
+    ('internal.apiserver.k8s.io/v1alpha1', 'StorageVersion'): 'V1alpha1StorageVersion',
+    ('lifecycle.k8s.io/v1alpha1', 'Eviction'): 'V1alpha1Eviction',
+    ('lifecycle.k8s.io/v1alpha1', 'EvictionRequest'): 'V1alpha1EvictionRequest',
+    ('networking.k8s.io/v1', 'IPAddress'): 'V1IPAddress',
+    ('networking.k8s.io/v1', 'Ingress'): 'V1Ingress',
+    ('networking.k8s.io/v1', 'IngressClass'): 'V1IngressClass',
+    ('networking.k8s.io/v1', 'NetworkPolicy'): 'V1NetworkPolicy',
+    ('networking.k8s.io/v1', 'ServiceCIDR'): 'V1ServiceCIDR',
+    ('node.k8s.io/v1', 'RuntimeClass'): 'V1RuntimeClass',
+    ('policy/v1', 'PodDisruptionBudget'): 'V1PodDisruptionBudget',
+    ('rbac.authorization.k8s.io/v1', 'ClusterRole'): 'V1ClusterRole',
+    ('rbac.authorization.k8s.io/v1', 'ClusterRoleBinding'): 'V1ClusterRoleBinding',
+    ('rbac.authorization.k8s.io/v1', 'Role'): 'V1Role',
+    ('rbac.authorization.k8s.io/v1', 'RoleBinding'): 'V1RoleBinding',
+    ('resource.k8s.io/v1', 'DeviceClass'): 'V1DeviceClass',
+    ('resource.k8s.io/v1', 'DeviceTaintRule'): 'V1DeviceTaintRule',
+    ('resource.k8s.io/v1', 'ResourceClaim'): 'ResourceV1ResourceClaim',
+    ('resource.k8s.io/v1', 'ResourceClaimTemplate'): 'V1ResourceClaimTemplate',
+    ('resource.k8s.io/v1', 'ResourceSlice'): 'V1ResourceSlice',
+    ('resource.k8s.io/v1alpha3', 'DeviceTaintRule'): 'V1alpha3DeviceTaintRule',
+    ('resource.k8s.io/v1alpha3', 'ResourcePoolStatusRequest'): 'V1alpha3ResourcePoolStatusRequest',
+    ('resource.k8s.io/v1beta1', 'DeviceClass'): 'V1beta1DeviceClass',
+    ('resource.k8s.io/v1beta1', 'ResourceClaim'): 'V1beta1ResourceClaim',
+    ('resource.k8s.io/v1beta1', 'ResourceClaimTemplate'): 'V1beta1ResourceClaimTemplate',
+    ('resource.k8s.io/v1beta1', 'ResourceSlice'): 'V1beta1ResourceSlice',
+    ('resource.k8s.io/v1beta2', 'DeviceClass'): 'V1beta2DeviceClass',
+    ('resource.k8s.io/v1beta2', 'DeviceTaintRule'): 'V1beta2DeviceTaintRule',
+    ('resource.k8s.io/v1beta2', 'ResourceClaim'): 'V1beta2ResourceClaim',
+    ('resource.k8s.io/v1beta2', 'ResourceClaimTemplate'): 'V1beta2ResourceClaimTemplate',
+    ('resource.k8s.io/v1beta2', 'ResourceSlice'): 'V1beta2ResourceSlice',
+    ('scheduling.k8s.io/v1', 'PriorityClass'): 'V1PriorityClass',
+    ('scheduling.k8s.io/v1alpha3', 'CompositePodGroup'): 'V1alpha3CompositePodGroup',
+    ('scheduling.k8s.io/v1alpha3', 'PodGroup'): 'V1alpha3PodGroup',
+    ('scheduling.k8s.io/v1alpha3', 'Workload'): 'V1alpha3Workload',
+    ('scheduling.k8s.io/v1beta1', 'PodGroup'): 'V1beta1PodGroup',
+    ('scheduling.k8s.io/v1beta1', 'Workload'): 'V1beta1Workload',
+    ('storage.k8s.io/v1', 'CSIDriver'): 'V1CSIDriver',
+    ('storage.k8s.io/v1', 'CSINode'): 'V1CSINode',
+    ('storage.k8s.io/v1', 'CSIStorageCapacity'): 'V1CSIStorageCapacity',
+    ('storage.k8s.io/v1', 'StorageClass'): 'V1StorageClass',
+    ('storage.k8s.io/v1', 'VolumeAttachment'): 'V1VolumeAttachment',
+    ('storage.k8s.io/v1', 'VolumeAttributesClass'): 'V1VolumeAttributesClass',
+    ('storagemigration.k8s.io/v1', 'StorageVersionMigration'): 'V1StorageVersionMigration',
+    ('storagemigration.k8s.io/v1beta1', 'StorageVersionMigration'): 'V1beta1StorageVersionMigration',
+    ('v1', 'ConfigMap'): 'V1ConfigMap',
+    ('v1', 'Endpoints'): 'V1Endpoints',
+    ('v1', 'Event'): 'CoreV1Event',
+    ('v1', 'LimitRange'): 'V1LimitRange',
+    ('v1', 'Namespace'): 'V1Namespace',
+    ('v1', 'Node'): 'V1Node',
+    ('v1', 'PersistentVolume'): 'V1PersistentVolume',
+    ('v1', 'PersistentVolumeClaim'): 'V1PersistentVolumeClaim',
+    ('v1', 'Pod'): 'V1Pod',
+    ('v1', 'PodTemplate'): 'V1PodTemplate',
+    ('v1', 'ReplicationController'): 'V1ReplicationController',
+    ('v1', 'ResourceQuota'): 'V1ResourceQuota',
+    ('v1', 'Secret'): 'V1Secret',
+    ('v1', 'Service'): 'V1Service',
+    ('v1', 'ServiceAccount'): 'V1ServiceAccount',
+    ('v1', 'Status'): 'V1Status',
+}
+
+
 class ApiClient:
     """Generic API client for OpenAPI client library builds.
 
@@ -533,6 +630,15 @@ class ApiClient:
                 reason="Unsupported content type: {0}".format(content_type)
             )
 
+        if isinstance(response_type, str) and response_type.endswith(" | V1Status"):
+            match data:
+                case {"apiVersion": str(version), "kind": str(kind)}:
+                    model = _DELETE_MODELS.get((version, kind))
+                    if model not in response_type.split(" | "):
+                        raise ValueError(f"Expected {response_type}, got {version}/{kind}")
+                    response_type = model
+                case _:
+                    raise ValueError(f"Expected apiVersion and kind for {response_type}")
         return self.__deserialize(data, response_type)
 
     def __deserialize(self, data, klass):

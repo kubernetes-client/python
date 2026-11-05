@@ -4477,7 +4477,7 @@ class ResourceV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1DeviceClass:
+    ) -> V1DeviceClass | V1Status:
         """delete_device_class
 
         delete a DeviceClass
@@ -4536,8 +4536,8 @@ class ResourceV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1DeviceClass",
-            '202': "V1DeviceClass",
+            '200': "V1DeviceClass | V1Status",
+            '202': "V1DeviceClass | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -4574,7 +4574,7 @@ class ResourceV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1DeviceClass]:
+    ) -> ApiResponse[V1DeviceClass | V1Status]:
         """delete_device_class
 
         delete a DeviceClass
@@ -4633,8 +4633,8 @@ class ResourceV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1DeviceClass",
-            '202': "V1DeviceClass",
+            '200': "V1DeviceClass | V1Status",
+            '202': "V1DeviceClass | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -4865,7 +4865,7 @@ class ResourceV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1DeviceTaintRule | V1Status:
         """delete_device_taint_rule
 
         delete a DeviceTaintRule
@@ -4924,8 +4924,8 @@ class ResourceV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1DeviceTaintRule | V1Status",
+            '202': "V1DeviceTaintRule | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -4962,7 +4962,7 @@ class ResourceV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[V1DeviceTaintRule | V1Status]:
         """delete_device_taint_rule
 
         delete a DeviceTaintRule
@@ -5021,8 +5021,8 @@ class ResourceV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1DeviceTaintRule | V1Status",
+            '202': "V1DeviceTaintRule | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5254,7 +5254,7 @@ class ResourceV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ResourceV1ResourceClaim:
+    ) -> ResourceV1ResourceClaim | V1Status:
         """delete_namespaced_resource_claim
 
         delete a ResourceClaim
@@ -5316,8 +5316,8 @@ class ResourceV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ResourceV1ResourceClaim",
-            '202': "ResourceV1ResourceClaim",
+            '200': "ResourceV1ResourceClaim | V1Status",
+            '202': "ResourceV1ResourceClaim | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5355,7 +5355,7 @@ class ResourceV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[ResourceV1ResourceClaim]:
+    ) -> ApiResponse[ResourceV1ResourceClaim | V1Status]:
         """delete_namespaced_resource_claim
 
         delete a ResourceClaim
@@ -5417,8 +5417,8 @@ class ResourceV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "ResourceV1ResourceClaim",
-            '202': "ResourceV1ResourceClaim",
+            '200': "ResourceV1ResourceClaim | V1Status",
+            '202': "ResourceV1ResourceClaim | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5657,7 +5657,7 @@ class ResourceV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1ResourceClaimTemplate:
+    ) -> V1ResourceClaimTemplate | V1Status:
         """delete_namespaced_resource_claim_template
 
         delete a ResourceClaimTemplate
@@ -5719,8 +5719,8 @@ class ResourceV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1ResourceClaimTemplate",
-            '202': "V1ResourceClaimTemplate",
+            '200': "V1ResourceClaimTemplate | V1Status",
+            '202': "V1ResourceClaimTemplate | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5758,7 +5758,7 @@ class ResourceV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1ResourceClaimTemplate]:
+    ) -> ApiResponse[V1ResourceClaimTemplate | V1Status]:
         """delete_namespaced_resource_claim_template
 
         delete a ResourceClaimTemplate
@@ -5820,8 +5820,8 @@ class ResourceV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1ResourceClaimTemplate",
-            '202': "V1ResourceClaimTemplate",
+            '200': "V1ResourceClaimTemplate | V1Status",
+            '202': "V1ResourceClaimTemplate | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6059,7 +6059,7 @@ class ResourceV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1ResourceSlice:
+    ) -> V1ResourceSlice | V1Status:
         """delete_resource_slice
 
         delete a ResourceSlice
@@ -6118,8 +6118,8 @@ class ResourceV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1ResourceSlice",
-            '202': "V1ResourceSlice",
+            '200': "V1ResourceSlice | V1Status",
+            '202': "V1ResourceSlice | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6156,7 +6156,7 @@ class ResourceV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1ResourceSlice]:
+    ) -> ApiResponse[V1ResourceSlice | V1Status]:
         """delete_resource_slice
 
         delete a ResourceSlice
@@ -6215,8 +6215,8 @@ class ResourceV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1ResourceSlice",
-            '202': "V1ResourceSlice",
+            '200': "V1ResourceSlice | V1Status",
+            '202': "V1ResourceSlice | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
