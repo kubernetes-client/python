@@ -169,6 +169,7 @@ class LeaderElection:
         if (old_election_record.holder_identity is None or old_election_record.lease_duration is None
                 or old_election_record.acquire_time is None or old_election_record.renew_time is None):
             # try to update lock with proper annotation and election record
+            leader_election_record.leader_transitions = old_election_record.leader_transitions + 1
             return self.update_lock(leader_election_record)
 
         # Report transitions
@@ -189,6 +190,9 @@ class LeaderElection:
         if self.election_config.lock.identity == self.observed_record.holder_identity:
             # Leader updates renewTime, but keeps acquire_time unchanged
             leader_election_record.acquire_time = self.observed_record.acquire_time
+            leader_election_record.leader_transitions = self.observed_record.leader_transitions
+        else:
+            leader_election_record.leader_transitions = self.observed_record.leader_transitions + 1
 
         return self.update_lock(leader_election_record)
 

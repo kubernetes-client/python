@@ -108,6 +108,7 @@ class LeaseLock:
             leader_election_record.acquire_time)
         spec.renew_time = self.time_str_to_iso(
             leader_election_record.renew_time)
+        spec.lease_transitions = leader_election_record.leader_transitions
 
         return spec
 
@@ -129,6 +130,8 @@ class LeaseLock:
         if lease.spec.renew_time:
             leader_election_record.renew_time = self.time_from_utc(
                 lease.spec.renew_time)
+        if lease.spec.lease_transitions:
+            leader_election_record.leader_transitions = lease.spec.lease_transitions
 
         return leader_election_record
 
