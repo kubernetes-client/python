@@ -2,6 +2,7 @@
 
 Kubernetes API Version: v1.37.2
 
+- The certifi requirement is relaxed to certifi>=2024.7.4, so the client can be installed alongside applications that pin an older certifi.
 
 # v37.0.1
 
