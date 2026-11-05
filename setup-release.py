@@ -47,8 +47,15 @@ with open('requirements.txt') as f:
 with open('test-requirements.txt') as f:
     TESTS_REQUIRES = f.readlines()
 
+# The asyncio client (kubernetes.aio) ships in the same distribution, but its
+# dependencies are only installed with the extra: pip install kubernetes[asyncio]
+EXTRAS['asyncio'] = []
 with open('requirements-asyncio.txt') as f:
-    REQUIRES_ASYNCIO = f.readlines()
+    for line in f:
+        line, _, _ = line.partition('#')
+        line = line.strip()
+        if line:
+            EXTRAS['asyncio'].append(line)
 
 with open('test-requirements-asyncio.txt') as f:
     TESTS_REQUIRES_ASYNCIO = f.readlines()
@@ -63,7 +70,7 @@ setup(
     license_expression="Apache-2.0",
     url="https://github.com/kubernetes-client/python",
     keywords=["Swagger", "OpenAPI", "Kubernetes"],
-    install_requires=REQUIRES+REQUIRES_ASYNCIO,
+    install_requires=REQUIRES,
     tests_require=TESTS_REQUIRES+TESTS_REQUIRES_ASYNCIO,
     extras_require=EXTRAS,
     packages=['kubernetes', 'kubernetes.client', 'kubernetes.config',
