@@ -4,6 +4,7 @@
 import unittest
 from unittest import mock
 import weakref
+import ssl
 
 import kubernetes
 from kubernetes.aio.client.configuration import Configuration as AsyncConfiguration
@@ -13,6 +14,20 @@ import urllib3
 
 
 class TestApiClient(unittest.TestCase):
+    def test_disable_strict_ssl_verification(self):
+        config = Configuration(proxy='', no_proxy='')
+        config.disable_strict_ssl_verification = True
+
+        rest_client = RESTClientObject(config)
+
+        ssl_context = (
+            rest_client.pool_manager.connection_pool_kw["ssl_context"]
+        )
+
+        self.assertIsNotNone(ssl_context)
+        self.assertFalse(
+            ssl_context.verify_flags & ssl.VERIFY_X509_STRICT
+        )
     def test_context_manager_closes_threadpool(self):
         with kubernetes.client.ApiClient() as client:
             pool = weakref.ref(client.pool)
