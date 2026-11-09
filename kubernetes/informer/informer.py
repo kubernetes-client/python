@@ -39,6 +39,20 @@ BOOKMARK = "BOOKMARK"
 ERROR = "ERROR"
 
 
+def _list_items_and_resource_version(resp):
+    """Return the items and resourceVersion of a list response.
+
+    Supports both generated model objects and the plain dicts returned by
+    CustomObjectsApi list functions.
+    """
+    if isinstance(resp, dict):
+        meta = resp.get("metadata") or {}
+        return resp.get("items") or [], meta.get("resourceVersion")
+    items = getattr(resp, "items", []) or []
+    meta = getattr(resp, "metadata", None)
+    return items, getattr(meta, "resource_version", None)
+
+
 class SharedInformer:
     """Watch a Kubernetes resource and maintain a local cache.
 
@@ -201,7 +215,7 @@ class SharedInformer:
         """
         kw = self._build_kwargs()
         resp = self._list_func(**kw)
-        items = getattr(resp, "items", []) or []
+        items, rv = _list_items_and_resource_version(resp)
 
         # Build key → item map for incoming items.
         new_items_map = {}
@@ -229,10 +243,6 @@ class SharedInformer:
             else:
                 self._fire(ADDED, item)
 
-        rv = None
-        meta = getattr(resp, "metadata", None)
-        if meta is not None:
-            rv = getattr(meta, "resource_version", None)
         self._resource_version = rv or "0"
 
     def _run_loop(self):
