@@ -12,11 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import datetime
 import os
 import tempfile
 import time
 import unittest
+from unittest.mock import patch
 from unittest import IsolatedAsyncioTestCase
 
 from kubernetes.aio.client import Configuration
@@ -86,7 +86,8 @@ class InClusterConfigTest(IsolatedAsyncioTestCase):
         self.assertEqual(cert_filename, loader.ssl_ca_cert)
         self.assertEqual('bearer ' + _TEST_TOKEN, loader.token)
 
-    async def test_refresh_token(self):
+    @patch(__package__ + ".incluster_config.monotonic", return_value=100.0)
+    async def test_refresh_token(self, monotonic):
         loader = self.get_test_loader()
         config = Configuration()
         loader.load_and_set(config)
@@ -96,14 +97,13 @@ class InClusterConfigTest(IsolatedAsyncioTestCase):
         self.assertEqual('bearer ' + _TEST_TOKEN, loader.token)
         self.assertIsNotNone(loader.token_expires_at)
 
-        old_token = loader.token
         old_token_expires_at = loader.token_expires_at
         loader._token_filename = self._create_file_with_temp_content(
             _TEST_NEW_TOKEN)
         self.assertEqual('bearer ' + _TEST_TOKEN,
                          await config.get_api_key_with_prefix('BearerToken'))
 
-        loader.token_expires_at = datetime.datetime.now()
+        monotonic.return_value = 160.0
         self.assertEqual('bearer ' + _TEST_NEW_TOKEN,
                          await config.get_api_key_with_prefix('BearerToken'))
         self.assertEqual('bearer ' + _TEST_NEW_TOKEN, loader.token)
