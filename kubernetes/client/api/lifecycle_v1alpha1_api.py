@@ -1537,7 +1537,7 @@ class LifecycleV1alpha1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1alpha1Eviction | V1Status:
         """delete_namespaced_eviction
 
         delete an Eviction
@@ -1608,8 +1608,8 @@ class LifecycleV1alpha1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1alpha1Eviction | V1Status",
+            '202': "V1alpha1Eviction | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -1649,7 +1649,7 @@ class LifecycleV1alpha1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[object, int, Any]:
+    ) -> Tuple[V1alpha1Eviction | V1Status, int, Any]:
         """delete_namespaced_eviction
 
         delete an Eviction
@@ -1720,8 +1720,8 @@ class LifecycleV1alpha1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1alpha1Eviction | V1Status",
+            '202': "V1alpha1Eviction | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -1864,7 +1864,7 @@ class LifecycleV1alpha1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1alpha1EvictionRequest | V1Status:
         """delete_namespaced_eviction_request
 
         delete an EvictionRequest
@@ -1935,8 +1935,8 @@ class LifecycleV1alpha1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1alpha1EvictionRequest | V1Status",
+            '202': "V1alpha1EvictionRequest | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -1976,7 +1976,7 @@ class LifecycleV1alpha1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[object, int, Any]:
+    ) -> Tuple[V1alpha1EvictionRequest | V1Status, int, Any]:
         """delete_namespaced_eviction_request
 
         delete an EvictionRequest
@@ -2047,8 +2047,8 @@ class LifecycleV1alpha1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1alpha1EvictionRequest | V1Status",
+            '202': "V1alpha1EvictionRequest | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(

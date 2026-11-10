@@ -418,7 +418,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_flow_schema**
-> object delete_flow_schema(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1FlowSchema | V1Status delete_flow_schema(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a FlowSchema
 
@@ -488,7 +488,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**V1FlowSchema**](V1FlowSchema.md) or [**V1Status**](V1Status.md)
 
 ### Authorization
 
@@ -510,7 +510,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_priority_level_configuration**
-> object delete_priority_level_configuration(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1PriorityLevelConfiguration | V1Status delete_priority_level_configuration(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a PriorityLevelConfiguration
 
@@ -580,7 +580,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**V1PriorityLevelConfiguration**](V1PriorityLevelConfiguration.md) or [**V1Status**](V1Status.md)
 
 ### Authorization
 

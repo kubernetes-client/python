@@ -1129,7 +1129,7 @@ class CertificatesV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1CertificateSigningRequest | V1Status:
         """delete_certificate_signing_request
 
         delete a CertificateSigningRequest
@@ -1188,8 +1188,8 @@ class CertificatesV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1CertificateSigningRequest | V1Status",
+            '202': "V1CertificateSigningRequest | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -1226,7 +1226,7 @@ class CertificatesV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[V1CertificateSigningRequest | V1Status]:
         """delete_certificate_signing_request
 
         delete a CertificateSigningRequest
@@ -1285,8 +1285,8 @@ class CertificatesV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1CertificateSigningRequest | V1Status",
+            '202': "V1CertificateSigningRequest | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -1517,7 +1517,7 @@ class CertificatesV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1ClusterTrustBundle | V1Status:
         """delete_cluster_trust_bundle
 
         delete a ClusterTrustBundle
@@ -1576,8 +1576,8 @@ class CertificatesV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1ClusterTrustBundle | V1Status",
+            '202': "V1ClusterTrustBundle | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -1614,7 +1614,7 @@ class CertificatesV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[V1ClusterTrustBundle | V1Status]:
         """delete_cluster_trust_bundle
 
         delete a ClusterTrustBundle
@@ -1673,8 +1673,8 @@ class CertificatesV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1ClusterTrustBundle | V1Status",
+            '202': "V1ClusterTrustBundle | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -3490,7 +3490,7 @@ class CertificatesV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1PodCertificateRequest | V1Status:
         """delete_namespaced_pod_certificate_request
 
         delete a PodCertificateRequest
@@ -3552,8 +3552,8 @@ class CertificatesV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1PodCertificateRequest | V1Status",
+            '202': "V1PodCertificateRequest | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -3591,7 +3591,7 @@ class CertificatesV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[V1PodCertificateRequest | V1Status]:
         """delete_namespaced_pod_certificate_request
 
         delete a PodCertificateRequest
@@ -3653,8 +3653,8 @@ class CertificatesV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1PodCertificateRequest | V1Status",
+            '202': "V1PodCertificateRequest | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(

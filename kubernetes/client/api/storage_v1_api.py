@@ -4326,7 +4326,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1CSIDriver:
+    ) -> V1CSIDriver | V1Status:
         """delete_csi_driver
 
         delete a CSIDriver
@@ -4394,8 +4394,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1CSIDriver",
-            '202': "V1CSIDriver",
+            '200': "V1CSIDriver | V1Status",
+            '202': "V1CSIDriver | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -4434,7 +4434,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[V1CSIDriver, int, Any]:
+    ) -> Tuple[V1CSIDriver | V1Status, int, Any]:
         """delete_csi_driver
 
         delete a CSIDriver
@@ -4502,8 +4502,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1CSIDriver",
-            '202': "V1CSIDriver",
+            '200': "V1CSIDriver | V1Status",
+            '202': "V1CSIDriver | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -4642,7 +4642,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1CSINode:
+    ) -> V1CSINode | V1Status:
         """delete_csi_node
 
         delete a CSINode
@@ -4710,8 +4710,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1CSINode",
-            '202': "V1CSINode",
+            '200': "V1CSINode | V1Status",
+            '202': "V1CSINode | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -4750,7 +4750,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[V1CSINode, int, Any]:
+    ) -> Tuple[V1CSINode | V1Status, int, Any]:
         """delete_csi_node
 
         delete a CSINode
@@ -4818,8 +4818,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1CSINode",
-            '202': "V1CSINode",
+            '200': "V1CSINode | V1Status",
+            '202': "V1CSINode | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -4959,7 +4959,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1CSIStorageCapacity | V1Status:
         """delete_namespaced_csi_storage_capacity
 
         delete a CSIStorageCapacity
@@ -5030,8 +5030,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1CSIStorageCapacity | V1Status",
+            '202': "V1CSIStorageCapacity | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -5071,7 +5071,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[object, int, Any]:
+    ) -> Tuple[V1CSIStorageCapacity | V1Status, int, Any]:
         """delete_namespaced_csi_storage_capacity
 
         delete a CSIStorageCapacity
@@ -5142,8 +5142,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1CSIStorageCapacity | V1Status",
+            '202': "V1CSIStorageCapacity | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -5285,7 +5285,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1StorageClass:
+    ) -> V1StorageClass | V1Status:
         """delete_storage_class
 
         delete a StorageClass
@@ -5353,8 +5353,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1StorageClass",
-            '202': "V1StorageClass",
+            '200': "V1StorageClass | V1Status",
+            '202': "V1StorageClass | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -5393,7 +5393,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[V1StorageClass, int, Any]:
+    ) -> Tuple[V1StorageClass | V1Status, int, Any]:
         """delete_storage_class
 
         delete a StorageClass
@@ -5461,8 +5461,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1StorageClass",
-            '202': "V1StorageClass",
+            '200': "V1StorageClass | V1Status",
+            '202': "V1StorageClass | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -5601,7 +5601,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1VolumeAttachment:
+    ) -> V1VolumeAttachment | V1Status:
         """delete_volume_attachment
 
         delete a VolumeAttachment
@@ -5669,8 +5669,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1VolumeAttachment",
-            '202': "V1VolumeAttachment",
+            '200': "V1VolumeAttachment | V1Status",
+            '202': "V1VolumeAttachment | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -5709,7 +5709,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[V1VolumeAttachment, int, Any]:
+    ) -> Tuple[V1VolumeAttachment | V1Status, int, Any]:
         """delete_volume_attachment
 
         delete a VolumeAttachment
@@ -5777,8 +5777,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1VolumeAttachment",
-            '202': "V1VolumeAttachment",
+            '200': "V1VolumeAttachment | V1Status",
+            '202': "V1VolumeAttachment | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -5917,7 +5917,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1VolumeAttributesClass:
+    ) -> V1VolumeAttributesClass | V1Status:
         """delete_volume_attributes_class
 
         delete a VolumeAttributesClass
@@ -5985,8 +5985,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1VolumeAttributesClass",
-            '202': "V1VolumeAttributesClass",
+            '200': "V1VolumeAttributesClass | V1Status",
+            '202': "V1VolumeAttributesClass | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -6025,7 +6025,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[V1VolumeAttributesClass, int, Any]:
+    ) -> Tuple[V1VolumeAttributesClass | V1Status, int, Any]:
         """delete_volume_attributes_class
 
         delete a VolumeAttributesClass
@@ -6093,8 +6093,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1VolumeAttributesClass",
-            '202': "V1VolumeAttributesClass",
+            '200': "V1VolumeAttributesClass | V1Status",
+            '202': "V1VolumeAttributesClass | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(

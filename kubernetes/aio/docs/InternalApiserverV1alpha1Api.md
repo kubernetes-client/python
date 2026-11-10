@@ -213,7 +213,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_storage_version**
-> object delete_storage_version(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1alpha1StorageVersion | V1Status delete_storage_version(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a StorageVersion
 
@@ -283,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**V1alpha1StorageVersion**](V1alpha1StorageVersion.md) or [**V1Status**](V1Status.md)
 
 ### Authorization
 
