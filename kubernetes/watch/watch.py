@@ -16,7 +16,8 @@ import http
 import inspect
 import json
 import pydoc
-from typing import Any
+from collections.abc import Callable, Iterator
+from typing import Any, Generic, Literal, ParamSpec, Protocol, TypeVar, TypedDict
 
 from kubernetes import client
 
@@ -32,8 +33,11 @@ TYPE_LIST_SUFFIX = "List"
 
 HTTP_STATUS_GONE = http.HTTPStatus.GONE
 
+_T = TypeVar("_T")
+_P = ParamSpec("_P")
 
-def _find_return_type(func):
+
+def _find_return_type(func) -> type[Any] | str:
     return_type = inspect.signature(func).return_annotation
     if (
         return_type is not inspect.Signature.empty
@@ -84,15 +88,24 @@ def iter_resp_lines(resp):
             next_newline = buffer.find(b'\n')
 
 
+class ListResponse(Protocol[_T]):
+    items: list[_T]
+
+
+class WatchEvent(TypedDict, Generic[_T]):
+    type: Literal["ADDED", "MODIFIED", "DELETED"]
+    object: _T
+
+
 class Watch:
 
-    def __init__(self, return_type=None):
+    def __init__(self, return_type: str | None = None):
         self._raw_return_type = return_type
         self._stop = False
         self._api_client = client.ApiClient()
-        self.resource_version = None
+        self.resource_version: object | None = None
 
-    def stop(self):
+    def stop(self) -> None:
         self._stop = True
         if hasattr(self, '_resp') and self._resp:
             import socket
@@ -109,8 +122,7 @@ class Watch:
             except Exception:
                 pass
 
-
-    def get_return_type(self, func):
+    def get_return_type(self, func) -> type[Any] | str:
         if self._raw_return_type:
             return self._raw_return_type
         return_type = _find_return_type(func)
@@ -124,7 +136,7 @@ class Watch:
             return getattr(client.models, item_type_name)
         return return_type
 
-    def get_watch_argument_name(self, func):
+    def get_watch_argument_name(self, func) -> Literal['follow'] | Literal['watch']:
         if (
             'follow' in inspect.signature(func).parameters
             or PYDOC_FOLLOW_PARAM in (pydoc.getdoc(func) or '')
@@ -133,7 +145,7 @@ class Watch:
         else:
             return 'watch'
 
-    def unmarshal_event(self, data, return_type):
+    def unmarshal_event(self, data: type[Any] | str, return_type: type[Any] | str | None) -> Any | None:
         if not data or data.isspace():
             return None
         try:
@@ -168,7 +180,9 @@ class Watch:
         except json.JSONDecodeError:
             return None
 
-    def stream(self, func, *args, **kwargs):
+    def stream(
+        self, func: Callable[_P, ListResponse[_T]], *args: _P.args, **kwargs: _P.kwargs
+    ) -> Iterator[WatchEvent[_T]]:
         """Watch an API resource and stream the result back via a generator.
 
         Note that watching an API resource can expire. The method tries to
@@ -217,7 +231,7 @@ class Watch:
         deserialize = kwargs.pop('deserialize', True)
         while True:
             resp = func(*args, **kwargs)
-            self._resp = resp
+            self._resp: ListResponse[_T] | None = resp
             try:
                 status = getattr(resp, 'status', None)
                 if isinstance(status, int) and not 200 <= status <= 299:
