@@ -280,7 +280,9 @@ class KubeConfigLoader(object):
 
         if (
             expires is not None and
-            _is_expired(datetime.datetime.utcfromtimestamp(expires))
+            _is_expired(
+        datetime.datetime.fromtimestamp(expires, datetime.timezone.utc).replace(tzinfo=None)
+    )
         ):
             await self._refresh_oidc(provider)
 
