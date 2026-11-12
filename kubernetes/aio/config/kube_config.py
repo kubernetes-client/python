@@ -74,7 +74,7 @@ def _create_temp_file_with_content(content, temp_file_path=None, force_recreate=
 
 def _is_expired(expiry):
     return ((parse_rfc3339(expiry) - EXPIRY_SKEW_PREVENTION_DELAY)
-            <= datetime.datetime.utcnow().replace(tzinfo=UTC))
+            <= datetime.datetime.now(datetime.timezone.utc))
 
 
 class FileOrData(object):
@@ -280,7 +280,9 @@ class KubeConfigLoader(object):
 
         if (
             expires is not None and
-            _is_expired(datetime.datetime.utcfromtimestamp(expires))
+            _is_expired(
+        datetime.datetime.fromtimestamp(expires, datetime.timezone.utc).replace(tzinfo=None)
+    )
         ):
             await self._refresh_oidc(provider)
 
