@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import base64
+import copy
 import datetime
 import io
 import json
@@ -134,6 +135,15 @@ TEST_OIDC_INVALID_PADDING_LENGTH = ".".join([
 ])
 
 TEST_OIDC_CA = _base64(TEST_CERTIFICATE_AUTH)
+
+
+def _oidc_token_with_exp(exp):
+    payload = json.dumps({"name": "test", "exp": exp})
+    return ".".join([
+        _urlsafe_unpadded_b64encode(TEST_OIDC_TOKEN),
+        _urlsafe_unpadded_b64encode(payload),
+        _urlsafe_unpadded_b64encode(TEST_CLIENT_CERT)
+    ])
 
 
 class BaseTestCase(unittest.TestCase):
@@ -1069,6 +1079,83 @@ class TestKubeConfigLoader(BaseTestCase):
             loader._load_oid_token("oidc_contains_reserved_character"),
             None,
         )
+
+    def test_oidc_sets_expiry_from_id_token(self):
+        exp = int((datetime.datetime.now(tz=UTC) +
+                   datetime.timedelta(hours=1)).timestamp())
+        config_dict = copy.deepcopy(self.TEST_KUBE_CONFIG)
+        for user in config_dict["users"]:
+            if user["name"] == "oidc":
+                user["user"]["auth-provider"]["config"]["id-token"] = (
+                    _oidc_token_with_exp(exp))
+        loader = KubeConfigLoader(
+            config_dict=config_dict,
+            active_context="oidc",
+        )
+        self.assertTrue(loader._load_auth_provider_token())
+        self.assertEqual(
+            datetime.datetime.fromtimestamp(exp, tz=UTC), loader.expiry)
+
+    @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token')
+    @mock.patch('kubernetes.config.kube_config.ApiClient.call_api')
+    def test_oidc_refresh_api_key_hook(self, mock_ApiClient,
+                                       mock_OAuth2Session):
+        now = datetime.datetime.now(tz=UTC)
+        first_exp = int((now + datetime.timedelta(hours=1)).timestamp())
+        new_exp = int((now + datetime.timedelta(hours=2)).timestamp())
+        config_dict = copy.deepcopy(self.TEST_KUBE_CONFIG)
+        for user in config_dict["users"]:
+            if user["name"] == "oidc":
+                config = user["user"]["auth-provider"]["config"]
+                config["id-token"] = _oidc_token_with_exp(first_exp)
+                config["client-id"] = "tectonic-kubectl"
+                config["client-secret"] = "FAKE_SECRET"
+                config["idp-issuer-url"] = "https://example.org/identity"
+                config["refresh-token"] = (
+                    "lucWJjEhlxZW01cXI3YmVlcYnpxNGhzk")
+
+        mock_response = mock.MagicMock()
+        type(mock_response).status = mock.PropertyMock(
+            return_value=200
+        )
+        type(mock_response).data = mock.PropertyMock(
+            return_value=json.dumps({
+                "token_endpoint": "https://example.org/identity/token"
+            })
+        )
+
+        mock_ApiClient.return_value = mock_response
+
+        new_token = _oidc_token_with_exp(new_exp)
+        mock_OAuth2Session.return_value = {"id_token": new_token,
+                                           "refresh_token": "newtoken123"}
+
+        fake_config = FakeConfig()
+        loader = KubeConfigLoader(
+            config_dict=config_dict,
+            active_context="oidc",
+        )
+        loader.load_and_set(fake_config)
+        self.assertIsNotNone(fake_config.refresh_api_key_hook)
+        self.assertEqual(
+            datetime.datetime.fromtimestamp(first_exp, tz=UTC),
+            loader.expiry)
+
+        # Simulate the token expiring: the id-token recorded in the
+        # config is now past its expiry, as it would be once the clock
+        # moves past the expiry the loader recorded at load time.
+        expired_exp = int((now - datetime.timedelta(hours=1)).timestamp())
+        loader.expiry = datetime.datetime.fromtimestamp(expired_exp, tz=UTC)
+        provider = loader._user['auth-provider']
+        provider['config'].value['id-token'] = (
+            _oidc_token_with_exp(expired_exp))
+
+        fake_config.refresh_api_key_hook(fake_config)
+
+        self.assertEqual(BEARER_TOKEN_FORMAT % new_token,
+                         fake_config.api_key['BearerToken'])
+        self.assertEqual(
+            datetime.datetime.fromtimestamp(new_exp, tz=UTC), loader.expiry)
 
     def test_oidc_fails_if_invalid_padding_length(self):
         loader = KubeConfigLoader(
