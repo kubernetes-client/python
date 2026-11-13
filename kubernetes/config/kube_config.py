@@ -83,6 +83,35 @@ def _is_expired(expiry):
             datetime.datetime.now(tz=UTC))
 
 
+def _get_jwt_expiry(token):
+    """Return the expiry of a JWT from its ``exp`` claim.
+
+    Returns None for malformed tokens and tokens without an ``exp``
+    claim.
+    """
+    parts = token.split('.')
+    if len(parts) != 3:  # Not a valid JWT
+        return None
+
+    padding = (4 - len(parts[1]) % 4) * '='
+    if len(padding) == 3:
+        # According to spec, 3 padding characters cannot occur
+        # in a valid jwt
+        # https://tools.ietf.org/html/rfc7515#appendix-C
+        return None
+
+    try:
+        jwt_attributes = json.loads(
+            base64.urlsafe_b64decode(parts[1] + padding).decode('utf-8')
+        )
+        expire = jwt_attributes.get('exp')
+        if expire is None:
+            return None
+        return datetime.datetime.fromtimestamp(expire, tz=UTC)
+    except (ValueError, TypeError, AttributeError, OverflowError):
+        return None
+
+
 class FileOrData:
     """Utility class to read content of obj[%data_key_name] or file's
      content of obj[%file_key_name] and represent it as file or data.
@@ -376,6 +405,14 @@ class KubeConfigLoader:
                 self._config_persister()
 
         self.token = "Bearer %s" % provider['config']['id-token']
+
+        # Record when the token in use expires so the refresh hook
+        # installed by _set_config() refreshes it instead of sending an
+        # expired token on later requests. The expiry is read from the
+        # final id-token because a refresh above replaces it.
+        expiry = _get_jwt_expiry(provider['config']['id-token'])
+        if expiry is not None:
+            self.expiry = expiry
 
         return self.token
 
