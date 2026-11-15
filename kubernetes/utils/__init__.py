@@ -16,7 +16,7 @@
 from .create_from_yaml import (FailToCreateError, create_from_dict,
                                create_from_yaml, create_from_directory)
 from .quantity import parse_quantity
-from .duration import parse_duration
+from .duration import Duration, parse_duration
 from .metrics import (get_nodes_metrics, get_pods_metrics,
                       get_pods_metrics_in_all_namespaces)
 from .retry import (Backoff, DEFAULT_BACKOFF, DEFAULT_RETRY,
@@ -34,6 +34,7 @@ __all__ = [
     "create_from_directory",
     "parse_quantity",
     "parse_duration",
+    "Duration",
     "get_nodes_metrics",
     "get_pods_metrics",
     "get_pods_metrics_in_all_namespaces",

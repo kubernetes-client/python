@@ -11,12 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from typing import List
+from typing import Annotated, Any, List
 
 import datetime
 import re
 
 import durationpy
+from pydantic import AfterValidator, BeforeValidator, PlainSerializer
 
 # Initialize our RE statically, rather than compiling for every call. This has
 # the downside that it'll get compiled at import time but that shouldn't
@@ -27,8 +28,12 @@ reDuration = re.compile(r'^([0-9]{1,5}(h|m|s|ms)){1,4}$')
 # milliseconds.
 maxDuration_ms = (((99999 * 3600) + (59 * 60) + 59) * 1_000) + 999
 
+# Go's time.Duration format and range.
+reGoDuration = re.compile(r'[-+]?(0|(([0-9]+\.?[0-9]*|\.[0-9]+)(ns|us|\u00b5s|\u03bcs|ms|s|m|h))+)')
+maxGoDuration = datetime.timedelta(microseconds=(2 ** 63 - 1) // 1000)
 
-def parse_duration(duration) -> datetime.timedelta:
+
+def parse_duration(duration: str) -> datetime.timedelta:
     """
     Parse GEP-2257 Duration format to a datetime.timedelta object.
 
@@ -172,3 +177,53 @@ def format_duration(delta: datetime.timedelta) -> str:
         output.append(f"{delta_us // 1000}ms")
 
     return "".join(output)
+
+
+def _parse_go_duration(value: Any) -> Any:
+    if not isinstance(value, str):
+        return value
+    if not reGoDuration.fullmatch(value):
+        raise ValueError("Invalid duration format: {}".format(value))
+    return durationpy.from_str(value)
+
+
+def _check_go_duration_range(value: datetime.timedelta) -> datetime.timedelta:
+    if abs(value) > maxGoDuration:
+        raise ValueError("Duration out of range: {}".format(value))
+    return value
+
+
+def _decimal(value: int, digits: int) -> str:
+    whole, frac = divmod(value, 10 ** digits)
+    if not frac:
+        return str(whole)
+    return "{}.{}".format(whole, str(frac).zfill(digits).rstrip("0"))
+
+
+def _format_go_duration(value: datetime.timedelta) -> str:
+    sign = "-" if value < datetime.timedelta(0) else ""
+    us = abs(value) // datetime.timedelta(microseconds=1)
+    if us == 0:
+        return "0s"
+    if us < 1000:
+        return "{}{}us".format(sign, us)
+    if us < 1_000_000:
+        return "{}{}ms".format(sign, _decimal(us, 3))
+
+    hours, us = divmod(us, 3_600_000_000)
+    minutes, us = divmod(us, 60_000_000)
+    seconds = _decimal(us, 6)
+    if hours:
+        return "{}{}h{}m{}s".format(sign, hours, minutes, seconds)
+    if minutes:
+        return "{}{}m{}s".format(sign, minutes, seconds)
+    return "{}{}s".format(sign, seconds)
+
+
+# metav1.Duration for pydantic models
+Duration = Annotated[
+    datetime.timedelta,
+    BeforeValidator(_parse_go_duration),
+    AfterValidator(_check_go_duration_range),
+    PlainSerializer(_format_go_duration, return_type=str),
+]
