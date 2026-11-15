@@ -49,7 +49,8 @@ class _IgnoredIO:
 
 
 class WSClient:
-    def __init__(self, configuration, url, headers, capture_all, binary=False):
+    def __init__(self, configuration, url, headers, capture_all, binary=False,
+                 _request_timeout=None):
         """A websocket client with support for channels.
 
             Exec command uses different channels for different streams. for
@@ -67,7 +68,8 @@ class WSClient:
             self._all = StringIO() if not self.binary else BytesIO()
         else:
             self._all = _IgnoredIO()
-        self.sock = create_websocket(configuration, url, headers)
+        self.sock = create_websocket(
+            configuration, url, headers, _request_timeout=_request_timeout)
         self.subprotocol = getattr(self.sock, 'subprotocol', None)
         if not self.subprotocol and self.sock:
             headers_dict = self.sock.getheaders()
@@ -300,12 +302,15 @@ class WSClient:
         """Wait till connection is closed or timeout reached. Buffer any input
         received during this time."""
         if timeout:
-            start = time.time()
-            while self.is_open() and time.time() - start < timeout:
-                self.update(timeout=(timeout - time.time() + start))
-        else:
-            while self.is_open():
-                self.update(timeout=None)
+            if isinstance(timeout, tuple) and len(timeout) == 2:
+                timeout = timeout[1]
+            if timeout:
+                start = time.time()
+                while self.is_open() and time.time() - start < timeout:
+                    self.update(timeout=(timeout - time.time() + start))
+                return
+        while self.is_open():
+            self.update(timeout=None)
     @property
     def returncode(self):
         """
@@ -543,7 +548,7 @@ def get_websocket_url(url, query_params=None):
     return urlunparse(parts)
 
 
-def create_websocket(configuration, url, headers=None):
+def create_websocket(configuration, url, headers=None, _request_timeout=None):
     enableTrace(False)
 
     # We just need to pass the Authorization, ignore all the other
@@ -578,6 +583,13 @@ def create_websocket(configuration, url, headers=None):
     connect_opt = {
          'header': header
     }
+
+    if _request_timeout:
+        if isinstance(_request_timeout, (int, float)):
+            connect_opt['timeout'] = _request_timeout
+        elif isinstance(_request_timeout, tuple) and len(_request_timeout) == 2:
+            if _request_timeout[0] is not None:
+                connect_opt['timeout'] = _request_timeout[0]
 
     if configuration.proxy or configuration.proxy_headers:
         connect_opt = websocket_proxycare(connect_opt, configuration, url, headers)
@@ -617,7 +629,8 @@ def websocket_call(configuration, _method, url, **kwargs):
     capture_all = kwargs.get("capture_all", True)
     binary = kwargs.get('binary', False)
     try:
-        client = WSClient(configuration, url, headers, capture_all, binary=binary)
+        client = WSClient(configuration, url, headers, capture_all, binary=binary,
+                          _request_timeout=_request_timeout)
         if not _preload_content:
             return client
         client.run_forever(timeout=_request_timeout)
@@ -659,7 +672,8 @@ def portforward_call(configuration, _method, url, **kwargs):
     headers = kwargs.get("headers")
 
     try:
-        websocket = create_websocket(configuration, url, headers)
+        websocket = create_websocket(configuration, url, headers,
+                                     _request_timeout=kwargs.get("_request_timeout"))
         return PortForward(websocket, ports)
     except (Exception, KeyboardInterrupt, SystemExit) as e:
         raise ApiException(status=0, reason=str(e))
