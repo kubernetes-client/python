@@ -19,7 +19,7 @@ jobs:
       with:
         submodules: true
     - name: Create Kind Cluster
-      uses: helm/kind-action@1544676c07bb3570fcb70166beaa07c4528fd4aa
+      uses: helm/kind-action@ea822c7bf1874f08e5a491df991c228edffc3376
       with:
         cluster_name: kubernetes-python-e2e-master-${{ matrix.python-version }}
         # The kind version to be used to spin the cluster up
