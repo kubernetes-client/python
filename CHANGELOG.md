@@ -1,3 +1,10 @@
+# v37.0.3
+
+Kubernetes API Version: v1.37.2
+
+- python-dateutil requirement is relaxed to python-dateutil>=2.8.2, so the client can be installed alongside applications that uses botocore.
+
+
 # v37.0.2
 
 Kubernetes API Version: v1.37.2
