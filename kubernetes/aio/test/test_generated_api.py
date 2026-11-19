@@ -48,6 +48,9 @@ class GeneratedAsyncApiTest(IsolatedAsyncioTestCase):
         self.response_status = 200
         self.response_headers = {}
         self.responses = None
+        self.websocket_protocol = 'v4.channel.k8s.io'
+        self.websocket_messages = (b'\x01remote output',)
+        self.negotiated_websocket_protocol = None
         app = web.Application()
         app.router.add_route('*', '/{path:.*}', self._handle_request)
         self.runner = web.AppRunner(app)
@@ -69,10 +72,12 @@ class GeneratedAsyncApiTest(IsolatedAsyncioTestCase):
         self.requests.append((request, body))
         if request.path.endswith('/exec'):
             response = web.WebSocketResponse(
-                protocols=('v4.channel.k8s.io',),
+                protocols=(self.websocket_protocol,),
             )
             await response.prepare(request)
-            await response.send_bytes(b'\x01remote output')
+            self.negotiated_websocket_protocol = response.ws_protocol
+            for message in self.websocket_messages:
+                await response.send_bytes(message)
             await response.close()
             return response
         if request.query.get('watch') == 'true':
@@ -302,8 +307,33 @@ class GeneratedAsyncApiTest(IsolatedAsyncioTestCase):
 
         self.assertEqual('remote output', output)
         self.assertEqual(
-            'v4.channel.k8s.io',
+            'v5.channel.k8s.io,v4.channel.k8s.io',
             self.requests[-1][0].headers['Sec-WebSocket-Protocol'],
+        )
+        self.assertEqual(
+            'v4.channel.k8s.io',
+            self.negotiated_websocket_protocol,
+        )
+
+    async def test_websocket_exec_v5_channel_close(self):
+        self.websocket_protocol = 'v5.channel.k8s.io'
+        self.websocket_messages = (
+            b'\x01before',
+            b'\xff\x01',
+            b'\x01after',
+            b'\x02stderr',
+        )
+        websocket_client = WsApiClient(self.configuration)
+        self.addAsyncCleanup(websocket_client.close)
+
+        output = await CoreV1Api(websocket_client).connect_get_namespaced_pod_exec(
+            'pod', 'default', command=['echo', 'hello'], stdout=True,
+        )
+
+        self.assertEqual('beforestderr', output)
+        self.assertEqual(
+            'v5.channel.k8s.io',
+            self.negotiated_websocket_protocol,
         )
 
     async def test_websocket_exec_preserves_interactive_raw_stream(self):

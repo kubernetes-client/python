@@ -21,6 +21,10 @@ STDOUT_CHANNEL = 1
 STDERR_CHANNEL = 2
 ERROR_CHANNEL = 3
 RESIZE_CHANNEL = 4
+CLOSE_CHANNEL = 255
+
+V4_CHANNEL_PROTOCOL = 'v4.channel.k8s.io'
+V5_CHANNEL_PROTOCOL = 'v5.channel.k8s.io'
 
 
 def get_websocket_url(url):
@@ -57,6 +61,12 @@ class WsResponse(RESTResponse):
 
 
 class WsApiClient(ApiClient):
+    """Async exec transport.
+
+    Preloaded responses collect UTF-8 stdout and stderr and honor v5 channel
+    close frames. Without preloading, the raw aiohttp WebSocket is returned;
+    callers are responsible for channel framing and close messages.
+    """
 
     def __init__(self, configuration=None, header_name=None, header_value=None,
                  cookie=None, pool_threads=1, heartbeat=None):
@@ -113,8 +123,19 @@ class WsApiClient(ApiClient):
 
         if headers is None:
             headers = {}
-        if 'sec-websocket-protocol' not in headers:
-            headers['sec-websocket-protocol'] = 'v4.channel.k8s.io'
+        protocol_header = next(
+            (key for key in headers if key.lower() == 'sec-websocket-protocol'),
+            None,
+        )
+        if protocol_header is None:
+            protocols = [V5_CHANNEL_PROTOCOL, V4_CHANNEL_PROTOCOL]
+            headers['sec-websocket-protocol'] = ','.join(protocols)
+        else:
+            protocols = [
+                protocol.strip()
+                for protocol in headers[protocol_header].split(',')
+                if protocol.strip()
+            ]
 
         if query_params:
             url += '?' + urlencode(query_params)
@@ -128,22 +149,37 @@ class WsApiClient(ApiClient):
         if _preload_content:
 
             resp_all = ''
+            closed_channels = set()
             async with pool_manager.ws_connect(
-                url, headers=headers, heartbeat=self.heartbeat
+                url, headers=headers, protocols=protocols,
+                heartbeat=self.heartbeat,
             ) as ws:
                 async for msg in ws:
-                    msg = msg.data.decode('utf-8')
-                    if len(msg) > 1:
-                        channel = ord(msg[0])
-                        data = msg[1:]
-                        if data:
-                            if channel in [STDOUT_CHANNEL, STDERR_CHANNEL]:
-                                resp_all += data
+                    data = msg.data
+                    if len(data) > 1:
+                        channel = data[0] if isinstance(data, bytes) else ord(data[0])
+                        if (
+                            channel == CLOSE_CHANNEL
+                            and ws.protocol == V5_CHANNEL_PROTOCOL
+                        ):
+                            closed_channel = (
+                                data[1] if isinstance(data, bytes) else ord(data[1])
+                            )
+                            closed_channels.add(closed_channel)
+                            continue
+                        if channel in closed_channels:
+                            continue
+                        data = data[1:]
+                        if isinstance(data, bytes):
+                            data = data.decode('utf-8')
+                        if data and channel in [STDOUT_CHANNEL, STDERR_CHANNEL]:
+                            resp_all += data
 
             return WsResponse(200, resp_all.encode('utf-8'))
 
         else:
 
             return pool_manager.ws_connect(
-                url, headers=headers, heartbeat=self.heartbeat
+                url, headers=headers, protocols=protocols,
+                heartbeat=self.heartbeat,
             )
