@@ -245,7 +245,9 @@ class Watch:
                                     obj['reason'], obj['message'])
                                 raise client.rest.ApiException(
                                     status=obj['code'], reason=reason)
-                        else:
+                        elif event is not None:
+                            # unmarshal_event returns None for blank or
+                            # undecodable lines; skip them.
                             retry_after_410 = False
                             yield event
                     else:
