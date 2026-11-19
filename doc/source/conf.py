@@ -16,8 +16,6 @@ import os
 import re
 import sys
 
-from recommonmark.transform import AutoStructify
-
 # --
 # Copy README.md, CONTRIBUTING.md to source/ directory and replace
 # all paths to point github files.
@@ -49,7 +47,7 @@ source_suffix = ['.rst', '.md']
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
     'sphinx_markdown_tables',
-    'recommonmark',
+    'myst_parser',
     'sphinx.ext.autodoc',
     #'sphinx.ext.intersphinx',
 ]
@@ -101,10 +99,4 @@ latex_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 #intersphinx_mapping = {'http://docs.python.org/': None}
-def setup(app):
-    app.add_config_value('recommonmark_config', {
-            'auto_toc_tree_section': 'Contents',
-            'enable_eval_rst': True,
-            }, True)
-    app.add_transform(AutoStructify)
 
