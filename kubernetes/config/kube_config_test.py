@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import base64
+import copy
 import datetime
 import io
 import json
@@ -982,6 +983,107 @@ class TestKubeConfigLoader(BaseTestCase):
         )
         self.assertTrue(loader._load_auth_provider_token())
         self.assertEqual(TEST_OIDC_TOKEN, loader.token)
+
+    @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token')
+    @mock.patch('kubernetes.config.kube_config.ApiClient.call_api')
+    def test_oidc_refresh_api_key_hook(self, mock_call_api, mock_refresh):
+        now = datetime.datetime(2024, 1, 1, tzinfo=UTC)
+        skew = datetime.timedelta(minutes=5)
+
+        def token(expiry):
+            return "header.%s.signature" % _urlsafe_unpadded_b64encode(
+                json.dumps({'exp': int(expiry.timestamp())}))
+
+        mock_call_api.return_value = mock.Mock(
+            status=200, data=json.dumps({
+                'token_endpoint': 'https://example.org/identity/token'}))
+
+        for lifetime in (datetime.timedelta(hours=1),
+                         skew + datetime.timedelta(seconds=1)):
+            with self.subTest(lifetime=lifetime):
+                mock_refresh.reset_mock()
+                mock_call_api.reset_mock()
+                persister = mock.Mock()
+                loader = KubeConfigLoader(
+                    config_dict=copy.deepcopy(self.TEST_KUBE_CONFIG),
+                    active_context="expired_oidc",
+                    config_persister=persister)
+                provider = loader._user['auth-provider']['config']
+                expiry = now + lifetime
+                provider.value['id-token'] = token(expiry)
+                config = Configuration()
+
+                with mock.patch(
+                        'kubernetes.config.kube_config.datetime',
+                        wraps=datetime) as clock:
+                    clock.datetime.now.return_value = now
+                    loader.load_and_set(config)
+                    self.assertEqual(expiry, loader.expiry)
+                    for _ in range(2):
+                        self.assertEqual(
+                            BEARER_TOKEN_FORMAT % token(expiry),
+                            config.get_api_key_with_prefix('BearerToken'))
+                    mock_refresh.assert_not_called()
+                    persister.assert_not_called()
+
+                    # The expiry skew applies once, not when storing expiry.
+                    clock.datetime.now.return_value = (
+                        expiry - skew - datetime.timedelta(seconds=1))
+                    config.get_api_key_with_prefix('BearerToken')
+                    mock_refresh.assert_not_called()
+
+                    for expired in (False, True):
+                        refresh_time = (expiry + datetime.timedelta(seconds=1)
+                                        if expired else expiry - skew)
+                        refreshed_expiry = refresh_time + lifetime
+                        refreshed_token = token(refreshed_expiry)
+                        mock_refresh.return_value = {
+                            'id_token': refreshed_token,
+                            'refresh_token': 'newtoken123'}
+                        previous_calls = mock_refresh.call_count
+                        clock.datetime.now.return_value = refresh_time
+                        self.assertEqual(
+                            BEARER_TOKEN_FORMAT % refreshed_token,
+                            config.get_api_key_with_prefix('BearerToken'))
+                        self.assertEqual(refreshed_expiry, loader.expiry)
+                        self.assertEqual(
+                            previous_calls + 1, mock_refresh.call_count)
+                        expiry = refreshed_expiry
+                        self.assertEqual(
+                            previous_calls + 1, persister.call_count)
+                        for _ in range(2):
+                            config.get_api_key_with_prefix('BearerToken')
+                        self.assertEqual(
+                            previous_calls + 1, mock_refresh.call_count)
+
+    def test_oidc_tracks_expiry_after_initial_refresh(self):
+        expiry = datetime.datetime.now(tz=UTC).replace(
+            microsecond=0) + datetime.timedelta(hours=1)
+        for claims in ({'exp': int(expiry.timestamp())}, {}):
+            with self.subTest(claims=claims):
+                refreshed_token = "header.%s.signature" % (
+                    _urlsafe_unpadded_b64encode(json.dumps(claims)))
+                loader = KubeConfigLoader(
+                    config_dict=copy.deepcopy(self.TEST_KUBE_CONFIG),
+                    active_context="expired_oidc")
+                loader.expiry = DATETIME_EXPIRY_PAST
+                config = Configuration()
+
+                def refresh(provider):
+                    provider['config'].value['id-token'] = refreshed_token
+
+                with mock.patch.object(
+                        loader, '_refresh_oidc', side_effect=refresh) as mocked:
+                    loader.load_and_set(config)
+                    if 'exp' in claims:
+                        self.assertEqual(expiry, loader.expiry)
+                    else:
+                        self.assertFalse(hasattr(loader, 'expiry'))
+                    for _ in range(2):
+                        self.assertEqual(
+                            BEARER_TOKEN_FORMAT % refreshed_token,
+                            config.get_api_key_with_prefix('BearerToken'))
+                    mocked.assert_called_once()
 
     @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token')
     @mock.patch('kubernetes.config.kube_config.ApiClient.call_api')
