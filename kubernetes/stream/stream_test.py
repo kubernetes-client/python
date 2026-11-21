@@ -78,6 +78,27 @@ class StreamTest(unittest.TestCase):
         )
         self.assertIn('command=echo&command=hello', request['url'])
 
+    def test_generated_api_request_passes_tuple_request_timeout(self):
+        request = {}
+
+        def websocket_call(configuration, method, url, **kwargs):
+            request.update(method=method, url=url, kwargs=kwargs)
+            return ws_client.WSResponse(data='output', status=200)
+
+        api = client.CoreV1Api()
+        output = _websocket_request(
+            websocket_call,
+            None,
+            api.connect_get_namespaced_pod_exec,
+            'pod',
+            'default',
+            command=['date'],
+            _request_timeout=(5, 10),
+        )
+
+        self.assertEqual('output', output)
+        self.assertEqual((5, 10), request['kwargs'].get('_request_timeout'))
+
 
 if __name__ == '__main__':
     unittest.main()
