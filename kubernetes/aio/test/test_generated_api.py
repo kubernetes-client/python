@@ -362,6 +362,23 @@ class GeneratedAsyncApiTest(IsolatedAsyncioTestCase):
             rest_client.ssl_context.verify_flags & ssl.VERIFY_X509_STRICT,
         )
 
+    async def test_assert_hostname_false_disables_hostname_check(self):
+        self.configuration.assert_hostname = False
+
+        rest_client = RESTClientObject(self.configuration)
+
+        self.assertFalse(rest_client.ssl_context.check_hostname)
+        self.assertEqual(ssl.CERT_REQUIRED, rest_client.ssl_context.verify_mode)
+
+    async def test_assert_hostname_does_not_reenable_verification(self):
+        self.configuration.verify_ssl = False
+        self.configuration.assert_hostname = True
+
+        rest_client = RESTClientObject(self.configuration)
+
+        self.assertFalse(rest_client.ssl_context.check_hostname)
+        self.assertEqual(ssl.CERT_NONE, rest_client.ssl_context.verify_mode)
+
     async def test_models_preserve_int_or_string_and_python_field_names(self):
         port = V1ServicePort(port=80, target_port='https')
 
