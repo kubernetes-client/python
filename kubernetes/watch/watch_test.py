@@ -719,12 +719,118 @@ class WatchTests(unittest.TestCase):
             self.assertIsInstance(e['object'], dict)
             self.assertEqual("test1", e['object']['metadata']['name'])
             self.assertEqual("1", e['object']['metadata']['resourceVersion'])
-    
+            w.stop()
+
         # verify the api is called twice
         fake_api.get_namespaces.assert_has_calls([
             call(_preload_content=False, watch=True),
             call(_preload_content=False, watch=True)
         ])
+
+    def test_watch_with_deserialize_false_skips_blank_lines(self):
+        fake_resp = Mock()
+        fake_resp.stream = Mock(return_value=[
+            '\n',
+            '{"type": "ADDED", "object": {"metadata": {"name": "test1"}}}\n',
+            '\n\n',
+            '{"type": "ADDED", "object": {"metadata": {"name": "test2"}}}\n',
+        ])
+        fake_api = Mock()
+        fake_api.get_namespaces = Mock(return_value=fake_resp)
+        fake_api.get_namespaces.__doc__ = ':rtype: V1NamespaceList'
+
+        events = list(Watch().stream(
+            fake_api.get_namespaces, deserialize=False, timeout_seconds=1))
+
+        self.assertEqual([
+            {"type": "ADDED", "object": {"metadata": {"name": "test1"}}},
+            {"type": "ADDED", "object": {"metadata": {"name": "test2"}}},
+        ], events)
+
+    def test_watch_with_deserialize_false_honours_stop_on_blank_line(self):
+        """No event after a skipped blank line is yielded once stopped."""
+        w = Watch()
+
+        def stream(**_):
+            w.stop()
+            yield '\n'
+            yield ('{"type": "ADDED", "object": {"metadata": '
+                   '{"name": "test1", "resourceVersion": "1"}}}\n')
+
+        fake_resp = Mock()
+        fake_resp.stream = Mock(side_effect=stream)
+        fake_api = Mock()
+        fake_api.get_namespaces = Mock(return_value=fake_resp)
+        fake_api.get_namespaces.__doc__ = ':rtype: V1NamespaceList'
+
+        events = list(w.stream(fake_api.get_namespaces, deserialize=False))
+
+        self.assertEqual([], events)
+        fake_api.get_namespaces.assert_called_once()
+
+    def test_watch_with_deserialize_false_tracks_resource_version(self):
+        """Reconnect from the last non-empty RV, not the initial one."""
+        first_resp = Mock()
+        first_resp.stream = Mock(return_value=[
+            '{"type": "ADDED", "object": {"metadata": {"name": "test1", '
+            '"resourceVersion": "2"}}}\n',
+            '{"type": "BOOKMARK", "object": {"metadata": '
+            '{"resourceVersion": "3"}}}\n',
+            '{"type": "MODIFIED", "object": {"metadata": {"name": "test1", '
+            '"resourceVersion": ""}}}\n',
+        ])
+        second_resp = Mock()
+        second_resp.stream = Mock(return_value=[
+            '{"type": "DELETED", "object": {"metadata": {"name": "test1", '
+            '"resourceVersion": "4"}}}\n',
+        ])
+        fake_api = Mock()
+        fake_api.get_namespaces = Mock(side_effect=[first_resp, second_resp])
+        fake_api.get_namespaces.__doc__ = ':rtype: V1NamespaceList'
+
+        w = Watch()
+        types = []
+        for e in w.stream(fake_api.get_namespaces, deserialize=False,
+                          resource_version="1"):
+            types.append(e['type'])
+            if e['type'] == 'DELETED':
+                w.stop()
+
+        self.assertEqual(['ADDED', 'BOOKMARK', 'MODIFIED', 'DELETED'], types)
+        fake_api.get_namespaces.assert_has_calls([
+            call(_preload_content=False, watch=True, resource_version="1"),
+            call(_preload_content=False, watch=True, resource_version="3"),
+        ])
+        self.assertEqual("4", w.resource_version)
+
+    def test_watch_with_deserialize_false_raises_on_error_event(self):
+        """410 retries once from the last event's RV; ERROR RV is ignored."""
+        for code, expected_rvs in ((410, ["1", "5"]), (500, ["1"])):
+            with self.subTest(code=code):
+                error = ('{"type": "ERROR", "object": {"metadata": '
+                         '{"resourceVersion": "9"}, "code": %d, "reason": '
+                         '"Gone", "message": "error message"}}\n' % code)
+                first_resp = Mock()
+                first_resp.stream = Mock(return_value=[
+                    '{"type": "ADDED", "object": {"metadata": {"name": '
+                    '"test1", "resourceVersion": "5"}}}\n', error])
+                retry_resp = Mock()
+                retry_resp.stream = Mock(return_value=[error])
+                fake_api = Mock()
+                fake_api.get_thing = Mock(
+                    side_effect=[first_resp, retry_resp])
+                w = Watch()
+
+                with self.assertRaises(ApiException) as ctx:
+                    list(w.stream(fake_api.get_thing, deserialize=False,
+                                  resource_version="1"))
+
+                self.assertEqual(code, ctx.exception.status)
+                self.assertEqual(
+                    [call(_preload_content=False, watch=True,
+                          resource_version=rv) for rv in expected_rvs],
+                    fake_api.get_thing.call_args_list)
+                self.assertEqual("5", w.resource_version)
     
 
 if __name__ == '__main__':
