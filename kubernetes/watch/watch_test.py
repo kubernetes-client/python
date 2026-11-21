@@ -14,6 +14,7 @@
 
 import json
 import os
+import threading
 import time
 from types import SimpleNamespace
 from typing import Any, Optional
@@ -428,6 +429,68 @@ class WatchTests(unittest.TestCase):
         self.assertEqual(fake_resp.stream.call_count, 2)
         self.assertEqual(fake_resp.close.call_count, 2)
         self.assertEqual(fake_resp.release_conn.call_count, 2)
+
+    def test_watch_stop_during_request(self):
+        """stop() called while the request is in flight ends the stream."""
+        fake_resp = Mock()
+        fake_resp.close = Mock()
+        fake_resp.release_conn = Mock()
+        fake_resp.stream = Mock(
+            return_value=['{"type": "ADDED", "object": 1}\n'])
+
+        w = Watch(float)
+
+        def get_namespaces(**kwargs):
+            # Simulate stop() from another thread before the response
+            # headers arrive, i.e. before the stream holds the response.
+            stopper = threading.Thread(target=w.stop)
+            stopper.start()
+            stopper.join(timeout=5)
+            return fake_resp
+
+        fake_api = Mock()
+        fake_api.get_namespaces = Mock(side_effect=get_namespaces)
+        fake_api.get_namespaces.__doc__ = ':rtype: V1NamespaceList'
+
+        events = list(w.stream(fake_api.get_namespaces))
+
+        self.assertEqual([], events)
+        fake_api.get_namespaces.assert_called_once_with(
+            _preload_content=False, watch=True)
+        fake_resp.stream.assert_not_called()
+        fake_resp.close.assert_called_once()
+        fake_resp.release_conn.assert_called_once()
+
+    def test_watch_stop_during_reconnect_request(self):
+        """stop() during a reconnect request ends the stream unread."""
+        first_resp = Mock()
+        first_resp.stream = Mock(
+            return_value=['{"type": "ADDED", "object": 1}\n'])
+        second_resp = Mock()
+        second_resp.stream = Mock(
+            return_value=['{"type": "ADDED", "object": 2}\n'])
+
+        w = Watch(float)
+
+        def get_namespaces(**kwargs):
+            if fake_api.get_namespaces.call_count == 1:
+                return first_resp
+            stopper = threading.Thread(target=w.stop)
+            stopper.start()
+            stopper.join(timeout=5)
+            return second_resp
+
+        fake_api = Mock()
+        fake_api.get_namespaces = Mock(side_effect=get_namespaces)
+        fake_api.get_namespaces.__doc__ = ':rtype: V1NamespaceList'
+
+        events = list(w.stream(fake_api.get_namespaces, resource_version='1'))
+
+        self.assertEqual(1, len(events))
+        self.assertEqual(2, fake_api.get_namespaces.call_count)
+        second_resp.stream.assert_not_called()
+        second_resp.close.assert_called_once()
+        second_resp.release_conn.assert_called_once()
 
     def test_unmarshal_with_float_object(self):
         w = Watch()
