@@ -219,6 +219,12 @@ class Watch:
             resp = func(*args, **kwargs)
             self._resp = resp
             try:
+                # stop() may have been called while the request was in
+                # flight. Keep this check after storing self._resp: stop()
+                # sets _stop before reading _resp, so either this check sees
+                # the flag or stop() sees the response and shuts it down.
+                if self._stop:
+                    break
                 status = getattr(resp, 'status', None)
                 if isinstance(status, int) and not 200 <= status <= 299:
                     self._api_client.response_deserialize(resp, {})
