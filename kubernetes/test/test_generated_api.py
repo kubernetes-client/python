@@ -29,6 +29,7 @@ from kubernetes.client import (
     CoreV1Api,
     CustomObjectsApi,
     V1ConfigMap,
+    V1CustomResourceDefinition,
     V1CustomResourceDefinitionVersion,
     V1CustomResourceValidation,
     V1ExecAction,
@@ -314,6 +315,87 @@ class GeneratedModelTest(unittest.TestCase):
             'items': [],
             'metadata': {'continue': 'token'},
         }, serialized)
+
+    def test_crd_round_trip_preserves_version_fields(self):
+        crd = {
+            'apiVersion': 'apiextensions.k8s.io/v1',
+            'kind': 'CustomResourceDefinition',
+            'metadata': {'name': 'widgets.example.com'},
+            'spec': {
+                'group': 'example.com',
+                'scope': 'Namespaced',
+                'names': {
+                    'plural': 'widgets',
+                    'singular': 'widget',
+                    'kind': 'Widget',
+                    'listKind': 'WidgetList',
+                },
+                'versions': [
+                    {
+                        'name': name,
+                        'served': True,
+                        'storage': storage,
+                        'schema': {
+                            'openAPIV3Schema': {
+                                'type': 'object',
+                                'properties': {
+                                    'spec': {
+                                        'type': 'object',
+                                        'required': ['size'],
+                                        'properties': {
+                                            'size': {
+                                                'type': 'integer',
+                                                'minimum': 0,
+                                                'default': 0,
+                                            },
+                                            'version': {
+                                                'type': 'string',
+                                                'enum': [name],
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                        'additionalPrinterColumns': [
+                            {
+                                'name': 'Size',
+                                'type': 'integer',
+                                'jsonPath': '.spec.size',
+                                'priority': 0,
+                            },
+                            {
+                                'name': 'Version',
+                                'type': 'string',
+                                'jsonPath': '.spec.version',
+                                'priority': 1,
+                            },
+                        ],
+                    }
+                    for name, storage in [('v1beta1', False), ('v1', True)]
+                ],
+            },
+        }
+        client = ApiClient()
+        models = {
+            'from_dict': V1CustomResourceDefinition.from_dict(crd),
+            'from_json': V1CustomResourceDefinition.from_json(json.dumps(crd)),
+            'deserialize': client.deserialize(
+                json.dumps(crd), 'V1CustomResourceDefinition',
+                'application/json'),
+        }
+        expected = {
+            **crd,
+            'metadata': {**crd['metadata'], 'labels': {'edited': 'true'}},
+        }
+
+        for source, model in models.items():
+            model.metadata.labels = {'edited': 'true'}
+            with self.subTest(source=source, serializer='api_client'):
+                self.assertEqual(
+                    expected, client.sanitize_for_serialization(model))
+            with self.subTest(source=source, serializer='to_json'):
+                self.assertEqual(expected, json.loads(model.to_json()))
 
     def test_int_or_string_fields_accept_both_representations(self):
         cases = [
