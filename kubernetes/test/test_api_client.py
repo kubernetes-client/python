@@ -68,6 +68,31 @@ class TestApiClient(unittest.TestCase):
             client = kubernetes.client.ApiClient(configuration=config)
             self.assertEqual( expected_pool, type(client.rest_client.pool_manager) )
 
+    def _read_pod_log(self, body):
+        with kubernetes.client.ApiClient() as client:
+            response = urllib3.HTTPResponse(
+                body=body, status=200, reason='OK',
+                headers={'Content-Type': 'text/plain'},
+            )
+            with mock.patch.object(
+                client.rest_client.pool_manager, 'request',
+                return_value=response,
+            ):
+                return kubernetes.client.CoreV1Api(client).read_namespaced_pod_log(
+                    'pod', 'default', limit_bytes=len(body),
+                )
+
+    def test_pod_log_cut_mid_character_by_limit_bytes(self):
+        # The last two bytes are the start of a three-byte euro sign.
+        log = self._read_pod_log('caf\u00e9 \u20ac'.encode()[:-1])
+
+        self.assertEqual('caf\u00e9 ', log)
+
+    def test_pod_log_with_invalid_utf8_still_raises(self):
+        # A Latin-1 e-acute is not valid UTF-8 wherever it appears.
+        with self.assertRaises(UnicodeDecodeError):
+            self._read_pod_log(b'caf\xe9 \xe2\x82')
+
     def test_client_go_read_retries_do_not_override_write_retries(self):
         config = Configuration(proxy='', no_proxy='', retries=urllib3.Retry(total=2))
         config.client_go_retries = True
