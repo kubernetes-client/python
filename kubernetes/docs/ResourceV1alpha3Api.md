@@ -418,7 +418,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_device_taint_rule**
-> V1alpha3DeviceTaintRule delete_device_taint_rule(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1alpha3DeviceTaintRule | V1Status delete_device_taint_rule(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a DeviceTaintRule
 
@@ -489,7 +489,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1alpha3DeviceTaintRule**](V1alpha3DeviceTaintRule.md)
+[**V1alpha3DeviceTaintRule**](V1alpha3DeviceTaintRule.md) or [**V1Status**](V1Status.md)
 
 ### Authorization
 
@@ -511,7 +511,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_resource_pool_status_request**
-> V1alpha3ResourcePoolStatusRequest delete_resource_pool_status_request(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1alpha3ResourcePoolStatusRequest | V1Status delete_resource_pool_status_request(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a ResourcePoolStatusRequest
 
@@ -582,7 +582,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1alpha3ResourcePoolStatusRequest**](V1alpha3ResourcePoolStatusRequest.md)
+[**V1alpha3ResourcePoolStatusRequest**](V1alpha3ResourcePoolStatusRequest.md) or [**V1Status**](V1Status.md)
 
 ### Authorization
 

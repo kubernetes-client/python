@@ -635,7 +635,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_composite_pod_group**
-> object delete_namespaced_composite_pod_group(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1alpha3CompositePodGroup | V1Status delete_namespaced_composite_pod_group(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a CompositePodGroup
 
@@ -707,7 +707,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**V1alpha3CompositePodGroup**](V1alpha3CompositePodGroup.md) or [**V1Status**](V1Status.md)
 
 ### Authorization
 
@@ -729,7 +729,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_pod_group**
-> object delete_namespaced_pod_group(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1alpha3PodGroup | V1Status delete_namespaced_pod_group(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a PodGroup
 
@@ -801,7 +801,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**V1alpha3PodGroup**](V1alpha3PodGroup.md) or [**V1Status**](V1Status.md)
 
 ### Authorization
 
@@ -823,7 +823,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_workload**
-> object delete_namespaced_workload(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1alpha3Workload | V1Status delete_namespaced_workload(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a Workload
 
@@ -895,7 +895,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**object**
+[**V1alpha3Workload**](V1alpha3Workload.md) or [**V1Status**](V1Status.md)
 
 ### Authorization
 

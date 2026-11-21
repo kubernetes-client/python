@@ -1034,7 +1034,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_device_class**
-> V1beta2DeviceClass delete_device_class(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1beta2DeviceClass | V1Status delete_device_class(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a DeviceClass
 
@@ -1105,7 +1105,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1beta2DeviceClass**](V1beta2DeviceClass.md)
+[**V1beta2DeviceClass**](V1beta2DeviceClass.md) or [**V1Status**](V1Status.md)
 
 ### Authorization
 
@@ -1127,7 +1127,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_device_taint_rule**
-> V1beta2DeviceTaintRule delete_device_taint_rule(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1beta2DeviceTaintRule | V1Status delete_device_taint_rule(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a DeviceTaintRule
 
@@ -1198,7 +1198,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1beta2DeviceTaintRule**](V1beta2DeviceTaintRule.md)
+[**V1beta2DeviceTaintRule**](V1beta2DeviceTaintRule.md) or [**V1Status**](V1Status.md)
 
 ### Authorization
 
@@ -1220,7 +1220,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_resource_claim**
-> V1beta2ResourceClaim delete_namespaced_resource_claim(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1beta2ResourceClaim | V1Status delete_namespaced_resource_claim(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a ResourceClaim
 
@@ -1293,7 +1293,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1beta2ResourceClaim**](V1beta2ResourceClaim.md)
+[**V1beta2ResourceClaim**](V1beta2ResourceClaim.md) or [**V1Status**](V1Status.md)
 
 ### Authorization
 
@@ -1315,7 +1315,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_namespaced_resource_claim_template**
-> V1beta2ResourceClaimTemplate delete_namespaced_resource_claim_template(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1beta2ResourceClaimTemplate | V1Status delete_namespaced_resource_claim_template(name, namespace, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a ResourceClaimTemplate
 
@@ -1388,7 +1388,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1beta2ResourceClaimTemplate**](V1beta2ResourceClaimTemplate.md)
+[**V1beta2ResourceClaimTemplate**](V1beta2ResourceClaimTemplate.md) or [**V1Status**](V1Status.md)
 
 ### Authorization
 
@@ -1410,7 +1410,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **delete_resource_slice**
-> V1beta2ResourceSlice delete_resource_slice(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
+> V1beta2ResourceSlice | V1Status delete_resource_slice(name, pretty=pretty, dry_run=dry_run, grace_period_seconds=grace_period_seconds, ignore_store_read_error_with_cluster_breaking_potential=ignore_store_read_error_with_cluster_breaking_potential, orphan_dependents=orphan_dependents, propagation_policy=propagation_policy, body=body)
 
 delete a ResourceSlice
 
@@ -1481,7 +1481,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**V1beta2ResourceSlice**](V1beta2ResourceSlice.md)
+[**V1beta2ResourceSlice**](V1beta2ResourceSlice.md) or [**V1Status**](V1Status.md)
 
 ### Authorization
 

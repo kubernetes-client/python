@@ -5314,7 +5314,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1CSIDriver:
+    ) -> V1CSIDriver | V1Status:
         """delete_csi_driver
 
         delete a CSIDriver
@@ -5373,8 +5373,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1CSIDriver",
-            '202': "V1CSIDriver",
+            '200': "V1CSIDriver | V1Status",
+            '202': "V1CSIDriver | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5411,7 +5411,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1CSIDriver]:
+    ) -> ApiResponse[V1CSIDriver | V1Status]:
         """delete_csi_driver
 
         delete a CSIDriver
@@ -5470,8 +5470,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1CSIDriver",
-            '202': "V1CSIDriver",
+            '200': "V1CSIDriver | V1Status",
+            '202': "V1CSIDriver | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5702,7 +5702,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1CSINode:
+    ) -> V1CSINode | V1Status:
         """delete_csi_node
 
         delete a CSINode
@@ -5761,8 +5761,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1CSINode",
-            '202': "V1CSINode",
+            '200': "V1CSINode | V1Status",
+            '202': "V1CSINode | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5799,7 +5799,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1CSINode]:
+    ) -> ApiResponse[V1CSINode | V1Status]:
         """delete_csi_node
 
         delete a CSINode
@@ -5858,8 +5858,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1CSINode",
-            '202': "V1CSINode",
+            '200': "V1CSINode | V1Status",
+            '202': "V1CSINode | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6091,7 +6091,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1CSIStorageCapacity | V1Status:
         """delete_namespaced_csi_storage_capacity
 
         delete a CSIStorageCapacity
@@ -6153,8 +6153,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1CSIStorageCapacity | V1Status",
+            '202': "V1CSIStorageCapacity | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6192,7 +6192,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[V1CSIStorageCapacity | V1Status]:
         """delete_namespaced_csi_storage_capacity
 
         delete a CSIStorageCapacity
@@ -6254,8 +6254,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1CSIStorageCapacity | V1Status",
+            '202': "V1CSIStorageCapacity | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6493,7 +6493,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1StorageClass:
+    ) -> V1StorageClass | V1Status:
         """delete_storage_class
 
         delete a StorageClass
@@ -6552,8 +6552,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1StorageClass",
-            '202': "V1StorageClass",
+            '200': "V1StorageClass | V1Status",
+            '202': "V1StorageClass | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6590,7 +6590,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1StorageClass]:
+    ) -> ApiResponse[V1StorageClass | V1Status]:
         """delete_storage_class
 
         delete a StorageClass
@@ -6649,8 +6649,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1StorageClass",
-            '202': "V1StorageClass",
+            '200': "V1StorageClass | V1Status",
+            '202': "V1StorageClass | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6881,7 +6881,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1VolumeAttachment:
+    ) -> V1VolumeAttachment | V1Status:
         """delete_volume_attachment
 
         delete a VolumeAttachment
@@ -6940,8 +6940,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1VolumeAttachment",
-            '202': "V1VolumeAttachment",
+            '200': "V1VolumeAttachment | V1Status",
+            '202': "V1VolumeAttachment | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6978,7 +6978,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1VolumeAttachment]:
+    ) -> ApiResponse[V1VolumeAttachment | V1Status]:
         """delete_volume_attachment
 
         delete a VolumeAttachment
@@ -7037,8 +7037,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1VolumeAttachment",
-            '202': "V1VolumeAttachment",
+            '200': "V1VolumeAttachment | V1Status",
+            '202': "V1VolumeAttachment | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -7269,7 +7269,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1VolumeAttributesClass:
+    ) -> V1VolumeAttributesClass | V1Status:
         """delete_volume_attributes_class
 
         delete a VolumeAttributesClass
@@ -7328,8 +7328,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1VolumeAttributesClass",
-            '202': "V1VolumeAttributesClass",
+            '200': "V1VolumeAttributesClass | V1Status",
+            '202': "V1VolumeAttributesClass | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -7366,7 +7366,7 @@ class StorageV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[V1VolumeAttributesClass]:
+    ) -> ApiResponse[V1VolumeAttributesClass | V1Status]:
         """delete_volume_attributes_class
 
         delete a VolumeAttributesClass
@@ -7425,8 +7425,8 @@ class StorageV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1VolumeAttributesClass",
-            '202': "V1VolumeAttributesClass",
+            '200': "V1VolumeAttributesClass | V1Status",
+            '202': "V1VolumeAttributesClass | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(

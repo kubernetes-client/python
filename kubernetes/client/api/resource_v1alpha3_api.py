@@ -1492,7 +1492,7 @@ class ResourceV1alpha3Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1alpha3DeviceTaintRule:
+    ) -> V1alpha3DeviceTaintRule | V1Status:
         """delete_device_taint_rule
 
         delete a DeviceTaintRule
@@ -1560,8 +1560,8 @@ class ResourceV1alpha3Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1alpha3DeviceTaintRule",
-            '202': "V1alpha3DeviceTaintRule",
+            '200': "V1alpha3DeviceTaintRule | V1Status",
+            '202': "V1alpha3DeviceTaintRule | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -1600,7 +1600,7 @@ class ResourceV1alpha3Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[V1alpha3DeviceTaintRule, int, Any]:
+    ) -> Tuple[V1alpha3DeviceTaintRule | V1Status, int, Any]:
         """delete_device_taint_rule
 
         delete a DeviceTaintRule
@@ -1668,8 +1668,8 @@ class ResourceV1alpha3Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1alpha3DeviceTaintRule",
-            '202': "V1alpha3DeviceTaintRule",
+            '200': "V1alpha3DeviceTaintRule | V1Status",
+            '202': "V1alpha3DeviceTaintRule | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -1808,7 +1808,7 @@ class ResourceV1alpha3Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> V1alpha3ResourcePoolStatusRequest:
+    ) -> V1alpha3ResourcePoolStatusRequest | V1Status:
         """delete_resource_pool_status_request
 
         delete a ResourcePoolStatusRequest
@@ -1876,8 +1876,8 @@ class ResourceV1alpha3Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1alpha3ResourcePoolStatusRequest",
-            '202': "V1alpha3ResourcePoolStatusRequest",
+            '200': "V1alpha3ResourcePoolStatusRequest | V1Status",
+            '202': "V1alpha3ResourcePoolStatusRequest | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
@@ -1916,7 +1916,7 @@ class ResourceV1alpha3Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> Tuple[V1alpha3ResourcePoolStatusRequest, int, Any]:
+    ) -> Tuple[V1alpha3ResourcePoolStatusRequest | V1Status, int, Any]:
         """delete_resource_pool_status_request
 
         delete a ResourcePoolStatusRequest
@@ -1984,8 +1984,8 @@ class ResourceV1alpha3Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "V1alpha3ResourcePoolStatusRequest",
-            '202': "V1alpha3ResourcePoolStatusRequest",
+            '200': "V1alpha3ResourcePoolStatusRequest | V1Status",
+            '202': "V1alpha3ResourcePoolStatusRequest | V1Status",
             '401': None,
         }
         return self.api_client._call_with_legacy_options(
