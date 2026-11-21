@@ -184,7 +184,11 @@ def _parse_go_duration(value: Any) -> Any:
         return value
     if not reGoDuration.fullmatch(value):
         raise ValueError("Invalid duration format: {}".format(value))
-    return durationpy.from_str(value)
+    try:
+        return durationpy.from_str(value)
+    except OverflowError:
+        # older durationpy lets this escape, pydantic only catches ValueError
+        raise ValueError("Duration out of range: {}".format(value))
 
 
 def _check_go_duration_range(value: datetime.timedelta) -> datetime.timedelta:

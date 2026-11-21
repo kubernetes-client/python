@@ -75,7 +75,7 @@ class DurationTest(unittest.TestCase):
 
     def test_rejects_invalid_durations(self):
         for value in ["abc", "1", "1x", "", "1d", "1h 2m", "1h-2m", "2562048h",
-                      "\u0661s"]:
+                      "\u0661s", "99999999999h", "1" + "0" * 310 + "h"]:
             with self.subTest(value=value):
                 with self.assertRaises(ValidationError):
                     Spec(ttl=value)
