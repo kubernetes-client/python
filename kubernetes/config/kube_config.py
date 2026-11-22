@@ -339,12 +339,8 @@ class KubeConfigLoader:
         if self._config_persister:
             self._config_persister()
 
-    def _load_oid_token(self, provider):
-        if 'config' not in provider:
-            return
-
+    def _decode_jwt_token(self, token):
         reserved_characters = frozenset(["=", "+", "/"])
-        token = provider['config']['id-token']
 
         if any(char in token for char in reserved_characters):
             # Invalid jwt, as it contains url-unsafe chars
@@ -361,9 +357,17 @@ class KubeConfigLoader:
             # https://tools.ietf.org/html/rfc7515#appendix-C
             return
 
-        jwt_attributes = json.loads(
+        return json.loads(
             base64.urlsafe_b64decode(parts[1] + padding).decode('utf-8')
         )
+
+    def _load_oid_token(self, provider):
+        if 'config' not in provider:
+            return
+
+        jwt_attributes = self._decode_jwt_token(provider['config']['id-token'])
+        if jwt_attributes is None:
+            return
 
         expire = jwt_attributes.get('exp')
 
@@ -374,6 +378,15 @@ class KubeConfigLoader:
 
             if self._config_persister:
                 self._config_persister()
+
+            jwt_attributes = self._decode_jwt_token(
+                provider['config']['id-token']) or {}
+            expire = jwt_attributes.get('exp')
+
+        if expire is not None:
+            self.expiry = datetime.datetime.fromtimestamp(expire, tz=UTC)
+        else:
+            self.__dict__.pop('expiry', None)
 
         self.token = "Bearer %s" % provider['config']['id-token']
 

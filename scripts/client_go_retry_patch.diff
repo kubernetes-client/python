@@ -83,7 +83,7 @@ diff --git a/kubernetes/client/rest.py b/kubernetes/client/rest.py
          try:
              # For `POST`, `PUT`, `PATCH`, `OPTIONS`, `DELETE`
              if method in ['POST', 'PUT', 'PATCH', 'OPTIONS', 'DELETE']:
-@@ -331,16 +365,67 @@
+@@ -348,16 +382,67 @@
                      raise ApiException(status=0, reason=msg)
              # For `GET`, `HEAD`
              else:

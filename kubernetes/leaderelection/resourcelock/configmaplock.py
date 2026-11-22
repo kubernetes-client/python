@@ -38,7 +38,8 @@ class ConfigMapLock:
             'holderIdentity': None,
             'leaseDurationSeconds': None,
             'acquireTime': None,
-            'renewTime': None
+            'renewTime': None,
+            'leaderTransitions': 0
                             }
 
     # get returns the election record from a ConfigMap Annotation
@@ -130,6 +131,8 @@ class ConfigMapLock:
             leader_election_record.acquire_time = lock_record['acquireTime']
         if lock_record.get('renewTime'):
             leader_election_record.renew_time = lock_record['renewTime']
+        if lock_record.get('leaderTransitions'):
+            leader_election_record.leader_transitions = lock_record['leaderTransitions']
 
         return leader_election_record
 
@@ -138,5 +141,6 @@ class ConfigMapLock:
         self.lock_record['leaseDurationSeconds'] = leader_election_record.lease_duration
         self.lock_record['acquireTime'] = leader_election_record.acquire_time
         self.lock_record['renewTime'] = leader_election_record.renew_time
+        self.lock_record['leaderTransitions'] = leader_election_record.leader_transitions
         
         return self.lock_record

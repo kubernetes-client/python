@@ -15,6 +15,8 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
+import certifi
+
 from . import ws_client as ws_client_module
 from .ws_client import get_websocket_url, WSClient, V5_CHANNEL_PROTOCOL, V4_CHANNEL_PROTOCOL, CLOSE_CHANNEL, STDIN_CHANNEL, STDOUT_CHANNEL
 from .ws_client import websocket_proxycare
@@ -739,6 +741,66 @@ def test_websocket_call_honors_env(dummy_proxy, monkeypatch):
     assert opts.get('http_proxy_port') == 8888
     # Optionally verify no_proxy parsing
     assert opts.get('http_no_proxy') is None
+
+
+TEST_CA_PEM = """-----BEGIN CERTIFICATE-----
+MIIBkDCCATWgAwIBAgIUBhjtqf+Sq0WeQ4JEcMTaXGZmd1swCgYIKoZIzj0EAwIw
+HDEaMBgGA1UEAwwRd3MtY2xpZW50LXRlc3QtY2EwIBcNMjYxMTE4MDIyNzAwWhgP
+MjEyNjEwMjUwMjI3MDBaMBwxGjAYBgNVBAMMEXdzLWNsaWVudC10ZXN0LWNhMFkw
+EwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEiTDv6Yk7OqV4dT7KlOEHhG0fmiwdgG1E
+IDATkDILQy0je0GkQBmJ2AUwKWEEHlNKypdkKN08/ApfQ7xIN5L3QKNTMFEwHQYD
+VR0OBBYEFHMnE6d3WtsviVtqctHfpvDNUYkGMB8GA1UdIwQYMBaAFHMnE6d3Wtsv
+iVtqctHfpvDNUYkGMA8GA1UdEwEB/wQFMAMBAf8wCgYIKoZIzj0EAwIDSQAwRgIh
+ANGLLfyfwq5CYkujsECHs0wOpIYNV40HVlNhxIPAO6rgAiEA9BQQFDAoqm2SmjvK
+TtGlcOfZux0zojBk7MLlXSZpN6g=
+-----END CERTIFICATE-----
+"""
+
+
+class CreateWebsocketCaCertDataTest(unittest.TestCase):
+
+    def _sslopt(self, configuration, url="wss://example.com"):
+        with patch.object(ws_client_module, 'WebSocket', autospec=True) as mock_ws_cls:
+            ws_client_module.create_websocket(configuration, url)
+        return mock_ws_cls.call_args[1]['sslopt']
+
+    def test_ca_cert_data_is_trusted(self):
+        configuration = Configuration()
+        configuration.ca_cert_data = TEST_CA_PEM
+        context = self._sslopt(configuration)['context']
+        self.assertEqual(context.verify_mode, ssl.CERT_REQUIRED)
+        self.assertTrue(context.check_hostname)
+        subjects = [c['subject'] for c in context.get_ca_certs()]
+        self.assertEqual(subjects, [((('commonName', 'ws-client-test-ca'),),)])
+
+    def test_ca_cert_data_respects_assert_hostname(self):
+        configuration = Configuration()
+        configuration.ca_cert_data = TEST_CA_PEM
+        configuration.assert_hostname = False
+        context = self._sslopt(configuration)['context']
+        self.assertFalse(context.check_hostname)
+        self.assertEqual(context.verify_mode, ssl.CERT_REQUIRED)
+
+    def test_ca_cert_data_with_ssl_ca_cert_trusts_both(self):
+        configuration = Configuration()
+        configuration.ca_cert_data = TEST_CA_PEM
+        configuration.ssl_ca_cert = certifi.where()
+        context = self._sslopt(configuration)['context']
+        self.assertGreater(len(context.get_ca_certs()), 1)
+
+    def test_no_context_without_ca_cert_data(self):
+        sslopt = self._sslopt(Configuration())
+        self.assertNotIn('context', sslopt)
+        self.assertEqual(sslopt['cert_reqs'], ssl.CERT_REQUIRED)
+
+    def test_no_context_when_verify_ssl_is_off(self):
+        configuration = Configuration()
+        configuration.ca_cert_data = TEST_CA_PEM
+        configuration.verify_ssl = False
+        sslopt = self._sslopt(configuration)
+        self.assertNotIn('context', sslopt)
+        self.assertEqual(sslopt['cert_reqs'], ssl.CERT_NONE)
+
 
 if __name__ == '__main__':
     unittest.main()

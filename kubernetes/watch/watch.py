@@ -219,6 +219,12 @@ class Watch:
             resp = func(*args, **kwargs)
             self._resp = resp
             try:
+                # stop() may have been called while the request was in
+                # flight. Keep this check after storing self._resp: stop()
+                # sets _stop before reading _resp, so either this check sees
+                # the flag or stop() sees the response and shuts it down.
+                if self._stop:
+                    break
                 status = getattr(resp, 'status', None)
                 if isinstance(status, int) and not 200 <= status <= 299:
                     self._api_client.response_deserialize(resp, {})
@@ -230,10 +236,24 @@ class Watch:
                             event = self.unmarshal_event(line, return_type)
                         else:
                             # Only do basic JSON parsing, no deserialize
-                            event = json.loads(line)
+                            # Blank lines are not events.
+                            event = json.loads(line) \
+                                if line and not line.isspace() else None
+                            # Track the resource version from the raw dict
+                            # so that a reconnect resumes from the last event.
+                            raw = event.get('object') \
+                                if isinstance(event, dict) else None
+                            metadata = raw.get('metadata') \
+                                if isinstance(raw, dict) else None
+                            rv = metadata.get('resourceVersion') \
+                                if isinstance(metadata, dict) else None
+                            if rv and event.get('type') != 'ERROR':
+                                self.resource_version = rv
                         if isinstance(event, dict) \
                                 and event['type'] == 'ERROR':
-                            obj = event['raw_object']
+                            # 'object' of an ERROR event is never
+                            # deserialized, so it is the raw Status dict.
+                            obj = event['object']
                             # Current request expired, let's retry, (if enabled)
                             # but only if we have not already retried.
                             if not disable_retries and not retry_after_410 and \
@@ -245,7 +265,9 @@ class Watch:
                                     obj['reason'], obj['message'])
                                 raise client.rest.ApiException(
                                     status=obj['code'], reason=reason)
-                        else:
+                        elif event is not None:
+                            # unmarshal_event returns None for blank or
+                            # undecodable lines; skip them.
                             retry_after_410 = False
                             yield event
                     else:

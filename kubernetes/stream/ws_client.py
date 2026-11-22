@@ -547,6 +547,18 @@ def get_websocket_url(url, query_params=None):
             parts[4] = urlencode(query)
     return urlunparse(parts)
 
+def _ssl_context_with_ca_data(configuration):
+    context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+    if configuration.assert_hostname is not None:
+        context.check_hostname = bool(configuration.assert_hostname)
+    context.verify_mode = ssl.CERT_REQUIRED
+    context.load_verify_locations(cafile=configuration.ssl_ca_cert,
+                                  cadata=configuration.ca_cert_data)
+    # websocket-client ignores certfile and keyfile when a context is given
+    if configuration.cert_file:
+        context.load_cert_chain(configuration.cert_file,
+                                configuration.key_file)
+    return context
 
 def create_websocket(configuration, url, headers=None, _request_timeout=None):
     enableTrace(False)
@@ -569,6 +581,10 @@ def create_websocket(configuration, url, headers=None, _request_timeout=None):
         }
         if configuration.assert_hostname is not None:
             ssl_opts['check_hostname'] = configuration.assert_hostname
+        if configuration.ca_cert_data:
+            # websocket-client has no option for CA data, so trust it through
+            # an SSL context, the same way the REST client does.
+            ssl_opts['context'] = _ssl_context_with_ca_data(configuration)
     else:
         ssl_opts = {'cert_reqs': ssl.CERT_NONE}
 
