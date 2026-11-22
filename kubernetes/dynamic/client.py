@@ -158,7 +158,12 @@ class DynamicClient:
 
         return self.request('patch', path, body=body, force_conflicts=force_conflicts, **kwargs)
 
-    def watch(self, resource, namespace=None, name=None, label_selector=None, field_selector=None, resource_version=None, timeout=None, watcher=None, allow_watch_bookmarks=None, send_initial_events=None, resource_version_match=None):
+    def watch(
+        self, resource, namespace=None, name=None, label_selector=None,
+        field_selector=None, resource_version=None, timeout=None, watcher=None,
+        allow_watch_bookmarks=None, send_initial_events=None,
+        resource_version_match=None, _request_timeout=None
+    ):
         """
         Stream events for a resource from the Kubernetes API
 
@@ -169,7 +174,10 @@ class DynamicClient:
         :param field_selector: The field selector with which to filter results
         :param resource_version: The version with which to filter results. Only events with
                                  a resource_version greater than this value will be returned
-        :param timeout: The amount of time in seconds to wait before terminating the stream
+        :param timeout: The server-side amount of time in seconds to wait before terminating
+                        the stream
+        :param _request_timeout: The client-side request timeout in seconds, or a
+                                 (connect, read) timeout tuple
         :param watcher: The Watcher object that will be used to stream the resource
         :param allow_watch_bookmarks: Ask the API server to send BOOKMARK events
         :param send_initial_events: Ask the API server to begin the stream with synthetic events
@@ -199,6 +207,10 @@ class DynamicClient:
         if name:
             field_selector = f"metadata.name={name}"
 
+        request_timeout_kwargs = {}
+        if _request_timeout is not None:
+            request_timeout_kwargs['_request_timeout'] = _request_timeout
+
         for event in watcher.stream(
             resource.get,
             namespace=namespace,
@@ -210,6 +222,7 @@ class DynamicClient:
             allow_watch_bookmarks=allow_watch_bookmarks,
             send_initial_events=send_initial_events,
             resource_version_match=resource_version_match,
+            **request_timeout_kwargs,
         ):
             event['object'] = ResourceInstance(resource, event['object'])
             yield event
