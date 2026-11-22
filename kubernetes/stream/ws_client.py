@@ -602,17 +602,21 @@ def create_websocket(configuration, url, headers=None, _request_timeout=None):
          'header': header
     }
 
+    read_timeout = None
     if _request_timeout:
         if isinstance(_request_timeout, (int, float)):
             connect_opt['timeout'] = _request_timeout
+            read_timeout = _request_timeout
         elif isinstance(_request_timeout, tuple) and len(_request_timeout) == 2:
             if _request_timeout[0] is not None:
                 connect_opt['timeout'] = _request_timeout[0]
+            read_timeout = _request_timeout[1]
 
     if configuration.proxy or configuration.proxy_headers:
         connect_opt = websocket_proxycare(connect_opt, configuration, url, headers)
 
     websocket.connect(url, **connect_opt)
+    websocket.settimeout(read_timeout)
     return websocket
 
 def websocket_proxycare(connect_opt, configuration, url, headers):
