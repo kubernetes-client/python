@@ -547,6 +547,7 @@ def get_websocket_url(url, query_params=None):
             parts[4] = urlencode(query)
     return urlunparse(parts)
 
+
 def _ssl_context_with_ca_data(configuration):
     context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
     if configuration.assert_hostname is not None:
@@ -559,6 +560,7 @@ def _ssl_context_with_ca_data(configuration):
         context.load_cert_chain(configuration.cert_file,
                                 configuration.key_file)
     return context
+
 
 def create_websocket(configuration, url, headers=None, _request_timeout=None):
     enableTrace(False)
