@@ -20,6 +20,7 @@ import json
 import os
 from pprint import pprint
 import shutil
+import ssl
 import tempfile
 import unittest
 from collections import namedtuple
@@ -37,6 +38,7 @@ from .kube_config import (ENV_KUBECONFIG_PATH_SEPARATOR, CommandTokenSource,
                           _create_temp_file_with_content,
                           _get_kube_config_loader,
                           _get_kube_config_loader_for_yaml_file,
+                          _partial_chain_context, _PartialChainAdapter,
                           list_kube_config_contexts, load_kube_config,
                           load_kube_config_from_dict, new_client_from_config, new_client_from_config_dict)
 
@@ -1161,6 +1163,44 @@ class TestKubeConfigLoader(BaseTestCase):
         )
         self.assertTrue(loader._load_auth_provider_token())
         self.assertEqual("Bearer abc123", loader.token)
+
+    @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token',
+                autospec=True)
+    @mock.patch('kubernetes.config.kube_config.ApiClient')
+    def test_oidc_refresh_partial_chain(
+            self, mock_ApiClient, mock_refresh_token):
+        mock_response = mock.MagicMock()
+        mock_response.status = 200
+        mock_response.data = json.dumps({
+            "token_endpoint": "https://example.org/identity/token"
+        })
+        mock_ApiClient.return_value.call_api.return_value = mock_response
+        mock_refresh_token.return_value = {"id_token": "abc123",
+                                           "refresh_token": "newtoken123"}
+
+        for context, partial_chain in [
+                ("expired_oidc", True),
+                ("expired_oidc_with_idp_ca_file", True),
+                ("expired_oidc_nocert", False)]:
+            with self.subTest(context=context):
+                loader = KubeConfigLoader(
+                    config_dict=copy.deepcopy(self.TEST_KUBE_CONFIG),
+                    active_context=context,
+                )
+                self.assertTrue(loader._load_auth_provider_token())
+
+                config = mock_ApiClient.call_args.kwargs['configuration']
+                self.assertEqual(partial_chain, config.ssl_partial_chain)
+                session = mock_refresh_token.call_args.args[0]
+                adapter = session.get_adapter("https://example.org")
+                self.assertEqual(partial_chain,
+                                 isinstance(adapter, _PartialChainAdapter))
+
+    def test_partial_chain_context(self):
+        ssl_context = _partial_chain_context()
+        self.assertTrue(
+            ssl_context.verify_flags & ssl.VERIFY_X509_PARTIAL_CHAIN)
+        self.assertEqual(ssl.CERT_REQUIRED, ssl_context.verify_mode)
 
     def test_oidc_fails_if_contains_reserved_chars(self):
         loader = KubeConfigLoader(

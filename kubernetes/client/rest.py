@@ -21,6 +21,7 @@ from urllib.parse import urlparse
 
 import urllib3
 from urllib3.util.retry import Retry
+from urllib3.util.ssl_ import create_urllib3_context
 
 from kubernetes.utils.retry import (
     is_retry_after_response,
@@ -163,6 +164,12 @@ class RESTClientObject:
             pool_args['socket_options'] = configuration.socket_options
         elif getattr(configuration, 'keep_alive', False):
             pool_args['socket_options'] = tcp_keepalive_socket_options()
+
+        if getattr(configuration, 'ssl_partial_chain', False) and (
+                configuration.ssl_ca_cert or configuration.ca_cert_data):
+            ssl_context = create_urllib3_context(cert_reqs=cert_reqs)
+            ssl_context.verify_flags |= ssl.VERIFY_X509_PARTIAL_CHAIN
+            pool_args['ssl_context'] = ssl_context
 
         if configuration.connection_pool_maxsize is not None:
             pool_args['maxsize'] = configuration.connection_pool_maxsize

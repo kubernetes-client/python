@@ -20,6 +20,7 @@ import json
 import logging
 import os
 import platform
+import ssl
 import subprocess
 import tempfile
 from collections import namedtuple
@@ -27,7 +28,9 @@ from collections import namedtuple
 import oauthlib.oauth2
 import urllib3
 import yaml
+from requests.adapters import HTTPAdapter
 from requests_oauthlib import OAuth2Session
+from urllib3.util.ssl_ import create_urllib3_context
 
 from kubernetes.client import ApiClient, Configuration
 from kubernetes.config.exec_provider import ExecProvider
@@ -48,6 +51,24 @@ EXPIRY_SKEW_PREVENTION_DELAY = datetime.timedelta(minutes=5)
 KUBE_CONFIG_DEFAULT_LOCATION = os.environ.get('KUBECONFIG', '~/.kube/config')
 ENV_KUBECONFIG_PATH_SEPARATOR = ';' if platform.system() == 'Windows' else ':'
 _temp_files = {}
+
+
+class _PartialChainAdapter(HTTPAdapter):
+    # lets the IdP CA be a leaf or intermediate, like kubectl
+
+    def init_poolmanager(self, *args, **kwargs):
+        kwargs['ssl_context'] = _partial_chain_context()
+        super().init_poolmanager(*args, **kwargs)
+
+    def proxy_manager_for(self, proxy, **proxy_kwargs):
+        proxy_kwargs['ssl_context'] = _partial_chain_context()
+        return super().proxy_manager_for(proxy, **proxy_kwargs)
+
+
+def _partial_chain_context():
+    ssl_context = create_urllib3_context()
+    ssl_context.verify_flags |= ssl.VERIFY_X509_PARTIAL_CHAIN
+    return ssl_context
 
 
 def _cleanup_temp_files():
@@ -411,6 +432,7 @@ class KubeConfigLoader:
         else:
             config.verify_ssl = False
 
+        config.ssl_partial_chain = config.verify_ssl
         client = ApiClient(configuration=config)
 
         response = client.call_api(
@@ -434,6 +456,8 @@ class KubeConfigLoader:
             },
             auto_refresh_url=response['token_endpoint']
         )
+        if config.verify_ssl:
+            request.mount('https://', _PartialChainAdapter())
 
         try:
             refresh = request.refresh_token(

@@ -28,6 +28,7 @@ other hand-written REST tests (``keepalive_test.py``, ``retry_test.py``) so
 
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
+import ssl
 import threading
 import unittest
 from unittest import mock
@@ -309,3 +310,33 @@ class BatchJobContentTypeTest(unittest.TestCase):
 
         request = self.server.requests[-1]
         self.assertEqual(['application/json'], request['content_types'])
+
+
+class RESTClientObjectPartialChainTest(unittest.TestCase):
+
+    def pool_ssl_context(self, configuration):
+        rest_client = RESTClientObject(configuration)
+        return rest_client.pool_manager.connection_pool_kw.get('ssl_context')
+
+    def test_off_by_default(self):
+        configuration = Configuration()
+        configuration.ssl_ca_cert = 'ca.pem'
+
+        self.assertFalse(configuration.ssl_partial_chain)
+        self.assertIsNone(self.pool_ssl_context(configuration))
+
+    def test_enabled(self):
+        configuration = Configuration()
+        configuration.ssl_ca_cert = 'ca.pem'
+        configuration.ssl_partial_chain = True
+
+        ssl_context = self.pool_ssl_context(configuration)
+        self.assertTrue(
+            ssl_context.verify_flags & ssl.VERIFY_X509_PARTIAL_CHAIN)
+        self.assertEqual(ssl.CERT_REQUIRED, ssl_context.verify_mode)
+
+    def test_ignored_without_ca(self):
+        configuration = Configuration()
+        configuration.ssl_partial_chain = True
+
+        self.assertIsNone(self.pool_ssl_context(configuration))
