@@ -297,6 +297,125 @@ class WSClientProtocolTest(unittest.TestCase):
             expected_header = f"sec-websocket-protocol: {V5_CHANNEL_PROTOCOL},{V4_CHANNEL_PROTOCOL}"
             self.assertIn(expected_header, kwargs['header'])
 
+    def test_create_websocket_tuple_timeout(self):
+        """Verify _request_timeout tuple sets connect timeout and
+        resets socket timeout to read timeout."""
+        with patch.object(
+            ws_client_module, 'WebSocket', autospec=True
+        ) as mock_ws_cls:
+            mock_ws = mock_ws_cls.return_value
+            ws_client_module.create_websocket(
+                self.config_mock, "ws://test", headers=None,
+                _request_timeout=(5, 10))
+            mock_ws.connect.assert_called_once()
+            kwargs = mock_ws.connect.call_args[1]
+            self.assertEqual(kwargs.get('timeout'), 5)
+            mock_ws.settimeout.assert_called_once_with(10)
+
+    def test_create_websocket_tuple_timeout_none_read(self):
+        """Verify (connect, None) tuple resets socket timeout to None
+        post-handshake."""
+        with patch.object(
+            ws_client_module, 'WebSocket', autospec=True
+        ) as mock_ws_cls:
+            mock_ws = mock_ws_cls.return_value
+            ws_client_module.create_websocket(
+                self.config_mock, "ws://test", headers=None,
+                _request_timeout=(5, None))
+            mock_ws.connect.assert_called_once()
+            kwargs = mock_ws.connect.call_args[1]
+            self.assertEqual(kwargs.get('timeout'), 5)
+            mock_ws.settimeout.assert_called_once_with(None)
+
+    def test_create_websocket_scalar_timeout(self):
+        """Verify scalar _request_timeout sets connect timeout and resets
+        socket timeout."""
+        with patch.object(
+            ws_client_module, 'WebSocket', autospec=True
+        ) as mock_ws_cls:
+            mock_ws = mock_ws_cls.return_value
+            ws_client_module.create_websocket(
+                self.config_mock, "ws://test", headers=None,
+                _request_timeout=15)
+            mock_ws.connect.assert_called_once()
+            kwargs = mock_ws.connect.call_args[1]
+            self.assertEqual(kwargs.get('timeout'), 15)
+            mock_ws.settimeout.assert_called_once_with(15)
+
+    def test_create_websocket_no_timeout(self):
+        """Verify omitting _request_timeout does not call settimeout."""
+        with patch.object(
+            ws_client_module, 'WebSocket', autospec=True
+        ) as mock_ws_cls:
+            mock_ws = mock_ws_cls.return_value
+            ws_client_module.create_websocket(
+                self.config_mock, "ws://test", headers=None)
+            mock_ws.connect.assert_called_once()
+            kwargs = mock_ws.connect.call_args[1]
+            self.assertNotIn('timeout', kwargs)
+            mock_ws.settimeout.assert_not_called()
+
+    def test_run_forever_tuple_timeout(self):
+        """Verify run_forever unrolls (connect, read) tuple and uses read
+        timeout."""
+        with patch.object(ws_client_module, 'create_websocket'):
+            client = ws_client_module.WSClient(
+                self.config_mock, "ws://test", headers=None,
+                capture_all=True)
+            with patch.object(client, 'is_open', side_effect=[True, False]), \
+                 patch.object(client, 'update') as mock_update:
+                client.run_forever(timeout=(1, 10))
+                mock_update.assert_called_once()
+                called_timeout = mock_update.call_args[1]['timeout']
+                self.assertIsInstance(called_timeout, float)
+                self.assertTrue(5 < called_timeout <= 10)
+
+    def test_run_forever_tuple_timeout_none_read(self):
+        """Verify run_forever handles (connect, None) tuple timeout"""
+        with patch.object(ws_client_module, 'create_websocket'):
+            client = ws_client_module.WSClient(
+                self.config_mock, "ws://test", headers=None,
+                capture_all=True)
+            with patch.object(client, 'is_open', side_effect=[True, False]), \
+                 patch.object(client, 'update') as mock_update:
+                client.run_forever(timeout=(5, None))
+                mock_update.assert_called_once_with(timeout=None)
+
+    def test_websocket_call_passes_tuple_request_timeout(self):
+        """Verify websocket_call forwards tuple _request_timeout"""
+        with patch.object(ws_client_module, 'WSClient') as mock_client_cls:
+            mock_client = mock_client_cls.return_value
+            mock_client.read_all.return_value = ['output']
+            ws_client_module.websocket_call(
+                self.config_mock, 'GET', 'http://test/exec',
+                _request_timeout=(5, 10))
+            mock_client_cls.assert_called_once()
+            self.assertEqual(
+                mock_client_cls.call_args[1].get('_request_timeout'), (5, 10))
+            mock_client.run_forever.assert_called_once_with(timeout=(5, 10))
+
+    def test_portforward_call_passes_request_timeout(self):
+        """Verify portforward_call forwards _request_timeout"""
+        with patch.object(ws_client_module, 'create_websocket') as mock_c, \
+             patch.object(ws_client_module, 'PortForward') as mock_pf:
+            mock_ws = mock_c.return_value
+            mock_pf.return_value = 'mock_portforward'
+            res = ws_client_module.portforward_call(
+                self.config_mock,
+                'GET',
+                'http://test/portforward',
+                query_params=[('ports', '8080')],
+                _request_timeout=(5, 10),
+            )
+            self.assertEqual(res, 'mock_portforward')
+            mock_c.assert_called_once_with(
+                self.config_mock,
+                'ws://test/portforward?ports=8080',
+                None,
+                _request_timeout=(5, 10),
+            )
+            mock_pf.assert_called_once_with(mock_ws, [8080])
+
     def test_close_channel_v5(self):
         """Verify close_channel sends correct frame when v5 is negotiated"""
         with patch.object(ws_client_module, 'create_websocket') as mock_create:
