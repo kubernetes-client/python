@@ -21,6 +21,7 @@ from kubernetes.client import ApiClient, Configuration
 
 from .client import DynamicClient
 from .exceptions import NotFoundError
+from .resource import Resource
 
 
 class DynamicClientTest(unittest.TestCase):
@@ -234,6 +235,42 @@ class DynamicClientTest(unittest.TestCase):
 
         self.assertEqual(True, watcher.kwargs['send_initial_events'])
         self.assertEqual('NotOlderThan', watcher.kwargs['resource_version_match'])
+
+    def test_resource_watch_forwards_request_timeout(self):
+        class FakeWatcher:
+            def __init__(self):
+                self.kwargs = None
+
+            def stream(self, func, **kwargs):
+                self.kwargs = kwargs
+                return iter(())
+
+        dynamic = DynamicClient.__new__(DynamicClient)
+        resource = Resource(
+            prefix='apis',
+            api_version='v1',
+            kind='Pod',
+            name='pods',
+            client=dynamic,
+        )
+
+        for request_timeout in (5, (2, 5)):
+            watcher = FakeWatcher()
+            list(resource.watch(
+                watcher=watcher,
+                timeout=30,
+                _request_timeout=request_timeout,
+            ))
+
+            self.assertEqual(
+                request_timeout, watcher.kwargs['_request_timeout'])
+            self.assertEqual(30, watcher.kwargs['timeout_seconds'])
+
+        watcher = FakeWatcher()
+        list(resource.watch(watcher=watcher, timeout=30))
+
+        self.assertNotIn('_request_timeout', watcher.kwargs)
+        self.assertEqual(30, watcher.kwargs['timeout_seconds'])
 
     def test_request_builds_send_initial_events_query_params(self):
         class Handler(BaseHTTPRequestHandler):
