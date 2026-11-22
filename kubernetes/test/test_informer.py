@@ -736,6 +736,48 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
         self.assertIn(pod2, received)
         self.assertEqual(len(received), 2)
 
+    def test_initial_list_handles_dict_response(self):
+        """A dict list response (e.g. CustomObjectsApi) populates the cache and
+        the watch resumes from the list's metadata.resourceVersion."""
+        obj1 = _make_pod("default", "obj1")
+        obj2 = _make_pod("default", "obj2")
+        list_func = MagicMock(return_value={
+            "apiVersion": "example.com/v1",
+            "kind": "FooList",
+            "metadata": {"resourceVersion": "42"},
+            "items": [obj1, obj2],
+        })
+
+        informer = SharedInformer(list_func=list_func, namespace="default")
+        received = {ADDED: [], ERROR: []}
+        for event_type, events in received.items():
+            informer.add_event_handler(event_type, events.append)
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            mock_w = MagicMock()
+            mock_w.resource_version = None
+
+            def fake_stream(func, **kw):
+                informer._stop_event.set()
+                return iter([])
+
+            mock_w.stream.side_effect = fake_stream
+            MockWatch.return_value = mock_w
+
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        self.assertEqual(
+            sorted(informer.cache.list_keys()),
+            ["default/obj1", "default/obj2"],
+        )
+        self.assertEqual(received[ADDED], [obj1, obj2])
+        self.assertEqual(received[ERROR], [])
+        self.assertEqual(list_func.call_count, 1)
+        mock_w.stream.assert_called_once()
+        _, stream_kw = mock_w.stream.call_args
+        self.assertEqual(stream_kw.get("resource_version"), "42")
+
     def test_relist_after_410_fires_delete_for_removed_items(self):
         """After a 410-triggered re-list, items absent from the new list fire DELETED."""
         from kubernetes.client.exceptions import ApiException
