@@ -343,7 +343,7 @@ class WSClientProtocolTest(unittest.TestCase):
             mock_ws.settimeout.assert_called_once_with(15)
 
     def test_create_websocket_no_timeout(self):
-        """Verify omitting _request_timeout resets socket timeout to None."""
+        """Verify omitting _request_timeout does not call settimeout."""
         with patch.object(
             ws_client_module, 'WebSocket', autospec=True
         ) as mock_ws_cls:
@@ -353,7 +353,7 @@ class WSClientProtocolTest(unittest.TestCase):
             mock_ws.connect.assert_called_once()
             kwargs = mock_ws.connect.call_args[1]
             self.assertNotIn('timeout', kwargs)
-            mock_ws.settimeout.assert_called_once_with(None)
+            mock_ws.settimeout.assert_not_called()
 
     def test_run_forever_tuple_timeout(self):
         """Verify run_forever unrolls (connect, read) tuple and uses read

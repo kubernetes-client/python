@@ -616,7 +616,8 @@ def create_websocket(configuration, url, headers=None, _request_timeout=None):
         connect_opt = websocket_proxycare(connect_opt, configuration, url, headers)
 
     websocket.connect(url, **connect_opt)
-    websocket.settimeout(read_timeout)
+    if _request_timeout is not None:
+        websocket.settimeout(read_timeout)
     return websocket
 
 def websocket_proxycare(connect_opt, configuration, url, headers):
