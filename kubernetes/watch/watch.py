@@ -52,7 +52,12 @@ def _find_return_type(func):
     return ""
 
 
-def iter_resp_lines(resp):
+def iter_resp_lines(resp, *, yield_unterminated_line=False):
+    """Yield newline-terminated lines decoded as utf-8 from resp.
+
+    If yield_unterminated_line is True, data left in the buffer without a
+    trailing newline when the stream ends is yielded as a final line.
+    """
     buffer = bytearray()
     for segment in resp.stream(amt=None, decode_content=False):
 
@@ -82,6 +87,9 @@ def iter_resp_lines(resp):
             else:
                 yield ''  # Only print one empty line
             next_newline = buffer.find(b'\n')
+
+    if yield_unterminated_line and buffer:
+        yield buffer.decode("utf-8", errors="replace")
 
 
 class Watch:
@@ -228,7 +236,10 @@ class Watch:
                 status = getattr(resp, 'status', None)
                 if isinstance(status, int) and not 200 <= status <= 299:
                     self._api_client.response_deserialize(resp, {})
-                for line in iter_resp_lines(resp):
+                # A watch event is complete only when terminated by a
+                # newline, but the last log line may not end with one.
+                for line in iter_resp_lines(
+                        resp, yield_unterminated_line=watch_arg == "follow"):
                     # unmarshal when we are receiving events from watch,
                     # return raw string when we are streaming log
                     if watch_arg == "watch":
