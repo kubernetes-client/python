@@ -35,6 +35,20 @@ def _make_pod(namespace, name):
     return {"metadata": {"namespace": namespace, "name": name}}
 
 
+class _RecordingStopEvent(threading.Event):
+    """Stop event whose wait records the timeout and advances *clock*."""
+
+    def __init__(self, clock=None):
+        super().__init__()
+        self.waits = []
+        self._clock = clock or [0.0]
+
+    def wait(self, timeout=None):
+        self.waits.append(timeout)
+        self._clock[0] += timeout or 0
+        return self.is_set()
+
+
 class TestMetaNamespaceKey(unittest.TestCase):
     def test_namespaced_dict(self):
         obj = {"metadata": {"namespace": "ns", "name": "pod"}}
@@ -502,13 +516,10 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
 
         with patch("kubernetes.informer.informer.Watch") as MockWatch, \
                 patch("kubernetes.informer.informer.time") as mock_time:
-            # Sequence of time.monotonic() calls inside _run_loop:
-            #   1. last_resync = time.monotonic()            → 0.0  (watch-loop start)
-            #   2. post-stream: time.monotonic()             → 61.0 (≥60 → resync fires)
-            #   3. last_resync = time.monotonic()            → 61.0 (second watch-loop start)
-            # The stop_event is set during the second stream, so the
-            # post-stream check is short-circuited and no further calls occur.
-            mock_time.monotonic.side_effect = [0.0, 61.0, 61.0]
+            # The clock reads 0s until the first stream starts and 61s after,
+            # so the resync is due (>= 60s) when that stream ends.
+            mock_time.monotonic.side_effect = (
+                lambda: 61.0 if stream_calls["n"] else 0.0)
             mock_time.sleep = time.sleep  # keep real sleep/wait working
 
             mock_w = MagicMock()
@@ -651,6 +662,7 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
 
         error_received = []
         informer = SharedInformer(list_func=list_func)
+        informer._stop_event = _RecordingStopEvent()  # skip the backoff sleep
         informer.add_event_handler(ERROR, error_received.append)
 
         stream_calls = {"n": 0}
@@ -799,6 +811,7 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
 
         deleted = []
         informer = SharedInformer(list_func=list_func)
+        informer._stop_event = _RecordingStopEvent()  # skip the backoff sleep
         informer.add_event_handler(DELETED, deleted.append)
 
         stream_calls = {"n": 0}
@@ -871,6 +884,7 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
         list_func.return_value = list_resp
 
         informer = SharedInformer(list_func=list_func)
+        informer._stop_event = _RecordingStopEvent()  # skip the backoff sleep
 
         stream_calls = {"n": 0}
 
@@ -908,6 +922,7 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
         list_func.return_value = list_resp
 
         informer = SharedInformer(list_func=list_func)
+        informer._stop_event = _RecordingStopEvent()  # skip the backoff sleep
 
         stream_calls = {"n": 0}
 
@@ -931,6 +946,126 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
 
         # list_func called twice: initial list + re-list after 410.
         self.assertEqual(list_func.call_count, 2)
+
+    def _run_watch_attempts(self, attempts, resync_period=0, jitter=0.0):
+        """Run the informer over *attempts*; return waits and ERROR args.
+
+        Each attempt is what one watch stream yields: events, exceptions to
+        raise, or floats that advance the fake clock.  *jitter* is random().
+        """
+        list_func = MagicMock(return_value=MagicMock(
+            items=[], metadata=MagicMock(resource_version="1")))
+        informer = SharedInformer(
+            list_func=list_func, resync_period=resync_period)
+        clock = [0.0]
+        informer._stop_event = stop_event = _RecordingStopEvent(clock)
+        errors = []
+        informer.add_event_handler(ERROR, errors.append)
+        attempts = iter(attempts)
+
+        def fake_stream(func, **kw):
+            attempt = next(attempts, None)
+            if attempt is None:
+                stop_event.set()
+                return
+            for item in attempt:
+                if isinstance(item, float):
+                    clock[0] += item
+                elif isinstance(item, Exception):
+                    raise item
+                else:
+                    yield item
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch, \
+                patch("kubernetes.informer.informer.time") as mock_time, \
+                patch("random.random", return_value=jitter):
+            mock_time.monotonic.side_effect = lambda: clock[0]
+            MockWatch.return_value.stream.side_effect = fake_stream
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        self.assertFalse(informer._thread.is_alive())
+        return [round(w, 6) for w in stop_event.waits], errors
+
+    def test_watch_failure_backs_off(self):
+        """Failures wait 0.8s doubling to 30s, plus jitter, and stay capped.
+
+        The delay starts over only after 2 minutes without a backoff.
+        """
+        from kubernetes.client.exceptions import ApiException
+        from urllib3.exceptions import MaxRetryError, ProtocolError
+
+        forbidden = ApiException(status=403, reason="Forbidden")
+        refused = MaxRetryError(None, "/", ConnectionRefusedError())
+        dropped = ProtocolError("Connection broken")
+        cases = (
+            # The 10th failure is 140.4s after the first one.
+            ("403", [[forbidden]] * 10, 0.0,
+             [0.8, 1.6, 3.2, 6.4, 12.8, 25.6, 30.0, 30.0, 30.0, 30.0]),
+            ("403 after 121s healthy watch",
+             [[forbidden], [forbidden], [121.0, dropped], [forbidden]], 0.0,
+             [0.8, 1.6, 0.8]),
+            ("jitter", [[forbidden]] * 2, 0.5, [1.2, 2.4]),
+            ("connection refused", [[refused]], 0.0, [0.8]),
+            ("410 Gone", [[ApiException(status=410)]], 0.0, [0.8]),
+        )
+        for name, attempts, jitter, expected in cases:
+            with self.subTest(name):
+                waits, errors = self._run_watch_attempts(
+                    attempts, jitter=jitter)
+
+                self.assertEqual(waits, expected)
+                self.assertEqual(errors, [i for a in attempts for i in a
+                                          if isinstance(i, Exception)])
+
+    def test_closed_stream_rewatches_unless_very_short(self):
+        """A closed or dropped stream is re-watched at once unless very short.
+
+        resync_period is set so that a normal stream end reaches the loop.
+        """
+        from urllib3.exceptions import ProtocolError, ReadTimeoutError
+
+        dropped = ProtocolError("Connection broken")
+        timed_out = ReadTimeoutError(None, None, "Read timed out.")
+        event = {"type": ADDED, "object": _make_pod("default", "p")}
+        cases = (
+            ("dropped after 10s", [[10.0, dropped]] * 2, []),
+            ("read timeout after 60s", [[60.0, timed_out]], []),
+            ("event, then dropped", [[event, dropped]], []),
+            ("ended after 1s", [[1.0]], []),
+            ("ended at once", [[]] * 2, [0.8, 1.6]),
+            ("dropped within 1s", [[0.5, dropped]], [0.8]),
+        )
+        for name, attempts, expected in cases:
+            with self.subTest(name):
+                waits, errors = self._run_watch_attempts(
+                    attempts, resync_period=600)
+
+                self.assertEqual(waits, expected)
+                # Drops still reach the ERROR handlers, as before.
+                self.assertEqual(errors, [i for a in attempts for i in a
+                                          if isinstance(i, Exception)])
+
+    def test_stop_during_watch_backoff_returns_promptly(self):
+        """stop() interrupts a backoff wait instead of sleeping it out."""
+        from kubernetes.client.exceptions import ApiException
+
+        list_func = MagicMock(return_value=MagicMock(
+            items=[], metadata=MagicMock(resource_version="1")))
+        informer = SharedInformer(list_func=list_func)
+        failed = threading.Event()
+        informer.add_event_handler(ERROR, lambda exc: failed.set())
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch, \
+                patch("kubernetes.informer.informer._WATCH_BACKOFF_INITIAL",
+                      60.0):
+            MockWatch.return_value.stream.side_effect = ApiException(403)
+            informer.start()
+            self.assertTrue(failed.wait(timeout=3))
+            started = time.monotonic()
+            informer.stop()
+
+        self.assertLess(time.monotonic() - started, 5)
 
     # ------------------------------------------------------------------
     # Tests analogous to client-go shared_informer_test.go scenarios.
@@ -1138,6 +1273,7 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
         added = []
         deleted = []
         informer = SharedInformer(list_func=list_func)
+        informer._stop_event = _RecordingStopEvent()  # skip the backoff sleep
         informer.add_event_handler(MODIFIED, modified.append)
         informer.add_event_handler(ADDED, added.append)
         informer.add_event_handler(DELETED, deleted.append)
