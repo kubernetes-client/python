@@ -146,24 +146,14 @@ class Watch:
             if js['type'] == 'BOOKMARK':
                 # Extract and store resource_version from BOOKMARK event for
                 # efficiency. No deserialization as event can be incomplete.
-                if isinstance(js['object'], dict) and 'metadata' in js['object']:
-                    metadata = js['object']['metadata']
-                    if isinstance(metadata, dict) and 'resourceVersion' in metadata:
-                        self.resource_version = metadata['resourceVersion']
+                self._update_resource_version(js['raw_object'])
             elif js['type'] != 'ERROR':
                 js['object'] = self._api_client.deserialize(
                     json.dumps(js['raw_object']),
                     return_type,
                     'application/json',
                 )
-                if hasattr(js['object'], 'metadata'):
-                    self.resource_version = js['object'].metadata.resource_version
-                # For custom objects that we don't have model defined, json
-                # deserialization results in dictionary
-                elif (isinstance(js['object'], dict) and 'metadata' in js['object']
-                      and 'resourceVersion' in js['object']['metadata']):
-                    self.resource_version = js['object']['metadata'][
-                        'resourceVersion']
+                self._update_resource_version(js['raw_object'])
             return js
         except json.JSONDecodeError:
             return None
@@ -241,14 +231,10 @@ class Watch:
                                 if line and not line.isspace() else None
                             # Track the resource version from the raw dict
                             # so that a reconnect resumes from the last event.
-                            raw = event.get('object') \
-                                if isinstance(event, dict) else None
-                            metadata = raw.get('metadata') \
-                                if isinstance(raw, dict) else None
-                            rv = metadata.get('resourceVersion') \
-                                if isinstance(metadata, dict) else None
-                            if rv and event.get('type') != 'ERROR':
-                                self.resource_version = rv
+                            if isinstance(event, dict) \
+                                    and event.get('type') != 'ERROR':
+                                self._update_resource_version(
+                                    event.get('object'))
                         if isinstance(event, dict) \
                                 and event['type'] == 'ERROR':
                             # 'object' of an ERROR event is never
@@ -288,3 +274,11 @@ class Watch:
 
             if self._stop or disable_retries:
                 break
+
+    def _update_resource_version(self, raw_object):
+        # Keep the last known resource version when the event does not carry
+        # one, so that the watch can still resume from it after reconnecting.
+        metadata = raw_object.get('metadata') \
+            if isinstance(raw_object, dict) else None
+        if isinstance(metadata, dict) and metadata.get('resourceVersion'):
+            self.resource_version = metadata['resourceVersion']

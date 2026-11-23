@@ -371,6 +371,48 @@ class WatchTests(unittest.TestCase):
         # more strict test with worse error message
         self.assertEqual(fake_api.get_namespaces.mock_calls, calls)
 
+    def test_watch_keeps_resource_version_without_event_resource_version(self):
+        """An event without a resourceVersion must not stop reconnecting."""
+        cases = [
+            ('V1PodList', 'ADDED', {'metadata': {'name': 'a'}}),
+            ('V1PodList', 'ADDED',
+             {'metadata': {'name': 'a', 'resourceVersion': None}}),
+            ('V1PodList', 'ADDED',
+             {'metadata': {'name': 'a', 'resourceVersion': ''}}),
+            ('V1PodList', 'ADDED', {'kind': 'Pod'}),
+            ('V1PodList', 'ADDED', {'metadata': None}),
+            ('object', 'ADDED',
+             {'metadata': {'name': 'a', 'resourceVersion': None}}),
+            ('object', 'ADDED',
+             {'metadata': {'name': 'a', 'resourceVersion': ''}}),
+            ('object', 'ADDED', {'metadata': None}),
+            ('V1PodList', 'BOOKMARK', {'metadata': {'resourceVersion': None}}),
+            ('V1PodList', 'BOOKMARK', {'metadata': {'resourceVersion': ''}}),
+        ]
+        for rtype, event_type, obj in cases:
+            with self.subTest(rtype=rtype, event_type=event_type, obj=obj):
+                # given
+                fake_resp = Mock()
+                fake_resp.stream = Mock(return_value=[
+                    json.dumps({'type': event_type, 'object': obj}) + '\n'])
+                fake_api = Mock()
+                fake_api.get_pods = Mock(return_value=fake_resp)
+                fake_api.get_pods.__doc__ = ':rtype: %s' % rtype
+                w = Watch()
+
+                # when
+                for count, _ in enumerate(
+                        w.stream(fake_api.get_pods, resource_version='5'), 1):
+                    if count == 2:
+                        w.stop()
+
+                # then
+                self.assertEqual(
+                    [call(_preload_content=False, watch=True,
+                          resource_version='5')] * 2,
+                    fake_api.get_pods.mock_calls)
+                self.assertEqual('5', w.resource_version)
+
     def test_watch_stream_twice(self):
         w = Watch(float)
         for step in ['first', 'second']:
