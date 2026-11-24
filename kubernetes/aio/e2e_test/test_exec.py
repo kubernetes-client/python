@@ -75,6 +75,7 @@ class TestExec(IsolatedAsyncioTestCase):
                     )
                     self.assertIn('stdout', result)
                     self.assertIn('stderr', result)
+                    self.assertEqual(len('stdout') + len('stderr'), len(result))
 
                     websocket = await exec_api.connect_get_namespaced_pod_exec_without_preload_content(
                         name, namespace,

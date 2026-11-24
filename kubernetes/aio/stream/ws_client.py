@@ -10,8 +10,11 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
+import codecs
 import json
 from urllib.parse import urlencode, urlparse, urlunparse
+
+from aiohttp import WSMsgType
 
 from kubernetes.aio.client import ApiClient
 from kubernetes.aio.client.rest import RESTResponse
@@ -63,9 +66,11 @@ class WsResponse(RESTResponse):
 class WsApiClient(ApiClient):
     """Async exec transport.
 
-    Preloaded responses collect UTF-8 stdout and stderr and honor v5 channel
-    close frames. Without preloading, the raw aiohttp WebSocket is returned;
-    callers are responsible for channel framing and close messages.
+    Preloaded responses incrementally decode UTF-8 stdout and stderr with
+    replacement for invalid bytes and honor v5 binary channel close frames.
+    Without preloading, the raw aiohttp WebSocket is returned; callers are
+    responsible for channel framing and close messages. Explicitly empty
+    Sec-WebSocket-Protocol headers are rejected.
     """
 
     def __init__(self, configuration=None, header_name=None, header_value=None,
@@ -121,8 +126,7 @@ class WsApiClient(ApiClient):
                     new_query_params.append((key, value))
             query_params = new_query_params
 
-        if headers is None:
-            headers = {}
+        headers = headers.copy() if headers is not None else {}
         protocol_header = next(
             (key for key in headers if key.lower() == 'sec-websocket-protocol'),
             None,
@@ -136,6 +140,8 @@ class WsApiClient(ApiClient):
                 for protocol in headers[protocol_header].split(',')
                 if protocol.strip()
             ]
+            if not protocols:
+                raise ValueError('Sec-WebSocket-Protocol must not be empty')
 
         if query_params:
             url += '?' + urlencode(query_params)
@@ -149,31 +155,42 @@ class WsApiClient(ApiClient):
         if _preload_content:
 
             resp_all = ''
-            closed_channels = set()
+            decoders = {
+                channel: codecs.getincrementaldecoder('utf-8')('replace')
+                for channel in (STDOUT_CHANNEL, STDERR_CHANNEL)
+            }
             async with pool_manager.ws_connect(
                 url, headers=headers, protocols=protocols,
                 heartbeat=self.heartbeat,
             ) as ws:
                 async for msg in ws:
+                    if msg.type == WSMsgType.ERROR:
+                        raise ws.exception() or msg.data
+                    if msg.type not in (WSMsgType.BINARY, WSMsgType.TEXT):
+                        continue
                     data = msg.data
-                    if len(data) > 1:
-                        channel = data[0] if isinstance(data, bytes) else ord(data[0])
+                    if not data:
+                        continue
+                    channel = data[0] if isinstance(data, bytes) else ord(data[0])
+                    if channel == CLOSE_CHANNEL:
                         if (
-                            channel == CLOSE_CHANNEL
+                            msg.type == WSMsgType.BINARY
+                            and len(data) == 2
                             and ws.protocol == V5_CHANNEL_PROTOCOL
                         ):
-                            closed_channel = (
-                                data[1] if isinstance(data, bytes) else ord(data[1])
-                            )
-                            closed_channels.add(closed_channel)
-                            continue
-                        if channel in closed_channels:
-                            continue
-                        data = data[1:]
-                        if isinstance(data, bytes):
-                            data = data.decode('utf-8')
-                        if data and channel in [STDOUT_CHANNEL, STDERR_CHANNEL]:
-                            resp_all += data
+                            decoder = decoders.pop(data[1], None)
+                            if decoder is not None:
+                                resp_all += decoder.decode(b'', final=True)
+                        continue
+                    if channel not in decoders:
+                        continue
+                    data = data[1:]
+                    if isinstance(data, str):
+                        data = data.encode('utf-8')
+                    resp_all += decoders[channel].decode(data)
+
+            for decoder in decoders.values():
+                resp_all += decoder.decode(b'', final=True)
 
             return WsResponse(200, resp_all.encode('utf-8'))
 
