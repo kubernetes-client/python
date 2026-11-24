@@ -48,6 +48,7 @@ class GeneratedAsyncApiTest(IsolatedAsyncioTestCase):
         self.response_status = 200
         self.response_headers = {}
         self.responses = None
+        self.log_body = b''
         app = web.Application()
         app.router.add_route('*', '/{path:.*}', self._handle_request)
         self.runner = web.AppRunner(app)
@@ -93,6 +94,8 @@ class GeneratedAsyncApiTest(IsolatedAsyncioTestCase):
             }).encode() + b'\n')
             await response.write_eof()
             return response
+        if request.path.endswith('/log'):
+            return web.Response(body=self.log_body, content_type='text/plain')
         if self.responses is not None:
             index = len(self.requests) - 1
             response, status, headers = self.responses[
@@ -371,3 +374,22 @@ class GeneratedAsyncApiTest(IsolatedAsyncioTestCase):
             'resource_version',
             inspect.signature(V1ObjectMeta).parameters,
         )
+
+    async def test_pod_log_cut_mid_character_by_limit_bytes(self):
+        # The last two bytes are the start of a three-byte euro sign.
+        self.log_body = 'caf\u00e9 \u20ac'.encode()[:-1]
+
+        log = await CoreV1Api(self.api_client).read_namespaced_pod_log(
+            'pod', 'default', limit_bytes=len(self.log_body),
+        )
+
+        self.assertEqual('caf\u00e9 ', log)
+
+    async def test_pod_log_with_invalid_utf8_still_raises(self):
+        # A Latin-1 e-acute is not valid UTF-8 wherever it appears.
+        self.log_body = b'caf\xe9 \xe2\x82'
+
+        with self.assertRaises(UnicodeDecodeError):
+            await CoreV1Api(self.api_client).read_namespaced_pod_log(
+                'pod', 'default', limit_bytes=len(self.log_body),
+            )
