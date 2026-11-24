@@ -275,7 +275,8 @@ class KubeConfigLoader(object):
         id_token = parts[1]
         # Re-pad the unpadded JWT token
         id_token += (4 - len(id_token) % 4) * '='
-        jwt_attributes = json.loads(base64.b64decode(id_token).decode('utf8'))
+        jwt_attributes = json.loads(
+            base64.urlsafe_b64decode(id_token).decode('utf8'))
         expires = jwt_attributes.get('exp')
 
         if (
