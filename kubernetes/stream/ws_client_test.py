@@ -27,6 +27,7 @@ import select
 import socket
 import ssl
 import threading
+import time
 import pytest
 from kubernetes import stream, client, config
 import websocket
@@ -866,6 +867,187 @@ class CreateWebsocketCaCertDataTest(unittest.TestCase):
         sslopt = self._sslopt(configuration)
         self.assertNotIn('context', sslopt)
         self.assertEqual(sslopt['cert_reqs'], ssl.CERT_NONE)
+
+
+class WSClientPingPongTest(unittest.TestCase):
+    def setUp(self):
+        self.config_mock = MagicMock()
+        self.config_mock.assert_hostname = False
+        self.config_mock.api_key = {}
+        self.config_mock.proxy = None
+        self.config_mock.ssl_ca_cert = None
+        self.config_mock.cert_file = None
+        self.config_mock.key_file = None
+        self.config_mock.verify_ssl = True
+        self.config_mock.keep_alive = False
+        self.config_mock.ws_ping_interval = None
+        self.config_mock.ws_ping_timeout = None
+
+    def _make_client(self, mock_ws, **kwargs):
+        with patch.object(ws_client_module, 'create_websocket') as mock_create:
+            mock_create.return_value = mock_ws
+            return WSClient(self.config_mock, "wss://test", headers=None,
+                            capture_all=True, **kwargs)
+
+    def test_ping_worker_sends_ping(self):
+        """Verify background thread sends ping frames at ping_interval."""
+        mock_ws = MagicMock()
+        mock_ws.subprotocol = V5_CHANNEL_PROTOCOL
+        mock_ws.connected = True
+        client = self._make_client(mock_ws, ping_interval=0.01)
+        try:
+            time.sleep(0.05)
+            self.assertTrue(mock_ws.ping.called)
+            self.assertIsNotNone(client._last_ping_time)
+        finally:
+            client.close()
+            client._ping_thread.join(timeout=1)
+            self.assertFalse(client._ping_thread.is_alive())
+
+    def test_update_responds_to_ping_with_pong(self):
+        """Verify receiving a PING frame automatically responds with a PONG frame."""
+        server_sock, client_sock = socket.socketpair()
+        try:
+            ws = websocket.WebSocket()
+            ws.sock = client_sock
+            ws.connected = True
+            client = self._make_client(ws)
+
+            ping_payload = b'heartbeat-test'
+            ping_frame = websocket.ABNF(
+                1, 0, 0, 0, websocket.ABNF.OPCODE_PING, 0, ping_payload).format()
+            close_frame = websocket.ABNF(
+                1, 0, 0, 0, websocket.ABNF.OPCODE_CLOSE, 0, b'\x03\xe8').format()
+            server_sock.sendall(ping_frame + close_frame)
+
+            with patch.object(ws, 'pong', wraps=ws.pong) as mock_pong:
+                client.update(timeout=2)
+                mock_pong.assert_called_with(ping_payload)
+        finally:
+            server_sock.close()
+            client_sock.close()
+            client.close()
+
+    def test_update_records_last_pong_time(self):
+        """Verify receiving a PONG frame updates _last_pong_time."""
+        server_sock, client_sock = socket.socketpair()
+        try:
+            ws = websocket.WebSocket()
+            ws.sock = client_sock
+            ws.connected = True
+            client = self._make_client(ws)
+
+            pong_frame = websocket.ABNF(
+                1, 0, 0, 0, websocket.ABNF.OPCODE_PONG, 0, b'').format()
+            close_frame = websocket.ABNF(
+                1, 0, 0, 0, websocket.ABNF.OPCODE_CLOSE, 0, b'\x03\xe8').format()
+            server_sock.sendall(pong_frame + close_frame)
+
+            t0 = time.time()
+            client.update(timeout=2)
+            self.assertIsNotNone(client._last_pong_time)
+            self.assertGreaterEqual(client._last_pong_time, t0 - 1.0)
+        finally:
+            server_sock.close()
+            client_sock.close()
+            client.close()
+
+    def test_keep_alive_config_defaults_ping_interval_to_30(self):
+        """Verify keep_alive=True sets default ping_interval=30s."""
+        self.config_mock.keep_alive = True
+        mock_ws = MagicMock()
+        mock_ws.connected = True
+        client = self._make_client(mock_ws)
+        try:
+            self.assertEqual(client._ping_interval, 30)
+        finally:
+            client.close()
+
+    def test_ws_ping_interval_config_override(self):
+        """Verify ws_ping_interval overrides default keep_alive interval."""
+        self.config_mock.keep_alive = True
+        self.config_mock.ws_ping_interval = 45
+        mock_ws = MagicMock()
+        mock_ws.connected = True
+        client = self._make_client(mock_ws)
+        try:
+            self.assertEqual(client._ping_interval, 45)
+        finally:
+            client.close()
+
+    def test_create_websocket_applies_keepalive_socket_options(self):
+        """Verify create_websocket applies TCP keepalive socket options when keep_alive=True."""
+        config = Configuration()
+        config.keep_alive = True
+        with patch.object(ws_client_module, 'WebSocket', autospec=True) as mock_ws_cls:
+            mock_ws = mock_ws_cls.return_value
+            mock_sock = MagicMock()
+            mock_ws.sock = mock_sock
+            ws_client_module.create_websocket(config, "ws://example.com")
+            mock_sock.setsockopt.assert_any_call(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
+
+    def test_create_websocket_applies_custom_socket_options(self):
+        """Verify create_websocket applies custom socket_options if configured."""
+        config = Configuration()
+        custom_opts = [(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)]
+        config.socket_options = custom_opts
+        with patch.object(ws_client_module, 'WebSocket', autospec=True) as mock_ws_cls:
+            mock_ws = mock_ws_cls.return_value
+            mock_sock = MagicMock()
+            mock_ws.sock = mock_sock
+            ws_client_module.create_websocket(config, "ws://example.com")
+            mock_sock.setsockopt.assert_called_with(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+
+    def test_stream_request_forwards_ping_parameters(self):
+        """Verify stream._websocket_request forwards ping_interval and ping_timeout."""
+        config = Configuration()
+        api_client = MagicMock()
+        api_client.configuration = config
+
+        class DummyApi:
+            def __init__(self, client):
+                self.api_client = client
+            def sample_call(self, *args, **kwargs):
+                return self.api_client.call_api('GET', 'https://example.com')
+
+        dummy = DummyApi(api_client)
+
+        received_kwargs = {}
+        def mock_ws_request(conf, method, url, **kwargs):
+            received_kwargs.update(kwargs)
+            return ws_client_module.WSResponse("ok", 200)
+
+        from kubernetes.stream.stream import _websocket_request
+
+        _websocket_request(mock_ws_request, None, dummy.sample_call, ping_interval=25, ping_timeout=15)
+        self.assertEqual(received_kwargs.get('ping_interval'), 25)
+        self.assertEqual(received_kwargs.get('ping_timeout'), 15)
+
+    def test_portforward_proxy_handles_ping_frame(self):
+        """Verify PortForward._proxy handles incoming PING frame and responds with PONG."""
+        server_sock, client_sock = socket.socketpair()
+        try:
+            ws = websocket.WebSocket()
+            ws.sock = client_sock
+            ws.connected = True
+
+            ping_payload = b'pf-ping'
+            ping_frame = websocket.ABNF(
+                1, 0, 0, 0, websocket.ABNF.OPCODE_PING, 0, ping_payload).format()
+            close_frame = websocket.ABNF(
+                1, 0, 0, 0, websocket.ABNF.OPCODE_CLOSE, 0, b'\x03\xe8').format()
+            server_sock.sendall(ping_frame + close_frame)
+
+            with patch.object(ws, 'pong', wraps=ws.pong) as mock_pong:
+                pf = ws_client_module.PortForward(ws, [8080])
+                try:
+                    time.sleep(0.1)
+                    mock_pong.assert_called_with(ping_payload)
+                finally:
+                    pf.close()
+        finally:
+            server_sock.close()
+            client_sock.close()
 
 
 if __name__ == '__main__':

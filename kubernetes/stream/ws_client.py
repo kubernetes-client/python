@@ -29,6 +29,7 @@ from base64 import urlsafe_b64decode
 
 import yaml
 from requests.utils import should_bypass_proxies
+from kubernetes.utils.keepalive import tcp_keepalive_socket_options
 
 STDIN_CHANNEL = 0
 STDOUT_CHANNEL = 1
@@ -50,7 +51,7 @@ class _IgnoredIO:
 
 class WSClient:
     def __init__(self, configuration, url, headers, capture_all, binary=False,
-                 _request_timeout=None):
+                 _request_timeout=None, ping_interval=None, ping_timeout=None):
         """A websocket client with support for channels.
 
             Exec command uses different channels for different streams. for
@@ -80,6 +81,48 @@ class WSClient:
                         break
         self._connected = True
         self._returncode = None
+
+        self._ping_interval = ping_interval
+        if self._ping_interval is None and configuration:
+            interval = getattr(configuration, 'ws_ping_interval', None)
+            if isinstance(interval, (int, float)):
+                self._ping_interval = interval
+        if self._ping_interval is None and configuration and getattr(configuration, 'keep_alive', False) is True:
+            self._ping_interval = 30
+
+        self._ping_timeout = ping_timeout
+        if self._ping_timeout is None and configuration:
+            timeout = getattr(configuration, 'ws_ping_timeout', None)
+            if isinstance(timeout, (int, float)):
+                self._ping_timeout = timeout
+
+        self._last_ping_time = None
+        self._last_pong_time = None
+        self._ping_stop_event = threading.Event()
+        self._ping_thread = None
+
+        if isinstance(self._ping_interval, (int, float)) and self._ping_interval > 0:
+            self._ping_thread = threading.Thread(
+                name="Kubernetes WSClient ping worker",
+                target=self._send_ping_worker
+            )
+            self._ping_thread.daemon = True
+            self._ping_thread.start()
+
+    def _send_ping_worker(self):
+        while not self._ping_stop_event.wait(timeout=self._ping_interval):
+            if not self.is_open() or not self.sock:
+                break
+            if (self._ping_timeout and self._last_ping_time and
+                    (self._last_pong_time is None or self._last_pong_time < self._last_ping_time)):
+                if time.time() - self._last_ping_time > self._ping_timeout:
+                    self.close()
+                    break
+            try:
+                self.sock.ping()
+                self._last_ping_time = time.time()
+            except Exception:
+                break
 
     def peek_channel(self, channel, timeout=0):
         """Peek a channel and return part of the input,
@@ -260,7 +303,16 @@ class WSClient:
             op_code, frame = self.sock.recv_data_frame(True)
             if op_code == ABNF.OPCODE_CLOSE:
                 self._connected = False
+                if hasattr(self, '_ping_stop_event') and self._ping_stop_event:
+                    self._ping_stop_event.set()
                 return
+            elif op_code == ABNF.OPCODE_PING:
+                try:
+                    self.sock.pong(frame.data)
+                except Exception:
+                    pass
+            elif op_code == ABNF.OPCODE_PONG:
+                self._last_pong_time = time.time()
             elif op_code == ABNF.OPCODE_BINARY or op_code == ABNF.OPCODE_TEXT:
                 data = frame.data
                 if len(data) > 0:
@@ -301,16 +353,20 @@ class WSClient:
     def run_forever(self, timeout=None):
         """Wait till connection is closed or timeout reached. Buffer any input
         received during this time."""
-        if timeout:
-            if isinstance(timeout, tuple) and len(timeout) == 2:
-                timeout = timeout[1]
+        try:
             if timeout:
-                start = time.time()
-                while self.is_open() and time.time() - start < timeout:
-                    self.update(timeout=(timeout - time.time() + start))
-                return
-        while self.is_open():
-            self.update(timeout=None)
+                if isinstance(timeout, tuple) and len(timeout) == 2:
+                    timeout = timeout[1]
+                if timeout:
+                    start = time.time()
+                    while self.is_open() and time.time() - start < timeout:
+                        self.update(timeout=(timeout - time.time() + start))
+                    return
+            while self.is_open():
+                self.update(timeout=None)
+        finally:
+            if hasattr(self, '_ping_stop_event') and self._ping_stop_event:
+                self._ping_stop_event.set()
     @property
     def returncode(self):
         """
@@ -334,6 +390,8 @@ class WSClient:
         close websocket connection.
         """
         self._connected = False
+        if hasattr(self, '_ping_stop_event') and self._ping_stop_event:
+            self._ping_stop_event.set()
         if self.sock:
             self.sock.close(**kwargs)
 
@@ -502,7 +560,12 @@ class PortForward:
                                         "Unexpected port number in initial channel frame: %s" % port_number
                                     )
                                 channel_initialized[channel] = True
-                        elif opcode not in (ABNF.OPCODE_PING, ABNF.OPCODE_PONG, ABNF.OPCODE_CLOSE):
+                        elif opcode == ABNF.OPCODE_PING:
+                            try:
+                                self.websocket.pong(frame.data)
+                            except Exception:
+                                pass
+                        elif opcode not in (ABNF.OPCODE_PONG, ABNF.OPCODE_CLOSE):
                             raise RuntimeError("Unexpected websocket opcode: %s" % opcode)
                         if not (isinstance(self.websocket.sock, ssl.SSLSocket) and self.websocket.sock.pending()):
                             pending = False
@@ -618,6 +681,17 @@ def create_websocket(configuration, url, headers=None, _request_timeout=None):
     websocket.connect(url, **connect_opt)
     if _request_timeout is not None:
         websocket.settimeout(read_timeout)
+    if hasattr(websocket, 'sock') and websocket.sock:
+        try:
+            socket_options = getattr(configuration, 'socket_options', None)
+            if isinstance(socket_options, (list, tuple)):
+                for opt in socket_options:
+                    websocket.sock.setsockopt(*opt)
+            elif getattr(configuration, 'keep_alive', False) is True:
+                for opt in tcp_keepalive_socket_options():
+                    websocket.sock.setsockopt(*opt)
+        except (OSError, socket.error, AttributeError):
+            pass
     return websocket
 
 def websocket_proxycare(connect_opt, configuration, url, headers):
@@ -657,9 +731,12 @@ def websocket_call(configuration, _method, url, **kwargs):
     _preload_content = kwargs.get("_preload_content", True)
     capture_all = kwargs.get("capture_all", True)
     binary = kwargs.get('binary', False)
+    ping_interval = kwargs.get('ping_interval')
+    ping_timeout = kwargs.get('ping_timeout')
     try:
         client = WSClient(configuration, url, headers, capture_all, binary=binary,
-                          _request_timeout=_request_timeout)
+                          _request_timeout=_request_timeout,
+                          ping_interval=ping_interval, ping_timeout=ping_timeout)
         if not _preload_content:
             return client
         client.run_forever(timeout=_request_timeout)
