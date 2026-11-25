@@ -16,7 +16,6 @@ from typing import Annotated, Any, List
 import datetime
 import re
 
-import durationpy
 from pydantic import AfterValidator, BeforeValidator, PlainSerializer
 
 # Initialize our RE statically, rather than compiling for every call. This has
@@ -31,6 +30,38 @@ maxDuration_ms = (((99999 * 3600) + (59 * 60) + 59) * 1_000) + 999
 # Go's time.Duration format and range.
 reGoDuration = re.compile(r'[-+]?(0|(([0-9]+\.?[0-9]*|\.[0-9]+)(ns|us|\u00b5s|\u03bcs|ms|s|m|h))+)')
 maxGoDuration = datetime.timedelta(microseconds=(2 ** 63 - 1) // 1000)
+
+_DURATION_UNIT_NS = {
+    'ns': 1,
+    'us': 1_000,
+    '\u00b5s': 1_000,
+    '\u03bcs': 1_000,
+    'ms': 1_000_000,
+    's': 1_000_000_000,
+    'm': 60 * 1_000_000_000,
+    'h': 3600 * 1_000_000_000,
+}
+_RE_DURATION_PART = re.compile(r'([0-9]+\.?[0-9]*|\.[0-9]+)(ns|us|\u00b5s|\u03bcs|ms|s|m|h)')
+
+
+def _duration_from_str(duration: str) -> datetime.timedelta:
+    """Parse a Go-style duration string into a datetime.timedelta."""
+    if duration in ("0", "+0", "-0"):
+        return datetime.timedelta(0)
+
+    sign = -1 if duration.startswith("-") else 1
+    s = duration.lstrip("+-")
+
+    total_ns = 0.0
+    try:
+        for match in _RE_DURATION_PART.finditer(s):
+            val_str, unit = match.groups()
+            total_ns += float(val_str) * _DURATION_UNIT_NS[unit]
+
+        microseconds = round(sign * total_ns / 1_000)
+        return datetime.timedelta(microseconds=microseconds)
+    except (OverflowError, ValueError) as e:
+        raise ValueError("Duration out of range: {}".format(duration)) from e
 
 
 def parse_duration(duration: str) -> datetime.timedelta:
@@ -82,7 +113,7 @@ def parse_duration(duration: str) -> datetime.timedelta:
     if not reDuration.match(duration):
         raise ValueError("Invalid duration format: {}".format(duration))
 
-    return durationpy.from_str(duration)
+    return _duration_from_str(duration)
 
 
 def format_duration(delta: datetime.timedelta) -> str:
@@ -143,8 +174,7 @@ def format_duration(delta: datetime.timedelta) -> str:
         raise ValueError(
             "Cannot express durations longer than 99999h59m59s999ms in GEP-2257: {}".format(delta))
 
-    # durationpy.to_str() is happy to use floating-point seconds, which
-    # GEP-2257 is _not_ happy with. So start by peeling off any microseconds
+    # GEP-2257 does not allow floating-point seconds. So start by peeling off any microseconds
     # from our delta.
     delta_us = delta.microseconds
 
@@ -184,11 +214,7 @@ def _parse_go_duration(value: Any) -> Any:
         return value
     if not reGoDuration.fullmatch(value):
         raise ValueError("Invalid duration format: {}".format(value))
-    try:
-        return durationpy.from_str(value)
-    except OverflowError:
-        # older durationpy lets this escape, pydantic only catches ValueError
-        raise ValueError("Duration out of range: {}".format(value))
+    return _duration_from_str(value)
 
 
 def _check_go_duration_range(value: datetime.timedelta) -> datetime.timedelta:
