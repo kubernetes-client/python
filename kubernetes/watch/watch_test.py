@@ -302,6 +302,56 @@ class WatchTests(unittest.TestCase):
         fake_resp.close.assert_called_once()
         fake_resp.release_conn.assert_called_once()
 
+    def test_watch_for_follow_yields_last_line_without_newline(self):
+        cases = [
+            ("newline terminated", [b'line1\nline2\n'], ['line1', 'line2']),
+            ("unterminated", [b'line1\nline2'], ['line1', 'line2']),
+            ("empty line before unterminated", ['line1\n\n', 'line2'],
+             ['line1', '', 'line2']),
+            ("multibyte split across final chunks",
+             [b'line1\nli\xC2', b'\xA9'], ['line1', 'li©']),
+            ("truncated multibyte", [b'line1\nli\xC2'], ['line1', 'li�']),
+        ]
+        for name, chunks, expected in cases:
+            with self.subTest(name):
+                # given
+                fake_resp = Mock()
+                fake_resp.stream = Mock(return_value=chunks)
+                fake_api = Mock()
+                fake_api.read_namespaced_pod_log = Mock(return_value=fake_resp)
+                fake_api.read_namespaced_pod_log.__doc__ = (
+                    ':param follow:\n:type follow: bool\n:rtype: str')
+
+                # when
+                lines = list(Watch().stream(fake_api.read_namespaced_pod_log))
+
+                # then
+                self.assertEqual(expected, lines)
+
+    def test_watch_ignores_truncated_event_at_end(self):
+        """A trailing fragment without a newline is not a complete event."""
+        chunks = [
+            '{"type": "ADDED", "object": {"metadata": {"name": "test1",'
+            '"resourceVersion": "1"}}}\n',
+            '{"type": "ADDED", "object": {"metadata": {"na',
+        ]
+        for deserialize in (True, False):
+            with self.subTest(deserialize=deserialize):
+                # given
+                fake_resp = Mock()
+                fake_resp.stream = Mock(return_value=chunks)
+                fake_api = Mock()
+                fake_api.get_namespaces = Mock(return_value=fake_resp)
+                fake_api.get_namespaces.__doc__ = ':rtype: V1NamespaceList'
+
+                # when
+                events = list(Watch().stream(
+                    fake_api.get_namespaces, timeout_seconds=1,
+                    deserialize=deserialize))
+
+                # then
+                self.assertEqual(['ADDED'], [e and e['type'] for e in events])
+
     def test_watch_resource_version_set(self):
         # https://github.com/kubernetes-client/python/issues/700
         # ensure watching from a resource version does reset to resource
