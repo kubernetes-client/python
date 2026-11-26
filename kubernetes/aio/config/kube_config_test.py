@@ -772,6 +772,20 @@ class TestKubeConfigLoader(BaseTestCase):
         await loader._load_authentication()
         self.assertEqual('Bearer abc123', loader.token)
 
+    async def test_oidc_url_safe_token(self):
+        # JWT segments use the base64url alphabet, so the payload can
+        # contain '-' and '_'. This payload encodes to "...In5-fiJ9".
+        payload = base64.urlsafe_b64encode(
+            b'{"name": "test", "sub": "~~~"}').decode().rstrip('=')
+        self.assertIn('-', payload)
+        token = '.'.join([_unpadded_base64(TEST_OIDC_TOKEN), payload,
+                          TEST_CLIENT_CERT_BASE64])
+
+        loader = KubeConfigLoader(config_dict=self.TEST_KUBE_CONFIG)
+        loader._user = {'auth-provider': {'config': {'id-token': token}}}
+        await loader._load_oid_token()
+        self.assertEqual('Bearer %s' % token, loader.token)
+
     async def test_invalid_oidc_configs(self):
         loader = KubeConfigLoader(config_dict=self.TEST_KUBE_CONFIG)
 
