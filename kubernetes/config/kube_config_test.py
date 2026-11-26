@@ -1111,6 +1111,33 @@ class TestKubeConfigLoader(BaseTestCase):
         self.assertEqual("Bearer abc123", loader.token)
 
     @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token')
+    @mock.patch('kubernetes.config.kube_config.ApiClient')
+    def test_oidc_refresh_uses_env_proxy_for_issuer(
+            self, mock_ApiClient, mock_OAuth2Session):
+        mock_response = mock.MagicMock()
+        mock_response.status = 200
+        mock_response.data = json.dumps({
+            "token_endpoint": "https://example.org/identity/token"
+        })
+        mock_ApiClient.return_value.call_api.return_value = mock_response
+        mock_OAuth2Session.return_value = {"id_token": "abc123",
+                                           "refresh_token": "newtoken123"}
+
+        proxy = "http://proxy.example.com:3128"
+        env = {"https_proxy": proxy, "HTTPS_PROXY": proxy,
+               "no_proxy": "", "NO_PROXY": ""}
+        with mock.patch.dict(os.environ, env):
+            loader = KubeConfigLoader(
+                config_dict=copy.deepcopy(self.TEST_KUBE_CONFIG),
+                active_context="expired_oidc",
+            )
+            self.assertTrue(loader._load_auth_provider_token())
+
+        config = mock_ApiClient.call_args.kwargs["configuration"]
+        self.assertEqual("https://example.org/identity", config.host)
+        self.assertEqual(proxy, config.proxy)
+
+    @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token')
     @mock.patch('kubernetes.config.kube_config.ApiClient.call_api')
     def test_oidc_with_idp_ca_file_refresh(self, mock_ApiClient, mock_OAuth2Session):
         mock_response = mock.MagicMock()
