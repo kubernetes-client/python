@@ -20,8 +20,11 @@ registered event-handler callbacks.
 """
 
 import logging
+import random
 import threading
 import time
+
+from urllib3.exceptions import ProtocolError, ReadTimeoutError
 
 from kubernetes.client.exceptions import ApiException
 from kubernetes.watch import Watch
@@ -37,6 +40,23 @@ MODIFIED = "MODIFIED"
 DELETED = "DELETED"
 BOOKMARK = "BOOKMARK"
 ERROR = "ERROR"
+
+# Delay before reconnecting a failed watch: 0.8s doubling up to 30s, plus up
+# to 100% jitter, so a persistent failure costs at most one request every
+# 30-60s.
+_WATCH_BACKOFF_INITIAL = 0.8
+_WATCH_BACKOFF_MAX = 30.0
+# The backoff starts over when it has not backed off for more than this many
+# seconds, so a failure after a long healthy period starts again from 0.8s.
+_WATCH_BACKOFF_RESET = 120.0
+# Errors raised while reading a watch stream (connection reset or closed,
+# incomplete read, read timeout) that mean the stream closed rather than
+# failed, so the watch is resumed without waiting.
+_WATCH_CLOSED_ERRORS = (ProtocolError, ReadTimeoutError)
+# A stream that closes within this many seconds of the watch request without
+# delivering an event is a failure ("very short watch"), so a server that
+# ends every stream at once does not cause a reconnect loop.
+_VERY_SHORT_WATCH = 1.0
 
 
 def _list_items_and_resource_version(resp):
@@ -248,12 +268,24 @@ class SharedInformer:
     def _run_loop(self):
         """Background loop: list then watch, reconnect on errors.
 
+        After a watch error, including 410 Gone, the loop waits with an
+        exponential backoff before it watches or lists again: the delay
+        starts at 0.8s and doubles up to 30s, each wait adds up to 100%
+        jitter (so at most 60s), and the delay starts over after 2 minutes
+        without a backoff.  A stream that ends or drops (for example a
+        connection reset) is watched again right away unless it closed
+        within a second of the request without an event.
+        Without ``resync_period``, ``Watch.stream`` reconnects a stream that
+        ended normally by itself, so the loop only sees streams that drop.
+
         A full re-list is only performed when ``self._resource_version`` is
         ``None`` (first start or after a 410 Gone response).  On all other
         reconnects the most recent ``resourceVersion`` is reused so that no
         events are missed and the API server does not need to send a full
         object snapshot.
         """
+        backoff_duration = _WATCH_BACKOFF_INITIAL
+        last_backoff_at = time.monotonic()
         while not self._stop_event.is_set():
             # Full re-list only when we have no resource version to resume from.
             if self._resource_version is None:
@@ -277,10 +309,14 @@ class SharedInformer:
             # below only runs when the generator yields an event.
             if self._resync_period > 0:
                 kw["timeout_seconds"] = max(1, int(self._resync_period))
+            stream_closed = False
+            got_event = False
+            watch_start = time.monotonic()
             try:
                 for event in self._watch.stream(self._list_func, **kw):
                     if self._stop_event.is_set():
                         break
+                    got_event = True
                     evt_type = event.get("type")
                     obj = event.get("object")
                     # Sync the most recent resource version from the Watch
@@ -305,6 +341,7 @@ class SharedInformer:
                         self._fire(BOOKMARK, event.get("raw_object", obj))
                     elif evt_type == ERROR:
                         self._fire(ERROR, obj)
+                stream_closed, watch_end = True, time.monotonic()
             except ApiException as exc:
                 if exc.status == 410:
                     # The stored resource version is too old; force a full re-list.
@@ -319,6 +356,8 @@ class SharedInformer:
                     )
                 self._fire(ERROR, exc)
             except Exception as exc:
+                stream_closed = isinstance(exc, _WATCH_CLOSED_ERRORS)
+                watch_end = time.monotonic()
                 logger.exception("Unexpected error in watch loop; reconnecting")
                 self._fire(ERROR, exc)
             finally:
@@ -333,6 +372,20 @@ class SharedInformer:
                 ):
                     self._resource_version = self._watch.resource_version
                 self._watch = None
+
+            # Back off after any failure (410 included) and after a very short
+            # watch, but not after a stream that closed.
+            if not self._stop_event.is_set() and (not stream_closed or (
+                    not got_event
+                    and watch_end - watch_start < _VERY_SHORT_WATCH)):
+                now = time.monotonic()
+                if now - last_backoff_at > _WATCH_BACKOFF_RESET:
+                    backoff_duration = _WATCH_BACKOFF_INITIAL
+                last_backoff_at = now
+                delay = backoff_duration + random.random() * backoff_duration
+                backoff_duration = min(
+                    backoff_duration * 2, _WATCH_BACKOFF_MAX)
+                self._stop_event.wait(delay)
 
             # Periodic resync: after the watch stream exits (whether due to the
             # server-side timeout_seconds, a stop request, or an error) check if
