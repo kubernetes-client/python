@@ -393,7 +393,8 @@ class KubeConfigLoader:
         return self.token
 
     def _refresh_oidc(self, provider):
-        config = Configuration()
+        # host selects the environment proxy (and NO_PROXY match) for the IdP
+        config = Configuration(host=provider['config']['idp-issuer-url'])
 
         if 'idp-certificate-authority-data' in provider['config']:
             cert = base64.b64decode(
