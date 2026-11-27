@@ -568,11 +568,12 @@ def create_websocket(configuration, url, headers=None, _request_timeout=None):
     # We just need to pass the Authorization, ignore all the other
     # http headers we get from the generated code
     header = []
-    if headers and 'authorization' in headers:
-            header.append("authorization: %s" % headers['authorization'])
-    if headers and 'sec-websocket-protocol' in headers:
+    lower_headers = {k.lower(): v for k, v in headers.items()} if headers else {}
+    if 'authorization' in lower_headers:
+        header.append("authorization: %s" % lower_headers['authorization'])
+    if 'sec-websocket-protocol' in lower_headers:
         header.append("sec-websocket-protocol: %s" %
-                      headers['sec-websocket-protocol'])
+                      lower_headers['sec-websocket-protocol'])
     else:
         header.append("sec-websocket-protocol: %s,%s" % (V5_CHANNEL_PROTOCOL, V4_CHANNEL_PROTOCOL))
 
@@ -631,8 +632,8 @@ def websocket_proxycare(connect_opt, configuration, url, headers):
         proxy_url = urlparse(configuration.proxy)
         connect_opt.update({'http_proxy_host': proxy_url.hostname, 'http_proxy_port': proxy_url.port})
     if configuration.proxy_headers:
-        for key,value in configuration.proxy_headers.items():
-            if key == 'proxy-authorization' and value.startswith('Basic'):
+        for key, value in configuration.proxy_headers.items():
+            if key.lower() == 'proxy-authorization' and value.startswith('Basic'):
                 parts = value.split()
                 if len(parts) < 2:
                     raise ApiValueError(
