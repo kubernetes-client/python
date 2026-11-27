@@ -307,6 +307,56 @@ class WSClientProtocolTest(unittest.TestCase):
             expected_header = f"sec-websocket-protocol: {V5_CHANNEL_PROTOCOL},{V4_CHANNEL_PROTOCOL}"
             self.assertIn(expected_header, kwargs['header'])
 
+    def test_create_websocket_header_case_insensitive(self):
+        """Verify Authorization and Sec-WebSocket-Protocol headers with custom casing are preserved."""
+        with patch.object(ws_client_module, 'WebSocket', autospec=True) as mock_ws_cls:
+            mock_ws = mock_ws_cls.return_value
+
+            headers = {
+                'Authorization': 'Bearer test-bearer-token',
+                'Sec-WebSocket-Protocol': 'v5.channel.k8s.io'
+            }
+            ws_client_module.create_websocket(
+                self.config_mock, "ws://test", headers=headers
+            )
+
+            mock_ws.connect.assert_called_once()
+            call_args = mock_ws.connect.call_args
+            kwargs = call_args[1]
+            self.assertIn('header', kwargs)
+            self.assertIn('authorization: Bearer test-bearer-token', kwargs['header'])
+            self.assertIn('sec-websocket-protocol: v5.channel.k8s.io', kwargs['header'])
+
+    def test_create_websocket_uppercase_authorization_header(self):
+        """Verify all-caps AUTHORIZATION header is recognized."""
+        with patch.object(ws_client_module, 'WebSocket', autospec=True) as mock_ws_cls:
+            mock_ws = mock_ws_cls.return_value
+
+            headers = {
+                'AUTHORIZATION': 'Basic dXNlcjpwYXNz'
+            }
+            ws_client_module.create_websocket(
+                self.config_mock, "ws://test", headers=headers
+            )
+
+            mock_ws.connect.assert_called_once()
+            kwargs = mock_ws.connect.call_args[1]
+            self.assertIn('authorization: Basic dXNlcjpwYXNz', kwargs['header'])
+            expected_proto = f"sec-websocket-protocol: {V5_CHANNEL_PROTOCOL},{V4_CHANNEL_PROTOCOL}"
+            self.assertIn(expected_proto, kwargs['header'])
+
+    def test_websocket_proxycare_case_insensitive(self):
+        """Verify proxy-authorization header casing in proxy_headers is handled."""
+        config = Configuration()
+        config.proxy = "http://proxy.example.com:8080"
+        config.proxy_headers = {
+            'Proxy-Authorization': 'Basic dXNlcjpwYXNzd29yZA=='
+        }
+        connect_opt = {}
+        result = websocket_proxycare(connect_opt, config, "ws://test", headers=None)
+        self.assertIn('http_proxy_auth', result)
+        self.assertEqual(result['http_proxy_auth'], ('user', 'password'))
+
     def test_create_websocket_tuple_timeout(self):
         """Verify _request_timeout tuple sets connect timeout and
         resets socket timeout to read timeout."""
