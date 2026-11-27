@@ -28,6 +28,7 @@ def _websocket_request(websocket_request, force_kwargs, api_method, *args, **kwa
     preload_content = kwargs.pop('_preload_content', True)
     kwargs['_preload_content'] = False
     binary = kwargs.pop('binary', False)
+    ping_interval = kwargs.pop('ping_interval', None)
     previous_call_api = api_client.call_api
 
     # Legacy-compatible generated methods preserve _preload_content=False
@@ -41,16 +42,21 @@ def _websocket_request(websocket_request, force_kwargs, api_method, *args, **kwa
         post_params=None,
         _request_timeout=None,
     ):
-        response = websocket_request(
-            configuration,
-            method,
-            url,
+        req_kwargs = dict(
             headers=header_params,
             body=body,
             post_params=post_params,
             _request_timeout=_request_timeout,
             _preload_content=preload_content,
             binary=binary,
+        )
+        if ping_interval is not None:
+            req_kwargs['ping_interval'] = ping_interval
+        response = websocket_request(
+            configuration,
+            method,
+            url,
+            **req_kwargs,
         )
         return SimpleNamespace(
             response=response,
