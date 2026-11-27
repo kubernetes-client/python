@@ -4569,7 +4569,7 @@ class AppsV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1ControllerRevision | V1Status:
         """delete_namespaced_controller_revision
 
         delete a ControllerRevision
@@ -4631,8 +4631,8 @@ class AppsV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1ControllerRevision | V1Status",
+            '202': "V1ControllerRevision | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -4670,7 +4670,7 @@ class AppsV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[V1ControllerRevision | V1Status]:
         """delete_namespaced_controller_revision
 
         delete a ControllerRevision
@@ -4732,8 +4732,8 @@ class AppsV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1ControllerRevision | V1Status",
+            '202': "V1ControllerRevision | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -4972,7 +4972,7 @@ class AppsV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1DaemonSet | V1Status:
         """delete_namespaced_daemon_set
 
         delete a DaemonSet
@@ -5034,8 +5034,8 @@ class AppsV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1DaemonSet | V1Status",
+            '202': "V1DaemonSet | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5073,7 +5073,7 @@ class AppsV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[V1DaemonSet | V1Status]:
         """delete_namespaced_daemon_set
 
         delete a DaemonSet
@@ -5135,8 +5135,8 @@ class AppsV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1DaemonSet | V1Status",
+            '202': "V1DaemonSet | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5375,7 +5375,7 @@ class AppsV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1Deployment | V1Status:
         """delete_namespaced_deployment
 
         delete a Deployment
@@ -5437,8 +5437,8 @@ class AppsV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Deployment | V1Status",
+            '202': "V1Deployment | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5476,7 +5476,7 @@ class AppsV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[V1Deployment | V1Status]:
         """delete_namespaced_deployment
 
         delete a Deployment
@@ -5538,8 +5538,8 @@ class AppsV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1Deployment | V1Status",
+            '202': "V1Deployment | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5778,7 +5778,7 @@ class AppsV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1ReplicaSet | V1Status:
         """delete_namespaced_replica_set
 
         delete a ReplicaSet
@@ -5840,8 +5840,8 @@ class AppsV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1ReplicaSet | V1Status",
+            '202': "V1ReplicaSet | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -5879,7 +5879,7 @@ class AppsV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[V1ReplicaSet | V1Status]:
         """delete_namespaced_replica_set
 
         delete a ReplicaSet
@@ -5941,8 +5941,8 @@ class AppsV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1ReplicaSet | V1Status",
+            '202': "V1ReplicaSet | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6181,7 +6181,7 @@ class AppsV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> object:
+    ) -> V1StatefulSet | V1Status:
         """delete_namespaced_stateful_set
 
         delete a StatefulSet
@@ -6243,8 +6243,8 @@ class AppsV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1StatefulSet | V1Status",
+            '202': "V1StatefulSet | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
@@ -6282,7 +6282,7 @@ class AppsV1Api:
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[object]:
+    ) -> ApiResponse[V1StatefulSet | V1Status]:
         """delete_namespaced_stateful_set
 
         delete a StatefulSet
@@ -6344,8 +6344,8 @@ class AppsV1Api:
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "object",
-            '202': "object",
+            '200': "V1StatefulSet | V1Status",
+            '202': "V1StatefulSet | V1Status",
             '401': None,
         }
         response_data = await self.api_client.call_api(
