@@ -1,5 +1,6 @@
 README.md
 client/__init__.py
+client/_legacy_model_helpers.py
 client/api/__init__.py
 client/api/admissionregistration_api.py
 client/api/admissionregistration_v1_api.py
