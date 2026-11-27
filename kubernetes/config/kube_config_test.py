@@ -987,7 +987,7 @@ class TestKubeConfigLoader(BaseTestCase):
         self.assertEqual(TEST_OIDC_TOKEN, loader.token)
 
     @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token')
-    @mock.patch('kubernetes.config.kube_config.ApiClient.call_api')
+    @mock.patch('kubernetes.config.kube_config.OAuth2Session.get')
     def test_oidc_refresh_api_key_hook(self, mock_call_api, mock_refresh):
         now = datetime.datetime(2024, 1, 1, tzinfo=UTC)
         skew = datetime.timedelta(minutes=5)
@@ -997,7 +997,7 @@ class TestKubeConfigLoader(BaseTestCase):
                 json.dumps({'exp': int(expiry.timestamp())}))
 
         mock_call_api.return_value = mock.Mock(
-            status=200, data=json.dumps({
+            status_code=200, json=mock.Mock(return_value={
                 'token_endpoint': 'https://example.org/identity/token'}))
 
         for lifetime in (datetime.timedelta(hours=1),
@@ -1088,17 +1088,13 @@ class TestKubeConfigLoader(BaseTestCase):
                     mocked.assert_called_once()
 
     @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token')
-    @mock.patch('kubernetes.config.kube_config.ApiClient.call_api')
+    @mock.patch('kubernetes.config.kube_config.OAuth2Session.get')
     def test_oidc_with_refresh(self, mock_ApiClient, mock_OAuth2Session):
         mock_response = mock.MagicMock()
-        type(mock_response).status = mock.PropertyMock(
-            return_value=200
-        )
-        type(mock_response).data = mock.PropertyMock(
-            return_value=json.dumps({
-                "token_endpoint": "https://example.org/identity/token"
-            })
-        )
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "token_endpoint": "https://example.org/identity/token"
+        }
 
         mock_ApiClient.return_value = mock_response
 
@@ -1113,17 +1109,13 @@ class TestKubeConfigLoader(BaseTestCase):
         self.assertEqual("Bearer abc123", loader.token)
 
     @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token')
-    @mock.patch('kubernetes.config.kube_config.ApiClient.call_api')
+    @mock.patch('kubernetes.config.kube_config.OAuth2Session.get')
     def test_oidc_with_idp_ca_file_refresh(self, mock_ApiClient, mock_OAuth2Session):
         mock_response = mock.MagicMock()
-        type(mock_response).status = mock.PropertyMock(
-            return_value=200
-        )
-        type(mock_response).data = mock.PropertyMock(
-            return_value=json.dumps({
-                "token_endpoint": "https://example.org/identity/token"
-            })
-        )
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "token_endpoint": "https://example.org/identity/token"
+        }
 
         mock_ApiClient.return_value = mock_response
 
@@ -1139,18 +1131,14 @@ class TestKubeConfigLoader(BaseTestCase):
         self.assertEqual("Bearer abc123", loader.token)
 
     @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token')
-    @mock.patch('kubernetes.config.kube_config.ApiClient.call_api')
+    @mock.patch('kubernetes.config.kube_config.OAuth2Session.get')
     def test_oidc_with_refresh_nocert(
             self, mock_ApiClient, mock_OAuth2Session):
         mock_response = mock.MagicMock()
-        type(mock_response).status = mock.PropertyMock(
-            return_value=200
-        )
-        type(mock_response).data = mock.PropertyMock(
-            return_value=json.dumps({
-                "token_endpoint": "https://example.org/identity/token"
-            })
-        )
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "token_endpoint": "https://example.org/identity/token"
+        }
 
         mock_ApiClient.return_value = mock_response
 
@@ -1166,15 +1154,14 @@ class TestKubeConfigLoader(BaseTestCase):
 
     @mock.patch('kubernetes.config.kube_config.OAuth2Session.refresh_token',
                 autospec=True)
-    @mock.patch('kubernetes.config.kube_config.ApiClient')
+    @mock.patch('kubernetes.config.kube_config.OAuth2Session.get',
+                autospec=True)
     def test_oidc_refresh_partial_chain(
-            self, mock_ApiClient, mock_refresh_token):
-        mock_response = mock.MagicMock()
-        mock_response.status = 200
-        mock_response.data = json.dumps({
+            self, mock_get, mock_refresh_token):
+        mock_get.return_value.status_code = 200
+        mock_get.return_value.json.return_value = {
             "token_endpoint": "https://example.org/identity/token"
-        })
-        mock_ApiClient.return_value.call_api.return_value = mock_response
+        }
         mock_refresh_token.return_value = {"id_token": "abc123",
                                            "refresh_token": "newtoken123"}
 
@@ -1189,12 +1176,18 @@ class TestKubeConfigLoader(BaseTestCase):
                 )
                 self.assertTrue(loader._load_auth_provider_token())
 
-                config = mock_ApiClient.call_args.kwargs['configuration']
-                self.assertEqual(partial_chain, config.ssl_partial_chain)
-                session = mock_refresh_token.call_args.args[0]
+                # discovery and token refresh share one session
+                session = mock_get.call_args.args[0]
+                self.assertIs(session, mock_refresh_token.call_args.args[0])
                 adapter = session.get_adapter("https://example.org")
                 self.assertEqual(partial_chain,
                                  isinstance(adapter, _PartialChainAdapter))
+                verify = mock_get.call_args.kwargs['verify']
+                self.assertEqual(
+                    mock_refresh_token.call_args.kwargs['verify'],
+                    verify if partial_chain else None)
+                if not partial_chain:
+                    self.assertFalse(verify)
 
     def test_partial_chain_context(self):
         ssl_context = _partial_chain_context()

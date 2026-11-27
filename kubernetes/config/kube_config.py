@@ -414,7 +414,7 @@ class KubeConfigLoader:
         return self.token
 
     def _refresh_oidc(self, provider):
-        config = Configuration()
+        ca_cert = None
 
         if 'idp-certificate-authority-data' in provider['config']:
             cert = base64.b64decode(
@@ -424,40 +424,32 @@ class KubeConfigLoader:
             # Use the shared temp-file helper instead of reopening a
             # NamedTemporaryFile by name, which fails with PermissionError
             # on Windows while the original handle is still open.
-            config.ssl_ca_cert = _create_temp_file_with_content(cert)
+            ca_cert = _create_temp_file_with_content(cert)
 
         elif 'idp-certificate-authority' in provider['config']:
-            config.ssl_ca_cert = provider['config']['idp-certificate-authority']
-
-        else:
-            config.verify_ssl = False
-
-        config.ssl_partial_chain = config.verify_ssl
-        client = ApiClient(configuration=config)
-
-        response = client.call_api(
-            method="GET",
-            url="%s/.well-known/openid-configuration"
-            % provider['config']['idp-issuer-url']
-        )
-        response.read()
-
-        if response.status != 200:
-            return
-
-        response = json.loads(response.data)
+            ca_cert = provider['config']['idp-certificate-authority']
 
         request = OAuth2Session(
             client_id=provider['config']['client-id'],
-            token=provider['config']['refresh-token'],
             auto_refresh_kwargs={
                 'client_id': provider['config']['client-id'],
                 'client_secret': provider['config']['client-secret']
-            },
-            auto_refresh_url=response['token_endpoint']
+            }
         )
-        if config.verify_ssl:
+        if ca_cert:
             request.mount('https://', _PartialChainAdapter())
+
+        response = request.get(
+            "%s/.well-known/openid-configuration"
+            % provider['config']['idp-issuer-url'],
+            verify=ca_cert if ca_cert else False
+        )
+
+        if response.status_code != 200:
+            return
+
+        response = response.json()
+        request.auto_refresh_url = response['token_endpoint']
 
         try:
             refresh = request.refresh_token(
@@ -465,7 +457,7 @@ class KubeConfigLoader:
                 refresh_token=provider['config']['refresh-token'],
                 auth=(provider['config']['client-id'],
                       provider['config']['client-secret']),
-                verify=config.ssl_ca_cert if config.verify_ssl else None
+                verify=ca_cert
             )
         except oauthlib.oauth2.rfc6749.errors.InvalidClientIdError:
             return

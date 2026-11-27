@@ -396,11 +396,6 @@ conf = client.Configuration(
            uses. Ignored if ``socket_options`` is set, which takes
            precedence.
         """
-        self.ssl_partial_chain = False
-        """Accept a certificate from ``ssl_ca_cert`` or ``ca_cert_data``
-           as trusted even if it is not a self-signed root, like Go does.
-           Python 3.13 and later already do this by default.
-        """
 
         self.datetime_format = datetime_format
         """datetime format
