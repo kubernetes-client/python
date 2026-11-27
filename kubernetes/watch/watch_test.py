@@ -717,83 +717,49 @@ class WatchTests(unittest.TestCase):
         fake_resp.close.assert_called_once()
         fake_resp.release_conn.assert_called_once()
     
-    @classmethod
-    def setUpClass(cls):
-        cls.api = Mock()
-        cls.namespace = "default"
-
     def test_pod_log_empty_lines(self):
-        pod_name = "demo-bug"
-        
-        try:
-            self.api.create_namespaced_pod = Mock()
-            self.api.read_namespaced_pod = Mock()
-            self.api.delete_namespaced_pod = Mock()
-            self.api.read_namespaced_pod_log = Mock()
+        fake_resp = Mock()
+        fake_resp.close = Mock()
+        fake_resp.release_conn = Mock()
+        fake_resp.stream = Mock(return_value=[
+            "Hello from Docker\n",
+            "\n",
+            "\n",
+            "Another log line\n",
+            "\n",
+            "Final log\n"
+        ])
 
-            #pod creating step
-            self.api.create_namespaced_pod.return_value = None
-            
-            #Checking pod status
-            mock_pod = Mock()
-            mock_pod.status.phase = "Running"
-            self.api.read_namespaced_pod.return_value = mock_pod
-            
-            # Printing at pod output
-            self.api.read_namespaced_pod_log.return_value = iter(["Hello from Docker\n"])
+        fake_api = Mock()
+        fake_api.read_namespaced_pod_log = Mock(return_value=fake_resp)
+        fake_api.read_namespaced_pod_log.__doc__ = ":param follow: bool"
 
-            # Wait for the pod to reach 'Running'
-            timeout = 60
-            start_time = time.time()
-            while time.time() - start_time < timeout:
-                pod = self.api.read_namespaced_pod(name=pod_name, namespace=self.namespace)
-                if pod.status.phase == "Running":
-                    break
-                time.sleep(2)
-            else:
-                self.fail("Pod did not reach 'Running' state within timeout")
+        w = Watch()
+        log_output = list(w.stream(
+            fake_api.read_namespaced_pod_log,
+            name="demo-bug",
+            namespace="default",
+            follow=True
+        ))
 
-            # Reading and streaming logs using Watch (mocked)
-            w = Watch()
-            log_output = []
-            #Mock logs used for this test
-            w.stream = Mock(return_value=[
-                        "Hello from Docker",
-                        "",
-                        "",
-                        "\n\n",
-                        "Another log line",
-                        "",
-                        "\n",
-                        "Final log"
-                    ])
-            for event in w.stream(self.api.read_namespaced_pod_log, name=pod_name, namespace=self.namespace, follow=True):
-                log_output.append(event)
-                print(event)
+        expected_log = [
+            "Hello from Docker",
+            "",
+            "",
+            "Another log line",
+            "",
+            "Final log"
+        ]
 
-            # Print outputs
-            print(f"Captured logs: {log_output}") 
-            # self.assertTrue(any("Hello from Docker" in line for line in log_output))
-            # self.assertTrue(any(line.strip() == "" for line in log_output), "No empty lines found in logs")
-            expected_log = [
-                "Hello from Docker",
-                "",
-                "",
-                "\n\n",
-                "Another log line",
-                "",
-                "\n",
-                "Final log"
-            ]
-            
-            self.assertEqual(log_output, expected_log, "Captured logs do not match expected logs")
-
-        except ApiException as e:
-            self.fail(f"Kubernetes API exception: {e}")
-        finally:
-            #checking pod is calling for delete
-            self.api.delete_namespaced_pod(name=pod_name, namespace=self.namespace)
-            self.api.delete_namespaced_pod.assert_called_once_with(name=pod_name, namespace=self.namespace)
+        self.assertEqual(log_output, expected_log)
+        fake_api.read_namespaced_pod_log.assert_called_once_with(
+            name="demo-bug",
+            namespace="default",
+            follow=True,
+            _preload_content=False
+        )
+        fake_resp.close.assert_called_once()
+        fake_resp.release_conn.assert_called_once()
 
     def test_watch_with_deserialize_param(self):
         """test watch.stream() deserialize param"""
