@@ -86,6 +86,10 @@ class RESTClientObject:
         if configuration.disable_strict_ssl_verification:
             self.ssl_context.verify_flags &= ~ssl.VERIFY_X509_STRICT
 
+        if (configuration.verify_ssl
+                and configuration.assert_hostname is not None):
+            self.ssl_context.check_hostname = bool(configuration.assert_hostname)
+
         self.proxy = configuration.proxy
         self.proxy_headers = configuration.proxy_headers
 
