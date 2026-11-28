@@ -9,4 +9,3 @@ requests-oauthlib # ISC
 oauthlib>=4.0.1 # ISC -- CVE-2026-49264, CVE-2026-49265; remove once requests-oauthlib bumps its own lower bound
 typing-extensions>=4.16.0  # PSF
 urllib3>=2.8.0,<3.0.0 # MIT
-durationpy>=0.11 # MIT
