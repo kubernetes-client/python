@@ -50,6 +50,7 @@ python examples/pod_logs.py
 - [cronjob_crud.py](cronjob_crud.py) — create, update and delete a cronjob
 - [ingress_create.py](ingress_create.py) — create a deployment, service and ingress
 - [node_labels.py](node_labels.py) — list nodes and update their labels
+- [config_map.py](config_map.py) — create a ConfigMap and consume it in a Pod (envFrom and volume mounts)
 - [patch_namespaced_config_map.py](patch_namespaced_config_map.py) — patch a config map
 
 ### Applying YAML
