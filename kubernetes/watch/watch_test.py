@@ -882,6 +882,43 @@ class WatchTests(unittest.TestCase):
         ])
         self.assertEqual("4", w.resource_version)
 
+    def test_watch_without_return_type_tracks_resource_version(self):
+        """A list function without a return type, e.g. a lambda wrapper."""
+        first_resp = Mock()
+        first_resp.stream = Mock(return_value=[
+            '{"type": "ADDED", "object": {"metadata": {"name": "test1", '
+            '"resourceVersion": "2"}}}\n',
+            '{"type": "BOOKMARK", "object": {"metadata": '
+            '{"resourceVersion": "3"}}}\n',
+            '{"type": "MODIFIED", "object": {"metadata": {"name": "test1", '
+            '"resourceVersion": ""}}}\n',
+        ])
+        second_resp = Mock()
+        second_resp.stream = Mock(return_value=[
+            '{"type": "DELETED", "object": {"metadata": {"name": "test1", '
+            '"resourceVersion": "4"}}}\n',
+        ])
+        fake_api = Mock()
+        fake_api.get_namespaces = Mock(side_effect=[first_resp, second_resp])
+        fake_api.get_namespaces.__doc__ = ':rtype: V1NamespaceList'
+
+        w = Watch()
+        events = []
+        for e in w.stream(lambda **kw: fake_api.get_namespaces(**kw),
+                          resource_version="1"):
+            events.append(e)
+            if e['type'] == 'DELETED':
+                w.stop()
+
+        self.assertEqual(['ADDED', 'BOOKMARK', 'MODIFIED', 'DELETED'],
+                         [e['type'] for e in events])
+        self.assertEqual("test1", events[0]['object']['metadata']['name'])
+        fake_api.get_namespaces.assert_has_calls([
+            call(_preload_content=False, watch=True, resource_version="1"),
+            call(_preload_content=False, watch=True, resource_version="3"),
+        ])
+        self.assertEqual("4", w.resource_version)
+
     def test_watch_with_deserialize_false_raises_on_error_event(self):
         """410 retries once from the last event's RV; ERROR RV is ignored."""
         for code, expected_rvs in ((410, ["1", "5"]), (500, ["1"])):
