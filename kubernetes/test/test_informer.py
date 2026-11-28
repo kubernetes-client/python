@@ -14,6 +14,7 @@
 
 """Unit tests for kubernetes.informer."""
 
+import json
 import threading
 import time
 import unittest
@@ -493,6 +494,69 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
             informer._thread.join(timeout=3)
 
         self.assertEqual(informer._resource_version, "30")
+
+    def _run_bookmark_watch(self, rtype, list_resp, bookmark):
+        """Run the informer with the real Watch; return it and its requests.
+
+        The first watch yields *bookmark* and then drops; the informer is
+        stopped when it watches again.  *rtype* is the list function's
+        ``:rtype:``.
+        """
+        from urllib3.exceptions import ProtocolError
+
+        calls = []
+
+        def list_func(**kw):
+            calls.append(kw)
+            if not kw.get("watch"):
+                return list_resp
+            if len(calls) == 2:
+                def stream(*args, **kwargs):
+                    yield json.dumps(
+                        {"type": BOOKMARK, "object": bookmark}) + "\n"
+                    raise ProtocolError("Connection broken")
+                return MagicMock(stream=stream)
+            informer._stop_event.set()
+            informer._watch.stop()
+            return MagicMock()
+        list_func.__doc__ = rtype
+
+        informer = SharedInformer(list_func=list_func)
+        bookmarks = []
+        informer.add_event_handler(BOOKMARK, bookmarks.append)
+        informer.start()
+        informer._thread.join(timeout=3)
+        self.assertFalse(informer._thread.is_alive())
+        return calls, bookmarks
+
+    def test_watch_requests_bookmarks_and_resumes_from_bookmark(self):
+        """Watch requests ask for bookmarks; after a BOOKMARK and a dropped
+        connection the informer re-watches from the bookmark's RV without
+        re-listing, for typed and dict list responses and for a list
+        function without a return type.
+        """
+        bookmark = {"kind": "Pod", "apiVersion": "v1",
+                    "metadata": {"resourceVersion": "10"}}
+        cases = (
+            ("typed", ":rtype: V1PodList",
+             MagicMock(items=[], metadata=MagicMock(resource_version="5"))),
+            ("dict", ":rtype: object",
+             {"metadata": {"resourceVersion": "5"}, "items": []}),
+            ("untyped", None,
+             {"metadata": {"resourceVersion": "5"}, "items": []}),
+        )
+        for name, rtype, list_resp in cases:
+            with self.subTest(name):
+                calls, bookmarks = self._run_bookmark_watch(
+                    rtype, list_resp, bookmark)
+
+                self.assertEqual(bookmarks, [bookmark])
+                self.assertEqual(len(calls), 3)
+                self.assertEqual(calls[0], {})
+                for kw, rv in ((calls[1], "5"), (calls[2], "10")):
+                    self.assertTrue(kw["watch"])
+                    self.assertIs(kw.get("allow_watch_bookmarks"), True)
+                    self.assertEqual(kw["resource_version"], rv)
 
     def test_resync_period_triggers_full_list(self):
         """A full List call must be made to the API server on every resync_period.
