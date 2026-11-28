@@ -85,8 +85,9 @@ class SharedInformer:
     ----------
     list_func:
         Bound API method used for the initial list **and** as the watch
-        source.  It must accept a watch keyword argument (e.g.
-        CoreV1Api().list_namespaced_pod).
+        source.  It must accept the same keyword arguments as a generated
+        list function, including watch-only ones such as watch and
+        allow_watch_bookmarks (e.g. CoreV1Api().list_namespaced_pod).
     namespace:
         Kubernetes namespace to watch.  Pass None for cluster-scoped
         or all-namespace list functions.
@@ -145,7 +146,8 @@ class SharedInformer:
             :data:`BOOKMARK` or :data:`ERROR`.
         handler:
             Callable invoked with the event object (or the raw exception for
-            ERROR events).
+            ERROR events).  BOOKMARK handlers receive the raw bookmark dict,
+            whose ``metadata.resourceVersion`` is the new resource version.
         """
         if event_type not in self._handlers:
             raise ValueError(
@@ -302,6 +304,11 @@ class SharedInformer:
             self._watch = Watch()
             kw = self._build_kwargs()
             kw["resource_version"] = self._resource_version
+            # Ask for BOOKMARK events so that the resource version keeps
+            # advancing while no matching object changes.  Otherwise, once
+            # other changes push that version out of the server's watch
+            # history, a reconnect gets 410 Gone and forces a full re-list.
+            kw["allow_watch_bookmarks"] = True
             # When a resync period is configured, set a matching server-side
             # watch timeout so that the stream exits after resync_period seconds
             # even if no events arrive.  Without this, a quiet period longer

@@ -141,6 +141,16 @@ class Watch:
         else:
             return 'watch'
 
+    def _track_raw_resource_version(self, event):
+        # Record the resource version of an event that was not
+        # deserialized, so that a reconnect resumes from the last event.
+        raw = event.get('object') if isinstance(event, dict) else None
+        metadata = raw.get('metadata') if isinstance(raw, dict) else None
+        rv = metadata.get('resourceVersion') \
+            if isinstance(metadata, dict) else None
+        if rv and event.get('type') != 'ERROR':
+            self.resource_version = rv
+
     def unmarshal_event(self, data, return_type):
         if not data or data.isspace():
             return None
@@ -149,6 +159,9 @@ class Watch:
             js['raw_object'] = js['object']
 
             if not return_type:
+                # The object stays a raw dict, e.g. for a lambda wrapper
+                # around a list function; still track its resource version.
+                self._track_raw_resource_version(js)
                 return js
 
             if js['type'] == 'BOOKMARK':
@@ -250,16 +263,7 @@ class Watch:
                             # Blank lines are not events.
                             event = json.loads(line) \
                                 if line and not line.isspace() else None
-                            # Track the resource version from the raw dict
-                            # so that a reconnect resumes from the last event.
-                            raw = event.get('object') \
-                                if isinstance(event, dict) else None
-                            metadata = raw.get('metadata') \
-                                if isinstance(raw, dict) else None
-                            rv = metadata.get('resourceVersion') \
-                                if isinstance(metadata, dict) else None
-                            if rv and event.get('type') != 'ERROR':
-                                self.resource_version = rv
+                            self._track_raw_resource_version(event)
                         if isinstance(event, dict) \
                                 and event['type'] == 'ERROR':
                             # 'object' of an ERROR event is never
