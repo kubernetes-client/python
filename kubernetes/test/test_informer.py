@@ -1067,6 +1067,129 @@ class TestSharedInformerWatchLoop(unittest.TestCase):
 
         self.assertLess(time.monotonic() - started, 5)
 
+    def _blocking_watch(self, MockWatch, informer):
+        """Make each watch block until stop(); return a semaphore per watch."""
+        watching = threading.Semaphore(0)
+
+        def fake_stream(func, **kw):
+            watching.release()
+            informer._stop_event.wait()
+            return iter([])
+        MockWatch.return_value.stream.side_effect = fake_stream
+        return watching
+
+    def test_has_synced_after_initial_list(self):
+        """Synced only once the list is in the cache and its handlers ran."""
+        pod = _make_pod("default", "p1")
+        release = threading.Event()
+
+        def list_func(**kw):
+            release.wait(timeout=3)
+            return MagicMock(items=[pod],
+                             metadata=MagicMock(resource_version="1"))
+
+        informer = SharedInformer(list_func=list_func)
+        added = []
+        informer.add_event_handler(
+            ADDED, lambda obj: added.append((obj, informer.has_synced())))
+        results = []
+        waiter = threading.Thread(
+            target=lambda: results.append(informer.wait_for_sync()),
+            daemon=True)
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            self._blocking_watch(MockWatch, informer)
+            informer.start()
+            waiter.start()
+            self.assertFalse(informer.has_synced())
+            self.assertFalse(informer.wait_for_sync(timeout=0))
+            release.set()
+            # Join before stop() so that only the sync can wake the waiter.
+            waiter.join(timeout=3)
+            woken = not waiter.is_alive()
+            cached = informer.cache.list()
+            informer.stop()
+
+        self.assertTrue(woken)
+        self.assertEqual(results, [True])
+        self.assertTrue(informer.has_synced())
+        self.assertEqual(cached, [pod])
+        self.assertEqual(added, [(pod, False)])
+
+    def test_wait_for_sync_while_initial_list_fails(self):
+        """A failing list times out the wait; stop() ends a wait at once."""
+        from kubernetes.client.exceptions import ApiException
+
+        informer = SharedInformer(
+            list_func=MagicMock(side_effect=ApiException(status=403)))
+        self.addCleanup(informer.stop)
+        failed = threading.Event()
+        informer.add_event_handler(ERROR, lambda exc: failed.set())
+        results = []
+        waiter = threading.Thread(
+            target=lambda: results.append(informer.wait_for_sync()),
+            daemon=True)
+
+        with patch("kubernetes.informer.informer.Watch"):
+            waiter.start()
+            informer.start()
+            self.assertTrue(failed.wait(timeout=3))
+            results.append(informer.wait_for_sync(timeout=0.1))
+            self.assertTrue(waiter.is_alive())
+            informer.stop()
+            waiter.join(timeout=3)
+            results.append(informer.wait_for_sync())
+
+        self.assertFalse(waiter.is_alive())
+        self.assertEqual(results, [False, False, False])
+        self.assertFalse(informer.has_synced())
+
+    def test_has_synced_stays_true_after_relist_failure(self):
+        """A 410 and a failed re-list do not reset the synced state."""
+        from kubernetes.client.exceptions import ApiException
+
+        list_func = MagicMock(side_effect=[
+            MagicMock(items=[], metadata=MagicMock(resource_version="1")),
+            ApiException(status=500),
+        ])
+        informer = SharedInformer(list_func=list_func)
+        informer._stop_event = _RecordingStopEvent()  # skip the backoff sleep
+        synced_on_error = []
+
+        def on_error(exc):
+            if exc.status == 500:
+                informer._stop_event.set()
+            synced_on_error.append((exc.status, informer.has_synced()))
+
+        informer.add_event_handler(ERROR, on_error)
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            MockWatch.return_value.stream.side_effect = ApiException(410)
+            informer.start()
+            informer._thread.join(timeout=3)
+
+        self.assertEqual(synced_on_error, [(410, True), (500, True)])
+        self.assertTrue(informer.wait_for_sync(timeout=0))
+
+    def test_has_synced_stays_true_after_restart(self):
+        """stop() then start() resumes the watch, so it is still synced."""
+        list_func = MagicMock(return_value=MagicMock(
+            items=[], metadata=MagicMock(resource_version="1")))
+        informer = SharedInformer(list_func=list_func)
+
+        with patch("kubernetes.informer.informer.Watch") as MockWatch:
+            watching = self._blocking_watch(MockWatch, informer)
+            informer.start()
+            self.assertTrue(watching.acquire(timeout=3))
+            informer.stop()
+            informer.start()
+            synced = informer.has_synced()
+            self.assertTrue(watching.acquire(timeout=3))
+            informer.stop()
+
+        self.assertTrue(synced)
+        self.assertEqual(list_func.call_count, 1)
+
     # ------------------------------------------------------------------
     # Tests analogous to client-go shared_informer_test.go scenarios.
     # ------------------------------------------------------------------

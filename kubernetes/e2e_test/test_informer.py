@@ -61,10 +61,8 @@ class TestSharedInformerE2E(unittest.TestCase):
         self.fail("key " + key + " never appeared in cache")
 
     def _wait_listed(self, inf):
-        stop = time.monotonic() + _TIMEOUT
-        while inf._resource_version is None and time.monotonic() < stop:
-            time.sleep(0.1)
-        self.assertIsNotNone(inf._resource_version, "initial list never completed")
+        self.assertTrue(inf.wait_for_sync(timeout=_TIMEOUT),
+                        "initial list never completed")
 
     # -------------------------------------------------------
 
