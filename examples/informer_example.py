@@ -58,6 +58,8 @@ def main():
 
     informer.start()
     print('Informer started. Watching pods in "default" namespace ...')
+    if not informer.wait_for_sync(timeout=30):
+        print("Initial list not finished yet; the cache may be incomplete.")
 
     try:
         while True:

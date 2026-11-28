@@ -125,6 +125,10 @@ class SharedInformer:
         self._thread = None
         self._stop_event = threading.Event()
         self._resource_version = None  # most recent RV seen; None forces a full re-list
+        # Guards _synced; notified after each list and by stop() after it
+        # sets _stop_event.
+        self._sync_cond = threading.Condition()
+        self._synced = False
 
     # ---------------------------------------------------------------- #
     # Public API                                                        #
@@ -134,6 +138,40 @@ class SharedInformer:
     def cache(self):
         """The :class:`ObjectCache` maintained by this informer."""
         return self._cache
+
+    def has_synced(self):
+        """Return True once the initial list has been applied.
+
+        The informer is synced when the objects of a full list are in
+        :attr:`cache` and the ADDED, MODIFIED and DELETED handlers for that
+        list have returned.  It stays synced afterwards, including during
+        re-lists, watch failures and after :meth:`stop` and :meth:`start`,
+        since the cache is kept across a restart.
+        """
+        return self._synced
+
+    def wait_for_sync(self, timeout=None):
+        """Block until the informer has synced (see :meth:`has_synced`).
+
+        Returns True once synced.  Returns False when *timeout* seconds pass
+        first, or when the informer is stopped (and not restarted) while
+        waiting.  On a stopped informer it returns the current
+        :meth:`has_synced` without waiting.  When called before
+        :meth:`start`, it waits for the informer to be started and synced.
+
+        Do not call it from an event handler: handlers run on the informer
+        thread, which cannot finish the list while it waits.
+
+        Parameters
+        ----------
+        timeout:
+            Maximum number of seconds to wait.  None (the default) waits until
+            the informer syncs or is stopped.
+        """
+        with self._sync_cond:
+            self._sync_cond.wait_for(
+                lambda: self._synced or self._stop_event.is_set(), timeout)
+            return self._synced
 
     def add_event_handler(self, event_type, handler):
         """Register a callback for a specific event type.
@@ -186,6 +224,8 @@ class SharedInformer:
     def stop(self):
         """Ask the background watch loop to stop and join the thread."""
         self._stop_event.set()
+        with self._sync_cond:
+            self._sync_cond.notify_all()
         if self._watch is not None:
             self._watch.stop()
         if self._thread is not None:
@@ -264,6 +304,9 @@ class SharedInformer:
                 self._fire(ADDED, item)
 
         self._resource_version = rv or "0"
+        with self._sync_cond:
+            self._synced = True
+            self._sync_cond.notify_all()
 
     def _run_loop(self):
         """Background loop: list then watch, reconnect on errors.
