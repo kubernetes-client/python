@@ -64,6 +64,7 @@ python examples/pod_logs.py
 - [pod_logs_non_blocking.py](pod_logs_non_blocking.py) — non-blocking pod log streaming with graceful shutdown
 - [pod_exec.py](pod_exec.py) — run commands in a container (exec)
 - [pod_portforward.py](pod_portforward.py) — port-forward to a container
+- [pod_node_selector.py](pod_node_selector.py) — assign a pod to specific nodes using `node_selector` in `V1PodSpec`
 
 ### Custom resources
 
